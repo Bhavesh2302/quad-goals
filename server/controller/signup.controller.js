@@ -5,7 +5,7 @@ const { UserModel } = require("../models/user.model");
 const signupController = Router()
 const bcrypt = require('bcryptjs');
 
-signupController.post("/signup",(req,res)=>{
+signupController.post("/",(req,res)=>{
     const { phoneNo, name, email, password,role} = req.body
 
     bcrypt.hash(password, 8, async function(err, hash) {
