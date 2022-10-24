@@ -1,5 +1,5 @@
 
-import { applyMiddleware, combineReducers, legacy_createStore } from "redux"
+import { applyMiddleware, compose, combineReducers, legacy_createStore } from "redux"
 import thunk from "redux-thunk";
 import { restaurantReducer } from "../Reducers/RestaurantReducer/restaurantReducer";
 
