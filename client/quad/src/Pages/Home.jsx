@@ -1,7 +1,46 @@
-import { Box, Image, Flex, Button, Text, Input} from '@chakra-ui/react'
+import { Box, Image, Flex, Button, Text, Input,SlideFade,Fade, useDisclosure} from '@chakra-ui/react'
 import React from 'react'
+import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 
-const Home = () => {
+const Home = () => { 
+
+  const strings = [ "Hungry?", "Unexpected Guest?", "Cooking gone Wrong?","Late Night at office?"]
+   //let i = 0; 
+   
+   const [currentString, setCurrentString ] = useState("") 
+   const [timer, settimer] = useState(0) 
+   const timerId = useRef(null) 
+   const { isOpen, onToggle } = useDisclosure()
+
+   useEffect(() => {
+
+    if(!timerId.current){
+
+        let id = setInterval(()=>{
+            settimer((prev)=>prev + 1)
+            setCurrentString(strings[timer])
+            onToggle()
+        },2000)
+
+      timerId.current = id
+     }
+
+   
+     return () => {
+       clearInterval(timerId.current) 
+        timerId.current=null 
+        if(timer === strings.length){
+          setCurrentString("Game Night?")
+          //onToggle()
+          settimer(0)
+        }
+     } 
+     
+
+   }, [timerId.current])
+   
+
   return (
     <Flex w={"100%"} m={"auto"} >
       <Box w={"52%"}  pl={"150px"} pt={"80px"} pr={"40px"}>
@@ -15,10 +54,10 @@ const Home = () => {
                 </Flex>
            </Flex>
            <Box textAlign={"left"}>
-                <Box fontSize={"40px"} fontWeight={"bold"} mb={"12px"}>
-                    <Text>Hungry?</Text>
-                </Box>
-                <Box fontSize={"18px"} fontWeight={"bold"} color={"gray"}>
+                <SlideFade  SlideFade in={isOpen} offsetY='20px'>
+                    <Text fontSize={"40px"} fontWeight={"bold"} mb={"12px"}>{currentString}</Text>
+                </SlideFade>
+                <Box fontSize={"18px"} fontWeight={"bold"} color={"gray"} >
                     <Text>Order food from favourite restaurants near you.</Text>
                 </Box>
            </Box>
