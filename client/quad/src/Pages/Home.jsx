@@ -2,6 +2,7 @@ import { Box, Image, Flex, Button, Text, Input,SlideFade,Fade, useDisclosure} fr
 import React from 'react'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
+import BannerAppStore from '../Components/BannerAppStore';
 
 const Home = () => { 
 
@@ -42,6 +43,7 @@ const Home = () => {
    
 
   return (
+    <Box w="100%">
     <Flex w={"100%"} m={"auto"} >
       <Box w={"52%"}  pl={"150px"} pt={"80px"} pr={"40px"}>
            <Flex  alignItems={"center"} justifyContent={"space-between"} p={"0px"} mb={"40px"}>
@@ -84,6 +86,9 @@ const Home = () => {
           <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"}/>
       </Box>
     </Flex>
+    <hr />
+    <BannerAppStore/>
+    </Box>
   )
 }
 
