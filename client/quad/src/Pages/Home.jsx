@@ -3,6 +3,7 @@ import React from 'react'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import BannerAppStore from '../Components/BannerAppStore';
+import OrderDeliveryTrackingComponent from '../Components/OrderDeliveryTrackingComponent';
 
 const Home = () => { 
 
@@ -46,7 +47,7 @@ const Home = () => {
     <Box w="100%">
     <Flex w={"100%"} m={"auto"} >
       <Box w={"52%"}  pl={"150px"} pt={"80px"} pr={"40px"}>
-           <Flex  alignItems={"center"} justifyContent={"space-between"} p={"0px"} mb={"40px"}>
+           <Flex  alignItems={"center"} justifyContent={"space-between"} p={"0px"} mb={"30px"}>
                 <Box  w={"155px"} >
                     <Image objectFit={"fill"} h={"105px"} w={"100%"} borderRadius={"50%"} src={"https://i.imgur.com/Gex3smL.jpg"} alt={"Logo"}/>
                 </Box>
@@ -63,7 +64,7 @@ const Home = () => {
                     <Text>Order food from favourite restaurants near you.</Text>
                 </Box>
            </Box>
-           <Flex mt={"25px"}>
+           <Flex mt={"23px"}>
                 <Input  border={"2px solid #969491"} h={"50px"} borderRadius={"0px"} placeholder={"Enter your delivery location"}/>
                 <Button h={"50px"}  borderRadius={"0px"} color={"white"} bg={"#ef234b "}>Find Food</Button>
            </Flex>
@@ -86,7 +87,7 @@ const Home = () => {
           <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"}/>
       </Box>
     </Flex>
-    <hr />
+    <OrderDeliveryTrackingComponent/>
     <BannerAppStore/>
     </Box>
   )
