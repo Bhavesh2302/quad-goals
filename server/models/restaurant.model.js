@@ -9,9 +9,10 @@ const restaurant_schema = new mongoose.Schema({
     rating :{type: Number},
     d_time:{type:String},
     cost:{type: Number},
-    offer :{type: String ,enum:["60"],default :"none"},
-    promoted :{type: String ,enum:["promoted"], default : "none"},
+    offer :{type: String ,enum:["60","none"],default :"none"},
+    promoted :{type: String ,enum:["promoted","none"], default : "none"},
     city:{type:String},
+    address:{type:String},
     userId:{type:String}
      
 
