@@ -1,6 +1,6 @@
 require("dotenv").config();
 const authentication = async (req, res, next) => {
-  if (!req.headers.authorization.split(" ")[1]) {
+  if (!req.headers.authorization) {
     return res.status(401).send({ msg: "please login again" });
   }
 
