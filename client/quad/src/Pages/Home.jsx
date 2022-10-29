@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import BannerAppStore from '../Components/BannerAppStore';
 import OrderDeliveryTrackingComponent from '../Components/OrderDeliveryTrackingComponent';
+import Signup from './Signup';
 
 const Home = () => { 
 
@@ -53,7 +54,7 @@ const Home = () => {
                 </Box>
                 <Flex gap={"15px"} >
                     <Button bg={"white"} borderRadius={"0px"} _hover={{ color:"black", bg: "white", border: "1px solid #eee" }}>Login</Button>
-                    <Button bg={"black"} color={"white"} borderRadius={"0px"} _hover={{ color:"black", bg: "white"}}>Signup</Button>
+                    <Signup/>
                 </Flex>
            </Flex>
            <Box textAlign={"left"}>
