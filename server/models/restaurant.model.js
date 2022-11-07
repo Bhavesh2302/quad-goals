@@ -13,6 +13,7 @@ const restaurant_schema = new mongoose.Schema({
     promoted :{type: String ,enum:["promoted","none"], default : "none"},
     city:{type:String},
     address:{type:String},
+    menu:{type:Array},
     userId:{type:String}
      
 
