@@ -6,44 +6,49 @@ const { RestaurantModel } = require("../models/restaurant.model")
 const { UserModel } = require("../models/user.model")
 const restaurantController = Router()
 
-restaurantController.get("/get",async (req,res)=>{
-   const all_restaurants =await RestaurantModel.find()
+restaurantController.get("/get",authentication,async (req,res)=>{
+    const {userId} =req.body
+   const all_restaurants =await RestaurantModel.find({userId})
    console.log(all_restaurants)
-    res.send(all_restaurants)
+    res.status(200).send(all_restaurants)
 })
 
 // authorization(["admin","shopOwner"])
 restaurantController.post("/create", authentication,authorization(["shopOwner"]),async (req,res)=>{
 
     
-        const payload = req.body;
+        // const payload = req.body;
         const {userId} =req.body
         console.log(userId)
         // console.log(payload)
 
         // const user = await UserModel.findOne({userId}) 
 
-        const new_restaurant = new RestaurantModel(payload)
+        const new_restaurant = new RestaurantModel({userId,...req.body})
         console.log(new_restaurant)
         // console.log(new_restaurant)
-        // await new_restaurant.save()
-        res.send("created restaurent")
+        await new_restaurant.save()
+        res.status(201).send({"msg":"created restaurant"})
     
    
 })
 
-restaurantController.patch("/update/:id",(req,res)=>{
+restaurantController.patch("/update/:id",authentication,authorization(["shopOwner"]),async (req,res)=>{
     const { id } = req.params
+    const {userId} = req.body
     const payload = req.body
-  const updated_restaurant = RestaurantModel.findByIdAndUpdate({_id:id},{...payload})
-    res.send("Updated Restaurant succesfully")
-})
+  const updated_restaurant = await RestaurantModel.findByIdAndUpdate({_id:id,userId},{...payload})
 
-restaurantController.delete("/remove/:id",(req,res)=>{
+  console.log(updated_restaurant)
+    res.status(201).send("Updated Restaurant succesfully")
+})
+ 
+restaurantController.delete("/remove/:id",authentication,authorization(["admin","shopOwner"]),async (req,res)=>{
     const { id } = req.params
-    const payload = req.body
-    const delete_restaurant = RestaurantModel.findByIdAndDelete({_id:id})
-    res.send("Deleted restaurent")
+    const {userId} = req.body
+    const delete_restaurant = await RestaurantModel.findByIdAndDelete({_id:id,userId})
+    console.log(delete_restaurant)
+    res.status(201).send("Deleted restaurant")
 })
 
 module.exports = { restaurantController }

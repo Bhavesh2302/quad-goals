@@ -9,7 +9,7 @@ const authentication = async (req, res, next) => {
 
   jwt.verify(token, process.env.SECRET, function (err, decoded) {
     if (err) {
-      res.staus(401).send({ msg: "something went wrong" });
+      res.status(401).send({ msg: "something went wrong" });
     } else {
       req.body.userId = decoded.userId;
       next();
