@@ -10,7 +10,7 @@ const { menuController } = require("./controller/menu.controller");
 const { searchCityController } = require("./controller/searchCity.controller");
 
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 7082;
 
 app.use(cors());
 app.use(express.json());
