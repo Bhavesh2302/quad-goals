@@ -1,9 +1,10 @@
-import { Box, Image, Flex, Button, Text, Input,SlideFade,Fade, useDisclosure} from '@chakra-ui/react'
+import { Box, Image, Flex, Button, Text, Input, SlideFade, useDisclosure} from '@chakra-ui/react'
 import React from 'react'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import BannerAppStore from '../Components/BannerAppStore';
 import OrderDeliveryTrackingComponent from '../Components/OrderDeliveryTrackingComponent';
+import Login from './Login';
 import Signup from './Signup';
 
 const Home = () => { 
@@ -14,7 +15,8 @@ const Home = () => {
    const [currentString, setCurrentString ] = useState("") 
    const [timer, settimer] = useState(0) 
    const timerId = useRef(null) 
-   const { isOpen, onToggle } = useDisclosure()
+   const { isOpen, onToggle } = useDisclosure();
+   const [ city, setCity ] = useState("")
 
    useEffect(() => {
 
@@ -42,6 +44,22 @@ const Home = () => {
      
 
    }, [timerId.current])
+
+   const handleSearchByCity = ()=>{
+       
+       fetch(`http://localhost:7082/allRestaurants/getCity?city=${city}`)
+       .then((res)=>{
+          return res.json();
+       })
+       .then((res)=>{
+         console.log(res)
+       })
+       .catch((error)=>{
+        console.log(error)
+       })
+
+       
+   }
    
 
   return (
@@ -53,12 +71,12 @@ const Home = () => {
                     <Image objectFit={"fill"} h={"105px"} w={"100%"} borderRadius={"50%"} src={"https://i.imgur.com/Gex3smL.jpg"} alt={"Logo"}/>
                 </Box>
                 <Flex gap={"15px"} >
-                    <Button bg={"white"} borderRadius={"0px"} _hover={{ color:"black", bg: "white", border: "1px solid #eee" }}>Login</Button>
+                    <Login/>
                     <Signup/>
                 </Flex>
            </Flex>
            <Box textAlign={"left"}>
-                <SlideFade  SlideFade in={isOpen} offsetY='20px'>
+                <SlideFade  slideFade in={isOpen} offsetY='20px'>
                     <Text fontSize={"40px"} fontWeight={"bold"} mb={"12px"}>{currentString}</Text>
                 </SlideFade>
                 <Box fontSize={"18px"} fontWeight={"bold"} color={"gray"} >
@@ -66,8 +84,8 @@ const Home = () => {
                 </Box>
            </Box>
            <Flex mt={"23px"}>
-                <Input  border={"2px solid #969491"} h={"50px"} borderRadius={"0px"} placeholder={"Enter your delivery location"}/>
-                <Button h={"50px"}  borderRadius={"0px"} color={"white"} bg={"#ef234b "}>Find Food</Button>
+                <Input onChange={(e)=>setCity(e.target.value)}  border={"2px solid #969491"} h={"50px"} borderRadius={"0px"} placeholder={"Enter your delivery location"}/>
+                <Button onClick = {handleSearchByCity} h={"50px"}  borderRadius={"0px"} color={"white"} bg={"#ef234b "}>Find Food</Button>
            </Flex>
            <Box textAlign={"left"} mt={"20px"} mb={"20px"}>
              <Text fontSize={"16px"} color={"gray"} fontWeight={"500"} mb={"12px"}>Popular cities in India</Text>
