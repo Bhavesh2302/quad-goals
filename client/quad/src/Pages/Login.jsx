@@ -60,7 +60,7 @@ import {
   
     return (
       <>
-         <Button ref={btnRef} fontWeight={"650"} variant={"outline"} color={"black"} borderRadius={"0px"} _hover={{ color:"black", bg: "white"}} onClick={onOpen}>
+         <Button ref={btnRef} fontWeight={"650"} variant={"unstyled"} border={"0px"} color={"black"} borderRadius={"0px"} _hover={{ color:"black", bg: "white"}} onClick={onOpen}>
           Login
         </Button>
         <Drawer
