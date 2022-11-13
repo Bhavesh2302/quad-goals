@@ -2,12 +2,19 @@ import { Box, Image, Flex, Button, Text, Input, SlideFade, useDisclosure} from '
 import React from 'react'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import  {useNavigate} from "react-router-dom"
 import BannerAppStore from '../Components/BannerAppStore';
 import OrderDeliveryTrackingComponent from '../Components/OrderDeliveryTrackingComponent';
+import { getRestaurantsByCity } from '../Redux/Reducers/RestaurantReducer/action';
+import { GET_RESTAURANTS_BY_CITY_SUCCESS } from '../Redux/Reducers/RestaurantReducer/actionTypes';
 import Login from './Login';
 import Signup from './Signup';
 
 const Home = () => { 
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const strings = [ "Hungry?", "Unexpected Guest?", "Cooking gone Wrong?","Late Night at office?"]
    //let i = 0; 
@@ -46,22 +53,19 @@ const Home = () => {
    }, [timerId.current])
 
    const handleSearchByCity = ()=>{
-       
-       fetch(`http://localhost:7082/allRestaurants/getCity?city=${city}`)
+  
+       dispatch(getRestaurantsByCity(city))
        .then((res)=>{
-          return res.json();
+        if(res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS"){
+          navigate(`/allrestaurants/${city}`)
+        }
        })
-       .then((res)=>{
-         console.log(res)
-       })
-       .catch((error)=>{
-        console.log(error)
-       })
-
-       
    }
-   
 
+  //  useEffect(()=>{
+  //   handleSearchByCity()
+  //  },[])
+   
   return (
     <Box w="100%">
     <Flex w={"100%"} m={"auto"} >
