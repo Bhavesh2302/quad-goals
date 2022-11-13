@@ -9,7 +9,7 @@ import { BsFillHandbagFill,  } from 'react-icons/bs';
 
 const Navbar = () => {
   return (
-    <Flex h={"80px"}  p={"10px"} justifyContent={"space-around"} alignItems={"center"} w={"80%"} m={"auto"} gap={"100px"}>
+    <Flex h={"80px"}  p={"10px"} justifyContent={"space-around"} alignItems={"center"} w={"90%"} m={"auto"} gap={"100px"}>
          <Flex w={"30%"}  justifyContent={"space-evenly"} alignItems={"center"}>
               <Box w={"90px"}>
                  <Image w={"100%"} src = {"https://i.imgur.com/Gex3smL.jpg"} alt={"logo"}/>
