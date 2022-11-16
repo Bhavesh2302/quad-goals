@@ -6,13 +6,35 @@ const searchCityController = Router()
 
 searchCityController.get("/getCity",async (req,res)=>{
     
-    let query =req.query
-    // console.log(query)
-    // const city =query.city
-    const restaurants_by_city = await RestaurantModel.find(query)
+    let {city,sortBy,deliveryTime} =req.query
+
+     if(sortBy &&  deliveryTime){
+        const restaurants_by_city = await RestaurantModel.find({city}).sort({cost:sortBy ==="asc"? 1 :-1, d_time:-1})
+        console.log(restaurants_by_city)
+    
+        res.status(200).send({"Restaurants":restaurants_by_city})
+    }
+    
+    else if(sortBy && !deliveryTime){
+        const restaurants_by_city = await RestaurantModel.find({city}).sort({cost:sortBy ==="asc"? 1 :-1})
+        console.log(restaurants_by_city)
+    
+        res.status(200).send({"Restaurants":restaurants_by_city})
+    }
+
+   else if(!sortBy && deliveryTime){
+    const restaurants_by_city = await RestaurantModel.find({city}).sort({d_time: -1 })
     console.log(restaurants_by_city)
 
     res.status(200).send({"Restaurants":restaurants_by_city})
+   }
+   else{
+    const restaurants_by_city = await RestaurantModel.find({city})
+    console.log(restaurants_by_city)
+
+    res.status(200).send({"Restaurants":restaurants_by_city})
+   }
+    
 })
 
 module.exports = { searchCityController}

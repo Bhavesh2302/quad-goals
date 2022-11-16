@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -12,6 +12,7 @@ import { SimpleGrid } from '@chakra-ui/react'
 const AllRestaurants = () => {
   const dispatch = useDispatch();
   const { city } = useParams();
+  const [sortBy ,setSortBy]=useState("asc")
   const restaurants = useSelector(
     (state) => state.restaurantReducer.allRestaurants
   );
@@ -22,6 +23,10 @@ const AllRestaurants = () => {
       dispatch(getRestaurantsByCity(city));
     }
   }, [restaurants.length]);
+
+  useEffect(()=>{
+    dispatch(getRestaurantsByCity(city,sortBy));
+  },[])
 
   return (
     <Box w="100%">
@@ -82,6 +87,11 @@ const AllRestaurants = () => {
               <Button
                 variant={"unstyled"}
                 _hover={{ color: "red", cursor: "pointer" }}
+                onClick={()=>{
+                  // console.log("hello")
+                  setSortBy("asc")
+                
+                }}
               >
                 Cost Low To High
               </Button>
@@ -90,6 +100,7 @@ const AllRestaurants = () => {
               <Button
                 variant={"unstyled"}
                 _hover={{ color: "red", cursor: "pointer" }}
+                onClick={()=>setSortBy("desc")}
               >
                 Cost High to Low
               </Button>
