@@ -6,6 +6,9 @@ import {
   GET_RESTAURANTS_DATA_FAILURE,
   GET_RESTAURANTS_DATA_REQUEST,
   GET_RESTAURANTS_DATA_SUCCESS,
+  GET_RESTAURANTS_FAILURE,
+  GET_RESTAURANTS_REQUEST,
+  GET_RESTAURANTS_SUCCESS,
 } from "./actionTypes";
 
 // export const getAllRestaurants = () => (dispatch) => {
@@ -21,12 +24,12 @@ import {
 //     });
 // };
 
-export const getRestaurantsByCity = (city,sortBy) => (dispatch) => {
-console.log(sortBy)
+export const getRestaurantsByCity = (city,) => (dispatch) => {
+// console.log(sortBy)
     dispatch({type:GET_RESTAURANTS_BY_CITY_REQUEST})
-  return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sortBy=${sortBy}`)
+  return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}`)
     .then((res) => {
-      console.log(res);
+      // console.log("city",res);
      return dispatch({type:GET_RESTAURANTS_BY_CITY_SUCCESS,payload:res.data.Restaurants})
     })
     .catch((error) => {
@@ -36,12 +39,16 @@ console.log(sortBy)
 };
 
 
-// const getResturantLowToHigh = () =>(dispatch) =>{
-
-
-// }
-
-// const getResturantHighToLow = () =>(dispatch) =>{
-
-
-// }
+export const getRestaurants = (city,sortBy,deliveryTime) =>(dispatch)=>{
+  console.log(deliveryTime)
+  dispatch({type:GET_RESTAURANTS_REQUEST})
+return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sortBy=${sortBy}&deliveryTime=${deliveryTime}`)
+  .then((res) => {
+    console.log(res.data.Restaurants);
+   return dispatch({type:GET_RESTAURANTS_SUCCESS,payload:res.data.Restaurants})
+  })
+  .catch((error) => {
+      dispatch({type:GET_RESTAURANTS_FAILURE})
+    console.log(error);
+  });
+}
