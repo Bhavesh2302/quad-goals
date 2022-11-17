@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import { getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
+import { getRestaurants, getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
 import { ImSpoonKnife } from "react-icons/im";
 import {FaStar} from "react-icons/fa"
 import { SimpleGrid } from '@chakra-ui/react'
@@ -13,20 +13,22 @@ const AllRestaurants = () => {
   const dispatch = useDispatch();
   const { city } = useParams();
   const [sortBy ,setSortBy]=useState("asc")
+  const [deliveryTime ,setDeliveryTime] =useState("desc")
   const restaurants = useSelector(
     (state) => state.restaurantReducer.allRestaurants
   );
-  console.log(restaurants);
+  // console.log(restaurants);
 
-  useEffect(() => {
-    if (restaurants.length === 0) {
-      dispatch(getRestaurantsByCity(city));
-    }
-  }, [restaurants.length]);
+  // useEffect(() => {
+  //   if (restaurants.length === 0) {
+  //     dispatch(getRestaurantsByCity(city));
+  //   }
+  // }, [restaurants.length]);
 
   useEffect(()=>{
-    dispatch(getRestaurantsByCity(city,sortBy));
-  },[])
+    // console.log(deliveryTime)
+    dispatch(getRestaurants(city,sortBy,deliveryTime));
+  },[sortBy,deliveryTime])
 
   return (
     <Box w="100%">
@@ -79,6 +81,12 @@ const AllRestaurants = () => {
               <Button
                 variant={"unstyled"}
                 _hover={{ color: "red", cursor: "pointer" }}
+                onClick={()=>
+                  {
+                    console.log("hello")
+                    console.log(deliveryTime)
+                  setDeliveryTime("desc")
+                   } }
               >
                 Delivery Time
               </Button>
@@ -149,7 +157,7 @@ const AllRestaurants = () => {
                 <Box><Text>{`${item.rating}`}</Text></Box>
                 </Box>
                 <Box>.</Box>
-                <Box color={"#686b78"}>{item.d_time}</Box>
+                <Box color={"#686b78"}>{`${item.d_time} MINS`}</Box>
                 <Box>.</Box>
                 <Box color={"#686b78"}>{`₹ ${item.cost} For Two`}</Box>
               </Box>
