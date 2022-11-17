@@ -9,7 +9,7 @@ searchCityController.get("/getCity",async (req,res)=>{
     let {city,sortBy,deliveryTime} =req.query
 
      if(sortBy &&  deliveryTime){
-        const restaurants_by_city = await RestaurantModel.find({city}).sort({cost:sortBy ==="asc"? 1 :-1, d_time:-1})
+        const restaurants_by_city = await RestaurantModel.find({city}).sort({ d_time:deliveryTime==="desc" ? -1 : 1}).collation({locale: "en_US", numericOrdering: true}).sort({cost:sortBy ==="asc"? 1 :-1})
         console.log(restaurants_by_city)
     
         res.status(200).send({"Restaurants":restaurants_by_city})
@@ -23,7 +23,7 @@ searchCityController.get("/getCity",async (req,res)=>{
     }
 
    else if(!sortBy && deliveryTime){
-    const restaurants_by_city = await RestaurantModel.find({city}).sort({d_time: -1 })
+    const restaurants_by_city = await RestaurantModel.find({city}).sort({ d_time:deliveryTime==="desc" ? -1 : 1}).collation({locale: "en_US", numericOrdering: true})
     console.log(restaurants_by_city)
 
     res.status(200).send({"Restaurants":restaurants_by_city})
