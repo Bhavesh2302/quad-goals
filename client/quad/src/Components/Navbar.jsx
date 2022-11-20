@@ -6,19 +6,22 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { MdHelp, MdLocalOffer } from 'react-icons/md';
 import { BsFillHandbagFill,  } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <Flex h={"80px"}  p={"10px"} justifyContent={"space-around"} alignItems={"center"} w={"90%"} m={"auto"} gap={"100px"}>
+    <Flex h={"80px"}  p={"10px"} justifyContent={"space-around"} alignItems={"center"} w={"85%"} m={"auto"} gap={"100px"}>
          <Flex w={"30%"}  justifyContent={"space-evenly"} alignItems={"center"}>
               <Box w={"90px"}>
-                 <Image w={"100%"} src = {"https://i.imgur.com/Gex3smL.jpg"} alt={"logo"}/>
+                  <Link to={"/"}>
+                     <Image w={"100%"} src = {"https://i.imgur.com/Gex3smL.jpg"} alt={"logo"}/>
+                 </Link>
               </Box>
               <Box>
                    <LocationSearch/>
               </Box>
          </Flex>
-         <Flex w={"70%"}  justifyContent={"end"} gap={"70px"} alignItems={"center"}>
+         <Flex w={"70%"}  justifyContent={"end"} gap={"65px"} alignItems={"center"}>
               <Flex  alignItems={"center"} gap={"10px"} _hover={{color:"red", cursor:"pointer"}}>
                     <FiSearch fontWeight={"650"}/>
                     <Text fontWeight={"650"} fontSize={"15px"}>Search</Text>
