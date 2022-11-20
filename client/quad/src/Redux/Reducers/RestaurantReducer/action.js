@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  GET_MENU_DATA_FAILURE,
+  GET_MENU_DATA_REQUEST,
+  GET_MENU_DATA_SUCCESS,
     GET_RESTAURANTS_BY_CITY_FAILURE,
     GET_RESTAURANTS_BY_CITY_REQUEST,
   GET_RESTAURANTS_BY_CITY_SUCCESS,
@@ -51,4 +54,29 @@ return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sort
       dispatch({type:GET_RESTAURANTS_FAILURE})
     console.log(error);
   });
+}
+
+
+// fetch(`http://localhost:7082/menu/getMenu/${restId}`,{
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//          "Authorization": `Bearer ${token}`,
+//         }
+//       })
+//         .then((res) => res.json())
+//         .then((res) => {
+//           console.log("menu", res);
+//         });
+
+export const singleRestaurant = (restId)=>(dispatch) =>{
+ 
+  dispatch({type:GET_MENU_DATA_REQUEST})
+  return axios.get(`http://localhost:7082/menu/getMenu/${restId}`)
+  .then((res)=>{
+    console.log(res)
+    return dispatch({type:GET_MENU_DATA_SUCCESS,payload:res.data})
+
+  })
+  .catch({type:GET_MENU_DATA_FAILURE})
 }

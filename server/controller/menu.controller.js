@@ -6,15 +6,23 @@ const { RestaurantModel } = require("../models/restaurant.model")
 
 const menuController =Router()
 
-menuController.get("/getMenu",authentication,async (req,res)=>{
-
+menuController.get("/getMenu/:restId",async (req,res)=>{
+   
+    const {restId} = req.params
     const {userId} =req.body
 
-    const getRestaurants = await RestaurantModel.find({userId})
+    try{
+        const menuList = await MenuModel.find({restId})
 
-    console.log(getRestaurants)
+        console.log(menuList)
+    
+        res.status(200).send({"menuList":menuList})
+    }
 
-    res.status(200).send({"Restaurants":getRestaurants})
+    catch(err){
+        res.status(400).send("msg","not found")
+    }
+   
 })
 
 
