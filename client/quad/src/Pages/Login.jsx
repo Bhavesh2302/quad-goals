@@ -11,6 +11,7 @@ import {
   DrawerBody,
   Input,
   FormControl,
+  InputGroup,
   FormLabel,
   useToast,
   }
@@ -19,12 +20,14 @@ import {
   import { useState } from 'react'
   import { useDispatch } from "react-redux"
   import { userLogin } from '../Redux/Reducers/UserAuthReducer/action'
+  import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
   
   const Login = () => {
       const { isOpen, onOpen, onClose } = useDisclosure()
       const btnRef = React.useRef()
       const dispatch = useDispatch()
       const userSignupToast = useToast()
+      const [showPassword, setShowPassword] = useState(false);
   
   
       const [ signupForm, setSignupForm ] = useState({
@@ -87,7 +90,25 @@ import {
                         <FormControl isRequired>
                               <Box mb={"20px"}>
                                   <FormLabel>Password</FormLabel>
-                                  <Input type={"password"} w={"60%"} name={"password"} value={signupForm.password} onChange={handleChangeLogin} borderRadius={"0px"} variant={"filled"} />
+                                  {/* <Input type={"password"} w={"60%"} name={"password"} value={signupForm.password} onChange={handleChangeLogin} borderRadius={"0px"} variant={"filled"} /> */}
+                                  <InputGroup>
+                <Input type={showPassword ? 'text' : 'password'}
+                w={"50%"}
+                name={"password"}
+                value={signupForm.password}
+                onChange={handleChangeLogin}
+                borderRadius={"0px"}
+                variant={"filled"}
+                />
+                  <Button
+                    variant={'solid'}
+                    borderRadius={"0px"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }>
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+              </InputGroup>
                               </Box>
                         </FormControl> 
                         <Box mb={"20px"}>

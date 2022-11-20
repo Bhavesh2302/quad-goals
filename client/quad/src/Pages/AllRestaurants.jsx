@@ -30,8 +30,8 @@ const AllRestaurants = () => {
 
   useEffect(() => {
     // console.log(deliveryTime)
-    dispatch(getRestaurants(city, sortBy, deliveryTime));
-  }, [sortBy, deliveryTime]);
+    dispatch(getRestaurants(city, sortBy));
+  }, [sortBy]);
 
   return (
     <Box w="100%">
