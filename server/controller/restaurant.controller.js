@@ -6,11 +6,11 @@ const { RestaurantModel } = require("../models/restaurant.model")
 const { UserModel } = require("../models/user.model")
 const restaurantController = Router()
 
-restaurantController.get("/get",authentication,async (req,res)=>{
-    const {userId} =req.body
-   const all_restaurants =await RestaurantModel.find({userId})
-   console.log(all_restaurants)
-    res.status(200).send(all_restaurants)
+restaurantController.get("/get/:restId",async (req,res)=>{
+    const {restId} =req.params
+   const singleRestaurant =await RestaurantModel.findOne({restId})
+   console.log(singleRestaurant)
+    res.status(200).send({"singleRestaurant":singleRestaurant})
 })
 
 // authorization(["admin","shopOwner"])

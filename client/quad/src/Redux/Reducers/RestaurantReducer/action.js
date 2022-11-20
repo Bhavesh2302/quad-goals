@@ -12,6 +12,9 @@ import {
   GET_RESTAURANTS_FAILURE,
   GET_RESTAURANTS_REQUEST,
   GET_RESTAURANTS_SUCCESS,
+  GET_SINGLE_RESTAURANT_NAME_FAILURE,
+  GET_SINGLE_RESTAURANT_NAME_REQUEST,
+  GET_SINGLE_RESTAURANT_NAME_SUCCESS,
 } from "./actionTypes";
 
 // export const getAllRestaurants = () => (dispatch) => {
@@ -42,12 +45,11 @@ export const getRestaurantsByCity = (city,) => (dispatch) => {
 };
 
 
-export const getRestaurants = (city,sortBy,deliveryTime) =>(dispatch)=>{
-  console.log(deliveryTime)
+export const getRestaurants = (city,sortBy) =>(dispatch)=>{
   dispatch({type:GET_RESTAURANTS_REQUEST})
-return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sortBy=${sortBy}&deliveryTime=${deliveryTime}`)
+return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sortBy=${sortBy}`)
   .then((res) => {
-    console.log(res.data.Restaurants);
+    // console.log(res.data.Restaurants);
    return dispatch({type:GET_RESTAURANTS_SUCCESS,payload:res.data.Restaurants})
   })
   .catch((error) => {
@@ -68,7 +70,7 @@ return axios.get(`http://localhost:7082/allRestaurants/getCity?city=${city}&sort
 //         .then((res) => {
 //           console.log("menu", res);
 //         });
-
+// /restaurant/get
 export const singleRestaurant = (restId)=>(dispatch) =>{
  
   dispatch({type:GET_MENU_DATA_REQUEST})
@@ -79,4 +81,16 @@ export const singleRestaurant = (restId)=>(dispatch) =>{
 
   })
   .catch({type:GET_MENU_DATA_FAILURE})
+}
+
+export const singleRestaurantName = (restId)=>(dispatch) =>{
+ 
+  dispatch({type:GET_SINGLE_RESTAURANT_NAME_REQUEST})
+  return axios.get(`http://localhost:7082/restaurant/get/${restId}`)
+  .then((res)=>{
+    console.log(res)
+    return dispatch({type:GET_SINGLE_RESTAURANT_NAME_SUCCESS,payload:res.data})
+
+  })
+  .catch({type:GET_SINGLE_RESTAURANT_NAME_FAILURE})
 }
