@@ -61,8 +61,7 @@ export const restaurantReducer = (state = initState, { type, payload }) => {
         isError: true,
       };
     }
-
-
+    
     default:
       return state;
   }
