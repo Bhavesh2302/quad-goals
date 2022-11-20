@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Text, Image, Flex } from "@chakra-ui/react"
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -18,7 +19,9 @@ const Footer = () => {
         <Box w={"28%"} display={"flex"} flexDirection={"column"} pl={"0px"}  fontWeight={"500"} justifyContent={"flex-start"} m={"auto"}  h={"450px"} mt={"40px"} textAlign={"left"}>
               <Text color={"#808080"} mb={"18px"}>CONTACT</Text>
               <Text mb={"12px"}>Help & Support</Text>
-              <Text mb={"12px"}>Partner with us</Text>      
+              <Link to={"/restownersignup"}>
+              <Text mb={"12px"}>Partner with us</Text> 
+              </Link>     
               <Text mb={"12px"}>Ride with us</Text>
         </Box>
         <Box w={"28%"} display={"flex"} flexDirection={"column"} pl={"0px"}  fontWeight={"500"} justifyContent={"flex-start"}m={"auto"}  h={"450px"} mt={"40px"} textAlign={"left"}>
