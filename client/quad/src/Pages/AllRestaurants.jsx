@@ -135,7 +135,7 @@ const AllRestaurants = () => {
       </Flex>
       <hr w="100%" />
 
-      <SimpleGrid columns={[4]} w="88%" m="auto" mt="20px">
+      <SimpleGrid columns={[1,2,2,4]} w="88%" m="auto" mt="20px">
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link to={`/allrestaurants/${city}/${item._id}`}>

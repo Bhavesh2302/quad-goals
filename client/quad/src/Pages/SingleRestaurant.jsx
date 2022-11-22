@@ -1,18 +1,18 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
-import { singleRestaurant, singleRestaurantName } from '../Redux/Reducers/RestaurantReducer/action';
+import { addToCart, getCart, singleRestaurant, singleRestaurantName } from '../Redux/Reducers/RestaurantReducer/action';
 import { FaStar } from "react-icons/fa";
 
 const SingleRestaurant = () => {
 
      const dispatch  =useDispatch()
      const [menu , setMenu] = useState([])
+     const AddTOCartToast = useToast()
      const [singleRestaurantData, setSingleRestaurantData] = useState({})
-    //  const 
     const {restId} =useParams()
     console.log(restId)
 
@@ -22,7 +22,6 @@ const SingleRestaurant = () => {
 dispatch(singleRestaurant(restId))
 .then((res)=>{
     if(res.type="GET_MENU_DATA_SUCCESS"){
-        // console.log(res.payload)
         let data = res.payload.menuList
         console.log(data)
 
@@ -40,10 +39,40 @@ dispatch(singleRestaurantName(restId))
   }
 })
 
-
 },[])
-console.log(menu)
-console.log(singleRestaurantData)
+
+const handleAddToCart = (menuId) =>{
+ dispatch(addToCart(menuId))
+//  .then((res)=>{
+//   if(res.type === "ADD_TO_CART_SUCCESS"){
+//     dispatch(getCart())
+//   }
+//  }) 
+ AddTOCartToast({
+  title: "Item Added to cart",
+  status: "success",
+  duration: 1500,
+  position:"top"
+});
+}
+// let token = localStorage.getItem("rest_token")
+
+// fetch(`http://localhost:7082/cart/add/${menuId}`,{
+//   method : "POST",
+//   headers : {
+//     "Content-Type" : "application/json",
+//     "Auhtorization" : `Bearer ${token}`
+//   },
+//   body :JSON.stringify(payload)
+
+
+// })
+// .then((res)=>res.json())
+// .then((res)=>{
+//   console.log("cart",res)
+// })
+// console.log(menu)
+// console.log(singleRestaurantData)
 
 const cuisine = singleRestaurantData?.cuisines?.join(", ")
 
@@ -95,7 +124,7 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
                  <Text fontWeight={"600"}
                   fontSize={"16px"}>{`${singleRestaurantData.d_time} MINS`}</Text>
 
-<Text color={"#b1b2b7"} fontSize="12px" mt="2px">Delivery Time</Text>
+                <Text color={"#b1b2b7"} fontSize="12px" mt="2px">Delivery Time</Text>
                 </Box>
                 <Box borderLeft="1px solid #b1b2b7" height="40px">
 
@@ -112,6 +141,45 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
 
       </Box>
 
+    </Box>
+
+    <Box w="50%" m="auto" h="600px"  overflowY="scroll" borderLeft={ "0.3px solid #e0e5e9"} mb="30px"
+    css={{
+      '&::-webkit-scrollbar': {
+        width: '4px',
+      },
+      '&::-webkit-scrollbar-track': {
+        width: '6px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: "#fff",
+        borderRadius: '24px',
+      },
+    }}
+    >
+      {
+          menu.map((item)=>(
+            <Box key={item._id} p="20px" position={"relative"}>
+             <Box display={"flex"} alignItems="center" textAlign={"left"} alignContent="center">
+              <Box w="80%">
+             <Text fontSize={"20px"} fontWeight="500"color="#3e4152">{item.title}</Text>
+             <Text>{`₹${item.price}`}</Text>
+             <Text w="100%" textOverflow={"ellipsis"} mt="15px" overflow="hidden" color="#9ea0a8">{item.description}</Text>
+             </Box>
+
+             <Box w="20%">
+              <Image src={item.item_image} w="100px" height="100px" m="auto" position={"relative"}/>
+             </Box>
+             <Button position={"absolute"} top="100px" left={"82%"} p="0px 20px 0px 20px" bg={"green.500"} borderRadius={"5px"}
+             alignItems="center"
+              color={"white"} onClick={()=>handleAddToCart(item._id)}>Add</Button>
+             </Box>
+             <Box borderBottom={"2px solid #e0e5e9"} mt="30px">
+
+             </Box>
+            </Box>
+          ))
+      }
     </Box>
    </Box>
   )

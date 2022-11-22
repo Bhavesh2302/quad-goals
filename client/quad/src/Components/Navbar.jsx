@@ -6,9 +6,10 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { MdHelp, MdLocalOffer } from 'react-icons/md';
 import { BsFillHandbagFill,  } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+      const navigate = useNavigate()
   return (
     <Flex h={"80px"}  p={"10px"} justifyContent={"space-around"} alignItems={"center"} w={"85%"} m={"auto"} gap={"100px"}>
          <Flex w={"30%"}  justifyContent={"space-evenly"} alignItems={"center"}>
@@ -38,7 +39,9 @@ const Navbar = () => {
                     <FaUserAlt/>
                     <Login/>
               </Flex>
-              <Flex alignItems={"center"} gap={"10px"} _hover={{color:"red", cursor:"pointer"}}> 
+              <Flex alignItems={"center"} gap={"10px"} _hover={{color:"red", cursor:"pointer"}} onClick={()=>{
+                  navigate("/cart")
+              }}> 
                     <BsFillHandbagFill/>
                     <Text fontWeight={"650"} fontSize={"15px"}>Bag</Text>
               </Flex>
