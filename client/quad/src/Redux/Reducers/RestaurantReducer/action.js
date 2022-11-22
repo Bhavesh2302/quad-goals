@@ -1,5 +1,14 @@
 import axios from "axios";
 import {
+  ADD_TO_CART_FAILURE,
+  ADD_TO_CART_REQUEST,
+  ADD_TO_CART_SUCCESS,
+  DELETE_ITEM_CART_FAILURE,
+  DELETE_ITEM_CART_REQUEST,
+  DELETE_ITEM_CART_SUCCESS,
+  GET_CART_FAILURE,
+  GET_CART_REQUEST,
+  GET_CART_SUCCESS,
   GET_MENU_DATA_FAILURE,
   GET_MENU_DATA_REQUEST,
   GET_MENU_DATA_SUCCESS,
@@ -29,6 +38,9 @@ import {
 //       dispatch({ type: GET_RESTAURANTS_DATA_FAILURE });
 //     });
 // };
+
+let token = JSON.parse(localStorage.getItem("rest_token"))
+    // console.log(token)
 
 export const getRestaurantsByCity = (city,) => (dispatch) => {
 // console.log(sortBy)
@@ -94,3 +106,76 @@ export const singleRestaurantName = (restId)=>(dispatch) =>{
   })
   .catch({type:GET_SINGLE_RESTAURANT_NAME_FAILURE})
 }
+
+
+//  *****  Get cart ******
+
+export const getCart = ()=> (dispatch) =>{
+
+  console.log("getdata")
+
+   dispatch({type : GET_CART_REQUEST})
+  return axios({
+    url:`http://localhost:7082/cart/get`,
+    method:"get",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    }
+  })
+  .then((res)=>{
+    console.log("get" ,res)
+   return dispatch({type :GET_CART_SUCCESS ,payload : res.data.cartData})
+  })
+  .catch((err)=>{
+    dispatch({type :GET_CART_FAILURE})
+  })
+
+}
+
+
+
+
+//  *****  Add To cart ******
+
+
+export const addToCart = (menuId)=>(dispatch) =>{
+  console.log(token)
+  dispatch({type :ADD_TO_CART_REQUEST})
+  return axios({
+    url:`http://localhost:7082/cart/add/${menuId}`,
+    method:"post",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    }
+  }).then((res)=>{
+    return dispatch({type : ADD_TO_CART_SUCCESS})
+    // getCart()
+  })
+  .catch((err)=>{
+    dispatch({type : ADD_TO_CART_FAILURE})
+  })
+
+}
+
+export const deleteFromCart = (cartId)=>(dispatch) =>{
+  dispatch({type :DELETE_ITEM_CART_REQUEST})
+  return axios({
+    url:`http://localhost:7082/cart/delete/${cartId}`,
+    method:"delete",
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    }
+  }).then((res)=>{
+    console.log(res)
+   return dispatch({type : DELETE_ITEM_CART_SUCCESS})
+    // dispatch(getCart())
+  })
+  .catch((err)=>{
+    dispatch({type : DELETE_ITEM_CART_FAILURE})
+  })
+
+}
+

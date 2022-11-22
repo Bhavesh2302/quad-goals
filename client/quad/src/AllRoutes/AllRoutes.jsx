@@ -6,6 +6,7 @@ import AllRestaurants from '../Pages/AllRestaurants'
 import Home from '../Pages/Home'
 import SingleRestaurant from '../Pages/SingleRestaurant'
 import RestOwnerSignup from '../Pages/RestOwnerSignup'
+import Cart from '../Pages/Cart'
 
 
 
@@ -17,6 +18,7 @@ const AllRoutes = () => {
             <Route path={"/allrestaurants/:city"} element={<AllRestaurants/>}></Route>
             <Route path={"/allrestaurants/:city/:restId"} element={<SingleRestaurant/>}></Route>
             <Route path={"/restownersignup"} element={<RestOwnerSignup/>}></Route>
+            <Route path={"/cart"} element={<Cart/>}/>
         </Routes>
         <Footer/>
     </div>

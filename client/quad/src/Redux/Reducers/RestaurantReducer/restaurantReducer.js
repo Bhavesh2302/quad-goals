@@ -1,4 +1,5 @@
 import {
+  GET_CART_SUCCESS,
   GET_RESTAURANTS_BY_CITY_FAILURE,
   GET_RESTAURANTS_BY_CITY_REQUEST,
   GET_RESTAURANTS_BY_CITY_SUCCESS,
@@ -10,6 +11,7 @@ import {
 const initState = {
   allRestaurantsByCity: [],
   allRestaurants:[],
+  cart:[],
   isLoading: false,
   isError: false,
 };
@@ -59,6 +61,14 @@ export const restaurantReducer = (state = initState, { type, payload }) => {
         ...state,
         isLoading: false,
         isError: true,
+      };
+    }
+
+    case GET_CART_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        cart: payload,
       };
     }
     
