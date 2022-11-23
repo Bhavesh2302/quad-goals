@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <Box w={"100%"} bg={"black"} m={"auto"} alignItems={"center"}>
-    <Flex w={"78%"} m={"auto"} alignItems={"center"} justifyContent={"space-evenly"} fontSize={"16px"} color={"white"} pt={"30px"}>
+    <Flex w={{base:"95%", sm:"95%", md: "85%", lg:"78%"}} m={"auto"} alignItems={"center"} justifyContent={"space-evenly"} fontSize={"16px"} color={"white"} pt={"30px"}>
         <Box w={"28%"} display={"flex"}  flexDirection={"column"} pl={"0px"}  fontWeight={"500"} justifyContent={"flex-start"} m={"auto"}  h={"450px"} mt={"40px"} textAlign={"left"} >
               <Text color={"#808080"} mb={"18px"}>COMPANY</Text>
               <Text mb={"12px"}>About us</Text>

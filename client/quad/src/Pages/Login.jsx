@@ -63,7 +63,7 @@ import {
   
     return (
       <>
-         <Button ref={btnRef} fontWeight={"650"} variant={"unstyled"} border={"0px"} color={"black"} borderRadius={"0px"} _hover={{ color:"black", bg: "white"}} onClick={onOpen}>
+         <Button ref={btnRef} fontWeight={"650"} variant={"unstyled"} border={"0px"} color={"black"} borderRadius={"0px"} fontSize={{base:"10px", sm:"11px", md:"15px"}}  _hover={{ color:"black", bg: "white"}} onClick={onOpen}>
           Login
         </Button>
         <Drawer
@@ -71,7 +71,7 @@ import {
           placement='right'
           onClose={onClose}
           finalFocusRef={btnRef}
-          size={"md"}
+          size={{base:"xs", sm: "xs", md:"sm"}}
         >
           <DrawerOverlay />
           <DrawerContent>

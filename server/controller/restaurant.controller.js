@@ -8,7 +8,7 @@ const restaurantController = Router()
 
 restaurantController.get("/get/:restId",async (req,res)=>{
     const {restId} =req.params
-   const singleRestaurant =await RestaurantModel.findOne({restId})
+   const singleRestaurant =await RestaurantModel.findOne({_id:restId})
    console.log(singleRestaurant)
     res.status(200).send({"singleRestaurant":singleRestaurant})
 })
