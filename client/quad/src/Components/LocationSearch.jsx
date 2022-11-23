@@ -18,7 +18,7 @@ const LocationSearch = () => {
 
   return (
     <>
-       <Button ref={btnRef} variant={"link"} fontSize={"15px"} fontWeight={"500"} onClick={onOpen}>
+       <Button ref={btnRef} variant={"link"} fontSize={{base:"10px", sm:"11px", md:"15px"}} fontWeight={"500"} onClick={onOpen}>
           Kota, Rajasthan, India
        </Button> 
        <Drawer
