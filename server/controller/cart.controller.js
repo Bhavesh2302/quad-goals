@@ -22,6 +22,7 @@ cartController.post("/add/:menuId",authentication,async (req,res)=>{
 
 
     const {userId} = req.body
+    console.log(userId)
     const {menuId} = req.params
 
     const menu  = await MenuModel.findOne({_id:menuId})
@@ -93,11 +94,29 @@ cartController.post("/add/:menuId",authentication,async (req,res)=>{
 
 cartController.delete("/delete/:cartId",authentication,async (req,res)=>{
    
+    const {userId} = req.body
     const {cartId} = req.params
-    const  deletedItem =  await CartModel.deleteOne({_id:cartId})
+    const  deletedItem =  await CartModel.deleteOne({_id:cartId,userId})
     console.log(deletedItem)
 
     res.send({"msg":"Item has been deleted"})
+})
+
+
+cartController.patch("/:cartId",authentication, async (req,res)=>{
+    const {userId} = req.body
+    // const payload = req.body
+    const {quantity} =req.body
+    // console.log("payload",payload)
+   
+    const {cartId} = req.params
+ 
+
+    const updatedCart = await CartModel.findByIdAndUpdate({_id : cartId,userId},{$inc :{quantity : quantity}})
+    console.log(updatedCart)
+    // const cart_data = await CartModel.find({userId})
+//  res.status(200).send({"updated cart":updatedCart,"cartData":cart_data})
+res.send({"msg" : "quantity has been updated","quantity" : updatedCart,"payload":quantity})
 })
 
 module.exports = {
