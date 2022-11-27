@@ -85,7 +85,7 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
     <Box bg="#171a29">
       <Box display={"flex"} flexDirection={{base:"column-reverse",sm:"column-reverse", md:"row"}} gap="80px" p="50px 30px" color="white" w="80%" m="auto">
        
-        <Box w={{base:"80%",sm:"80%",md:"80%",lg:"60%"}} border="1px solid red" p="20px">
+        <Box w={{base:"80%",sm:"80%",md:"80%",lg:"60%"}}  p="20px">
           <Text fontSize={"32px"} fontWeight="400" textAlign={"left"}>{singleRestaurantData.rest_name}</Text>
           
                 <Text  color={"#b1b2b7"} fontSize="15px" mt="10px" textAlign="left" height="20px" w="80%">{cuisine}</Text>

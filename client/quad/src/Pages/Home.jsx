@@ -67,12 +67,12 @@ const Home = () => {
   //  },[])
    
   return (
-    <Box w="100%">
-    <Flex w={"100%"} m={"auto"} >
-      <Box w={"52%"}  pl={"150px"} pt={"50px"} pr={"40px"}>
+    <Box w="100%" >
+    <Box display={{ base: "block", sm: "block", md: "block", lg: "flex"}} w={"100%"} m={"auto"} justifyContent={"center"} >
+      <Box w={{base: "90%", sm:"90%", md:"90%", lg:"52%"}}  pl={{base: "50px", sm: "50px", md: "100px",lg:"150px"}} pt={"50px"} pr={{base: "0px", sm: "10px", md: "20px", lg:"40px"}} >
            <Flex  alignItems={"center"} justifyContent={"space-between"} p={"0px"}>
-                <Box  w={"155px"} >
-                    <Image objectFit={"fill"} h={"105px"} w={"100%"} borderRadius={"50%"} src={"https://i.imgur.com/Gex3smL.jpg"} alt={"Logo"}/>
+                <Box  w={{base: "100px", sm:"100px", md:"140px", lg:"155px"}} >
+                    <Image objectFit={"fill"} h={{base: "70px", sm:"70px", md:"90px", lg:"105px"}} w={"100%"} borderRadius={"50%"} src={"https://i.imgur.com/Gex3smL.jpg"} alt={"Logo"}/>
                 </Box>
                 <Flex gap={"15px"} >
                     <Login/>
@@ -81,20 +81,20 @@ const Home = () => {
            </Flex>
            <Flex pb={"10px"} justifyContent={"flex-end"} mb={"30px"}>
                <Link to={"/restownersignup"}>
-                   <Text fontWeight={"550"}>Want to be a partner? Click here</Text>
+                   <Text fontSize={{base: "12px", sm:"12px", md:"15px", lg:"18px"}} fontWeight={"550"}>Want to be a partner?</Text>
                </Link>
            </Flex>
            <Box textAlign={"left"}>
                 <SlideFade  slideFade in={isOpen} offsetY='20px'>
-                    <Text fontSize={"40px"} fontWeight={"bold"} mb={"12px"}>{currentString}</Text>
+                    <Text fontSize={{base: "25px", sm:"25px", md:"30px", lg:"40px"}} fontWeight={"bold"} mb={"12px"}>{currentString}</Text>
                 </SlideFade>
-                <Box fontSize={"18px"} fontWeight={"bold"} color={"gray"} >
+                <Box fontSize={{base: "12px", sm:"12px", md:"15px", lg:"18px"}} fontWeight={"bold"} color={"gray"} >
                     <Text>Order food from favourite restaurants near you.</Text>
                 </Box>
            </Box>
            <Flex mt={"23px"}>
-                <Input onChange={(e)=>setCity(e.target.value)}  border={"2px solid #969491"} h={"50px"} borderRadius={"0px"} placeholder={"Enter your delivery location"}/>
-                <Button onClick = {handleSearchByCity} h={"50px"}  borderRadius={"0px"} color={"white"} bg={"#ef234b "}>Find Food</Button>
+                <Input onChange={(e)=>setCity(e.target.value)}  border={"2px solid #969491"} h={{base: "40px", sm:"40px", md:"40px", lg:"50px"}} borderRadius={"0px"} placeholder={"Enter your delivery location"}/>
+                <Button onClick = {handleSearchByCity} h={{base: "40px", sm:"40px", md:"40px", lg:"50px"}}  borderRadius={"0px"} color={"white"} bg={"#ef234b "}>Find Food</Button>
            </Flex>
            <Box textAlign={"left"} mt={"20px"} mb={"20px"}>
              <Text fontSize={"16px"} color={"gray"} fontWeight={"500"} mb={"12px"}>Popular cities in India</Text>
@@ -111,10 +111,10 @@ const Home = () => {
              </Flex>
            </Box>
       </Box>
-      <Box w={"48%"}>
+      <Box display={{base: "none", sm:"none", md: "none", lg: "block"}} w={{base: "0", lg:"48%"}}>
           <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"}/>
       </Box>
-    </Flex>
+    </Box>
     <OrderDeliveryTrackingComponent/>
     <BannerAppStore/>
     </Box>

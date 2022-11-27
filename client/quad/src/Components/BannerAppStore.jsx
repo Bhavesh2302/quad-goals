@@ -7,17 +7,17 @@ const BannerAppStore = () => {
         {/*  play store and apple store */}
         <Box width="50%">
 
-            <Box w="70%"  margin={"auto"} mt="30px"  height={"200px"}  padding="30px">
-            <Box w="60%">
-                <Text textAlign={"left"} fontSize={"30px"} fontWeight="bold">Restaurants in your pocket</Text>
-            </Box>
-            <Box mt="15px">
-                <Text textAlign={"left"} color={"gray"}>Order from your favourite restaurants & track <br/>on the go with all-new Swiggy app.</Text>
-            </Box>
-            <Box display={"flex"} alignItems="center" gap="20px" mt="50px">
-            <Image height={"60px"} src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-AppStore_lg30tv"} alt={"appleStore"}/>
-              <Image height={"60px"} src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-GooglePlay_1_zixjxl"} alt={"playStore"}/>
-            </Box>
+            <Box w="100%"  margin={"auto"} mt="30px" height={"200px"}  p={{base: "14px", sm:"14px", md : "20px",lg:"30px"}}>
+              <Box w="100%">
+                  <Text textAlign={"left"} fontSize={{base: "12px", sm:"12px", md : "18px",lg:"30px"}} fontWeight="bold">Restaurants in your pocket</Text>
+              </Box>
+              <Box mt="15px">
+                  <Text textAlign={"left"} fontSize={{base: "12px", sm:"12px", md : "18px",lg:"30px"}} color={"gray"}>Order from your favourite restaurants & track <br/>on the go with all-new Swiggy app.</Text>
+              </Box>
+              <Box display={"flex"} alignItems="center" gap="20px" mt={{base: "12.5px", sm:"12.5px", md : "25px",lg:"50px"}}>
+                <Image height={{base: "15px", sm:"15px", md : "30px",lg:"60px"}} src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-AppStore_lg30tv"} alt={"appleStore"}/>
+                <Image height={{base: "15px", sm:"15px", md : "30px",lg:"60px"}} src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-GooglePlay_1_zixjxl"} alt={"playStore"}/>
+              </Box>
             </Box>
         </Box>
 
