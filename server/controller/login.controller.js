@@ -9,12 +9,13 @@ loginController.post("/", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await UserModel.findOne({ email });
-  console.log(user)
+  // console.log(user)
    const hash = user.password
-   console.log(hash)
+  //  console.log(hash)
 
   bcrypt.compare(password, hash, async function (err, result) {
     if (err) {
+      console.log(err)
       res.status(401).send({ msg: "something went wrong try again" });
     }
 
@@ -26,7 +27,7 @@ loginController.post("/", async (req, res) => {
         process.env.SECRET,
       );
 
-      res.status(201).send({ msg: "Login Successfull", token: token,"user":user });
+      res.status(201).send({ msg: "Login Successful", token: token,"user":user });
     } else {
       res.status(401).send({ msg: "please login again" });
     }

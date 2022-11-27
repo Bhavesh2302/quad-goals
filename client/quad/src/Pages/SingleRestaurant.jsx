@@ -1,11 +1,11 @@
 import { Box, Button, Image, Text, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import { addToCart, getCart, singleRestaurant, singleRestaurantName } from '../Redux/Reducers/RestaurantReducer/action';
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaYenSign } from "react-icons/fa";
 
 const SingleRestaurant = () => {
 
@@ -13,6 +13,7 @@ const SingleRestaurant = () => {
      const [menu , setMenu] = useState([])
      const AddTOCartToast = useToast()
      const [singleRestaurantData, setSingleRestaurantData] = useState({})
+     const token = useSelector((state)=>state.userReducer.token)
     const {restId} =useParams()
     console.log(restId)
 
@@ -42,18 +43,19 @@ dispatch(singleRestaurantName(restId))
 },[])
 
 const handleAddToCart = (menuId) =>{
- dispatch(addToCart(menuId))
-//  .then((res)=>{
-//   if(res.type === "ADD_TO_CART_SUCCESS"){
-//     dispatch(getCart())
-//   }
-//  }) 
- AddTOCartToast({
-  title: "Item Added to cart",
-  status: "success",
-  duration: 1500,
-  position:"top"
-});
+ dispatch(addToCart(token,menuId))
+ .then((res)=>{
+  if(res.type === "ADD_TO_CART_SUCCESS"){
+    AddTOCartToast({
+      title: "Item Added to cart",
+      status: "success",
+      duration: 1500,
+      position:"top"
+    });
+    dispatch(getCart(token))
+  }
+ }) 
+ 
 }
 // let token = localStorage.getItem("rest_token")
 
@@ -81,17 +83,16 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
     <Navbar/>
 
     <Box bg="#171a29">
-      <Box display={"flex"} gap="80px" p="50px 30px" color="white" w="80%" m="auto">
-        <Box w="30%">
-          <Image src={singleRestaurantData.image_rest} height="190px"/>
-        </Box>
-        <Box w="60%">
+      <Box display={"flex"} flexDirection={{base:"column-reverse",sm:"column-reverse", md:"row"}} gap="80px" p="50px 30px" color="white" w="80%" m="auto">
+       
+        <Box w={{base:"80%",sm:"80%",md:"80%",lg:"60%"}} border="1px solid red" p="20px">
           <Text fontSize={"32px"} fontWeight="400" textAlign={"left"}>{singleRestaurantData.rest_name}</Text>
           
                 <Text  color={"#b1b2b7"} fontSize="15px" mt="10px" textAlign="left" height="20px" w="80%">{cuisine}</Text>
          
-          <Text color={"#b1b2b7"} fontSize="15px" mt="10px" textAlign={"left"}> {singleRestaurantData.address}</Text>
-         <Box display={"flex"} mt="20px" gap="50px" textAlign="left" alignItems={"left"} pt="15px" w="100%">
+          <Text color={"#b1b2b7"} fontSize="15px" mt={{base:"25px",sm:"25px",md:"25px",lg:"10px"}} textAlign={"left"}> {singleRestaurantData.address}</Text>
+
+         <Box display={"flex"} mt="20px" gap={{md:"30px",lg:"50px"}} textAlign="left" alignItems={"left"} pt="15px" w="100%">
           
        <Box >
           <Box
@@ -122,7 +123,7 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
 
                 <Box>
                  <Text fontWeight={"600"}
-                  fontSize={"16px"}>{`${singleRestaurantData.d_time} MINS`}</Text>
+                  fontSize={{base:"",sm:"",md:"14px",lg:"16px"}}>{`${singleRestaurantData.d_time} MINS`}</Text>
 
                 <Text color={"#b1b2b7"} fontSize="12px" mt="2px">Delivery Time</Text>
                 </Box>
@@ -137,7 +138,9 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
 
          </Box>
         </Box>
-        <Box></Box>
+        <Box w={{base:"20%",sm:"20%",md:"20%",lg:"40%"}}  p="20px">
+          <Image src={singleRestaurantData.image_rest} height="200px" />
+        </Box>
 
       </Box>
 
@@ -186,3 +189,5 @@ const cuisine = singleRestaurantData?.cuisines?.join(", ")
 }
 
 export default SingleRestaurant
+
+
