@@ -58,7 +58,7 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
   };
 
   return (
-    <Box>
+    <Box >
       <Box w={"20%"} m={"auto"}>
         <Link to={"/"}>
           <Image
