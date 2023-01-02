@@ -43,16 +43,16 @@ const AllRestaurants = () => {
       </Box>
 
       <Flex
-        w="88%"
+        w={{base : "95%", sm : "90%" , md : "90%" , lg : "88%"}}
         m="auto"
-        direction={"row"}
-        justifyContent="space-between"
+        direction={{base: "column", sm: "column", md: "column", lg : "row"}}
+        justifyContent={{base: "flex-start", sm: "flex-start", md: "flex-start", lg : "space-evenly"}}
         alignItems={"center"}
         color={"#282c3f"}
         p="15px"
         fontWeight="300"
-      >
-        <Box w="30%" display="flex" justifyContent={"space-between"}>
+       >
+        <Box w={{base : "100%", sm : "100%" , md : "100%" , lg : "30%"}} display="flex" justifyContent={"space-between"}>
           <Text
             textAlign={"left"}
             fontWeight="600"
@@ -60,26 +60,32 @@ const AllRestaurants = () => {
           >{` ${restaurants.length} restaurants`}</Text>
         </Box>
         <Flex
-          w="70%"
+          w={{base : "100%", sm : "100%" , md : "100%" , lg : "70%"}}
           direction={"row"}
-          gap="30px"
+          gap={{base : "10px", sm : "10px" , md : "12px" , lg : "30px"}}
+          flexWrap={"wrap"}
           color={"##282c3f"}
-          justifyContent="flex-end"
+          justifyContent={{base: "flex-start", sm: "flex-start", md: "flex-start", lg : "flex-end"}}
           alignItems={"center"}
         >
-          <Box>
+          <Box >
             <Button
-              variant={"unstyled"}
-              bg="none"
-              _hover={{ color: "red", cursor: "pointer" }}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               Relevance
             </Button>
           </Box>
-          <Box>
+          <Box >
             <Button
-              variant={"unstyled"}
-              _hover={{ color: "red", cursor: "pointer" }}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => {
                 console.log("hello");
                 console.log(deliveryTime);
@@ -89,45 +95,56 @@ const AllRestaurants = () => {
               Delivery Time
             </Button>
           </Box>
-          <Box>
+          <Box >
             <Button
-              variant={"unstyled"}
-              _hover={{ color: "red", cursor: "pointer" }}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => {
-                // console.log("hello")
                 setSortBy("asc");
               }}
             >
               Cost Low To High
             </Button>
           </Box>
-          <Box>
+          <Box >
             <Button
-              variant={"unstyled"}
-              _hover={{ color: "red", cursor: "pointer" }}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => setSortBy("desc")}
             >
               Cost High to Low
             </Button>
           </Box>
-          <Box>
+          <Box >
             <Button
-              variant={"unstyled"}
-              _hover={{ color: "red", cursor: "pointer" }}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               Rating
             </Button>
           </Box>
-          <Box>
+          <Box >
             <Button
               display={"flex"}
-              variant={"unstyled"}
+              variant={"solid"}
+              bg={"#83cd29"}
+              color={"white"}
+              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
               gap="10px"
-              _hover={{ color: "red", cursor: "pointer" }}
+              _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               <Text>Filters</Text>
-              <Box border={"1px solid #eee"} p="10px" borderRadius={"50%"}>
-                <ImSpoonKnife color="#f9791e" />
+              <Box border={"1px solid #eee"} p="10px" borderRadius={"50%"} borderColor={"transparent"}>
+                <ImSpoonKnife color="#f9791e" size={"15px"}/>
               </Box>
             </Button>
           </Box>
@@ -135,86 +152,85 @@ const AllRestaurants = () => {
       </Flex>
       <hr w="100%" />
 
-      <SimpleGrid columns={[1,2,2,4]} w="88%" m="auto" mt="20px">
+      <SimpleGrid columns={[1, 2, 2, 4]} w="88%" m="auto" mt="20px">
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link key={item._id} to={`/allrestaurants/${city}/${item._id}`}>
-            <Box
-              
-              textAlign="left"
-              height={"350px"}
-              p="25px"
-              position={"relative"}
-              _hover={
-                {
-                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
-                  border: "0.3px solid #e0e5e9",
-                }
-                //  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-              }
-            >
-              <Image src={item.image_rest} position="relative" />
               <Box
-                bg={"#3a3c41"}
-                color="white"
-                position="absolute"
-                top="3"
-                textOverflow={"ellipsis"}
-                overflow="hidden"
-                left="-0.4"
-                p="0px 5px"
-                fontSize={"14px"}
-                textShadow="inherit"
-                letterSpacing={"1px"}
-                textTransform={"uppercase"}
+                textAlign="left"
+                height={"350px"}
+                p="25px"
+                position={"relative"}
+                _hover={
+                  {
+                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
+                    border: "0.3px solid #e0e5e9",
+                  }
+                  //  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                }
               >
-                {item.promoted === "promoted" ? "promoted" : ""}
-              </Box>
-              <Box mt="10px">
-                <Text
-                  fontWeight={"600"}
-                  w="100%"
-                  height="20px"
+                <Image src={item.image_rest} position="relative" />
+                <Box
+                  bg={"#3a3c41"}
+                  color="white"
+                  position="absolute"
+                  top="3"
                   textOverflow={"ellipsis"}
                   overflow="hidden"
+                  left="-0.4"
+                  p="0px 5px"
+                  fontSize={"14px"}
+                  textShadow="inherit"
+                  letterSpacing={"1px"}
+                  textTransform={"uppercase"}
                 >
-                  {item.rest_name}
-                </Text>
-              </Box>
-              <Box height="30px" fontSize={"14px"} color={"#686b78"}>
-                {item.cuisines.join(", ")}
-              </Box>
-              <Box
-                display={"flex"}
-                fontSize={"14px"}
-                justifyContent="space-between"
-                alignItems={"center"}
-                mt="15px"
-              >
+                  {item.promoted === "promoted" ? "promoted" : ""}
+                </Box>
+                <Box mt="10px">
+                  <Text
+                    fontWeight={"600"}
+                    w="100%"
+                    height="20px"
+                    textOverflow={"ellipsis"}
+                    overflow="hidden"
+                  >
+                    {item.rest_name}
+                  </Text>
+                </Box>
+                <Box height="30px" fontSize={"14px"} color={"#686b78"}>
+                  {item.cuisines.join(", ")}
+                </Box>
                 <Box
                   display={"flex"}
-                  justifyContent={"space-evenly"}
-                  borderRadius="4px"
-                  gap="2px"
-                  p="0px 5px"
+                  fontSize={"14px"}
+                  justifyContent="space-between"
                   alignItems={"center"}
-                  color="white"
-                  bg={item.rating > 4.0 ? "#48c479" : "#f9791e"}
+                  mt="15px"
                 >
-                  <Box>
-                    <FaStar fontSize={"12px"} />
+                  <Box
+                    display={"flex"}
+                    justifyContent={"space-evenly"}
+                    borderRadius="4px"
+                    gap="2px"
+                    p="0px 5px"
+                    alignItems={"center"}
+                    color="white"
+                    bg={item.rating > 4.0 ? "#48c479" : "#f9791e"}
+                  >
+                    <Box>
+                      <FaStar fontSize={"12px"} />
+                    </Box>
+                    <Box>
+                      <Text>{`${item.rating}`}</Text>
+                    </Box>
                   </Box>
-                  <Box>
-                    <Text>{`${item.rating}`}</Text>
-                  </Box>
+                  <Box>.</Box>
+                  <Box color={"#686b78"}>{`${item.d_time} MINS`}</Box>
+                  <Box>.</Box>
+                  <Box color={"#686b78"}>{`₹ ${item.cost} For Two`}</Box>
                 </Box>
-                <Box>.</Box>
-                <Box color={"#686b78"}>{`${item.d_time} MINS`}</Box>
-                <Box>.</Box>
-                <Box color={"#686b78"}>{`₹ ${item.cost} For Two`}</Box>
+                <Box></Box>
               </Box>
-              <Box></Box>
-            </Box>
             </Link>
           ))}
       </SimpleGrid>
