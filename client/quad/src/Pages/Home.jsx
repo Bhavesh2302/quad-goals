@@ -112,7 +112,7 @@ const Home = () => {
            </Box>
       </Box>
       <Box display={{base: "none", sm:"none", md: "none", lg: "block"}} w={{base: "0", lg:"48%"}}>
-          <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"}/>
+          <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"} />
       </Box>
     </Box>
     <OrderDeliveryTrackingComponent/>

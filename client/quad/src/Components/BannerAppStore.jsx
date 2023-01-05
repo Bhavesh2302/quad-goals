@@ -23,8 +23,8 @@ const BannerAppStore = () => {
 
         {/* mobile images */}
         <Box width="50%" display={"flex"}>
-            <Box><Image src='https://i.imgur.com/yGkRXbJ.png' alt={"first-image"}></Image></Box>
-            <Box><Image src="https://i.imgur.com/3cbUU2L.png" alt="second-image"></Image></Box>
+            <Box><Image src='https://i.imgur.com/yGkRXbJ.png' h={"100%"} alt={"first-image"}></Image></Box>
+            <Box><Image src="https://i.imgur.com/3cbUU2L.png" h={"100%"} alt="second-image"></Image></Box>
         </Box>
 
     </Box>
