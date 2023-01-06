@@ -75,8 +75,9 @@ const SingleRestaurant = () => {
           m="auto"
           justifyContent={"space-evenly"}
         >
-          <Box w={{ base: "100%", sm: "100%", md: "50%", lg: "60%" }} p="20px" m={"auto"}>
-            <Text fontSize={"32px"} fontWeight="400" textAlign={"left"}>
+          <Box w={{ base: "100%", sm: "100%", md: "50%", lg: "60%" }} p="20px" m={"auto"} >
+            <Box w={{base: "100%", sm: "70%", md: "100%", lg: "100%"}} m={"auto"}>
+            <Text fontSize={"32px"} alignItems={"center"} fontWeight="400" textAlign={"left"}>
               {singleRestaurantData.rest_name}
             </Text>
             <Text
@@ -127,12 +128,12 @@ const SingleRestaurant = () => {
                   </Box>
                 </Box>
 
-                <Text color={"#b1b2b7"} fontSize="12px" mt="2px">
+                <Text color={"#b1b2b7"} alignItems={"center"} fontSize="12px" mt="2px">
                   Ratings
                 </Text>
               </Box>
 
-              <Box borderLeft="1px solid #b1b2b7" height="40px"></Box>
+              <Box borderLeft="1px solid #b1b2b7" height="40px" ml={"10px"} mr={"10px"}></Box>
 
               <Box>
                 <Text
@@ -140,28 +141,29 @@ const SingleRestaurant = () => {
                   fontSize={{ base: "", sm: "", md: "14px", lg: "16px" }}
                 >{`${singleRestaurantData.d_time} MINS`}</Text>
 
-                <Text color={"#b1b2b7"} fontSize="12px" mt="2px">
+                <Text color={"#b1b2b7"} alignItems={"center"} fontSize="12px" mt="2px">
                   Delivery Time
                 </Text>
               </Box>
-              <Box borderLeft="1px solid #b1b2b7" height="40px"></Box>
+              <Box borderLeft="1px solid #b1b2b7" height="40px" ml={"10px"} mr={"10px"}></Box>
 
               <Box>
                 <Text>{`₹${singleRestaurantData.cost}`}</Text>
-                <Text color={"#b1b2b7"} fontSize="12px" mt="2px">
+                <Text color={"#b1b2b7"} alignItems={"center"} fontSize="12px" mt="2px">
                   Cost for two
                 </Text>
               </Box>
             </Box>
+            </Box> 
           </Box>
           <Box w={{ base: "100%", sm: "100%", md: "40%", lg: "40%" }} p="20px"  m={"auto"}>
-            <Image src={singleRestaurantData.image_rest} height="200px" w={{base: "100%", sm: "60%", md: "100%", lg: "100%"}}/>
+            <Image src={singleRestaurantData.image_rest} height="200px" w={{base: "100%", sm: "70%", md: "100%", lg: "100%"}} m={"auto"}/>
           </Box>
         </Box>
       </Box>
 
       <Box
-        w="50%"
+        w={{base: "90%", sm: "80%", md: "65%", lg:"50%"}}
         m="auto"
         h="600px"
         overflowY="scroll"
@@ -179,7 +181,7 @@ const SingleRestaurant = () => {
             borderRadius: "24px",
           },
         }}
-      >
+       >
         {menu.map((item) => (
           <Box key={item._id} p="20px" position={"relative"}>
             <Box
@@ -199,6 +201,7 @@ const SingleRestaurant = () => {
                   mt="15px"
                   overflow="hidden"
                   color="#9ea0a8"
+                  fontSize={{ base:"12px", sm: "12.5px", md: "14px"}}
                 >
                   {item.description}
                 </Text>
