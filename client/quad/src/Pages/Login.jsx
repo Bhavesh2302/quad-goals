@@ -52,13 +52,32 @@ import {
              password: signupForm.password
          } 
          console.log(payload)
-         dispatch( userLogin(payload)) 
-         userSignupToast({
-            title: "Login Successful",
-            status: "success",
-            duration: 1500,
-            position:"top"
-         });
+
+         dispatch(userLogin(payload))
+         .then((res)=>{
+          console.log("insideFunc",res)
+            if(res.type === "USER_LOGIN_SUCCESS")
+            {
+                userSignupToast({
+                  title: "Login Successful",
+                  status: "success",
+                  duration: 1500,
+                  position:"top",
+                  isClosable : true
+             });
+            }
+            else{
+              userSignupToast({
+                  title: "Login Fail",
+                  description : "Please Check login cridentials",
+                  status: "error",
+                  duration: 1500,
+                  position:"top",
+                  isClosable : true
+             });
+            }
+         })
+         
       }
   
     return (

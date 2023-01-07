@@ -78,7 +78,7 @@ const Signup = () => {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size={"md"}
+        size={{base: "xs", sm: "xs", md: "sm"}}
       >
         <DrawerOverlay />
         <DrawerContent>
