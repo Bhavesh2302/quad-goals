@@ -2,19 +2,25 @@ import { Box, Image, Flex, Button, Text, Input, SlideFade, useDisclosure} from '
 import React from 'react'
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import  {Link, useNavigate} from "react-router-dom"
 import BannerAppStore from '../Components/BannerAppStore';
 import OrderDeliveryTrackingComponent from '../Components/OrderDeliveryTrackingComponent';
+import UserInfo from '../Components/UserInfo';
 import { getRestaurantsByCity } from '../Redux/Reducers/RestaurantReducer/action';
 import { GET_RESTAURANTS_BY_CITY_SUCCESS } from '../Redux/Reducers/RestaurantReducer/actionTypes';
 import Login from './Login';
-import Signup from './Signup';
+import Signup from './Signup'; 
+
+
 
 const Home = () => { 
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const {token, isAuth} = useSelector((state)=>state.userReducer)
+
+  console.log(isAuth)
 
   const strings = [ "Hungry?", "Unexpected Guest?", "Cooking gone Wrong?","Late Night at office?"]
    //let i = 0; 
@@ -74,10 +80,16 @@ const Home = () => {
                 <Box  w={{base: "100px", sm:"100px", md:"140px", lg:"155px"}} >
                     <Image objectFit={"fill"} h={{base: "70px", sm:"70px", md:"90px", lg:"105px"}} w={"100%"} borderRadius={"50%"} src={"https://i.imgur.com/Gex3smL.jpg"} alt={"Logo"}/>
                 </Box>
+
+                {
+                  token === null ? 
+                
                 <Flex gap={"15px"} >
                     <Login/>
                     <Signup/>
-                </Flex>
+                </Flex> 
+                : <UserInfo/>
+                }
            </Flex>
            <Flex pb={"10px"} justifyContent={"flex-end"} mb={"30px"}>
                <Link to={"/restownersignup"}>
