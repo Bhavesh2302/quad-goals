@@ -73,5 +73,5 @@ export const userLogin = (payload) => (dispatch) =>{
 
 export const userLogout = ()=>(dispatch)=>{
      
-     dispatch({ type: USER_LOGOUT})
+    return  dispatch({ type: USER_LOGOUT})
 }

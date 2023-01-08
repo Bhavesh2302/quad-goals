@@ -2,7 +2,7 @@ import { loadData, saveData } from "../../../Utilities/LocalStorage"
 import { USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "./actionTypes"
 
 const initState = {
-    isAuth: loadData("rest_token") ? true : false,
+    isAuth: loadData("rest_token") !== null ? true : false,
     token: loadData("rest_token") || null,
     userData: {},
     isLoading: false,
