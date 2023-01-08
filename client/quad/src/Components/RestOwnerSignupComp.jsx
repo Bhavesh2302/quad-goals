@@ -59,7 +59,7 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
 
   return (
     <Box >
-      <Box w={"20%"} m={"auto"}>
+      <Box w={{base:"50%", sm: "40%", md: "30%", lg: "20%" }} m={"auto"}>
         <Link to={"/"}>
           <Image
             w={"100%"}
@@ -68,13 +68,13 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
           />
         </Link>
       </Box>
-      <Box w={"40%"} m={"auto"} mb={"30px"}>
+      <Box w={{base:"85%", sm: "70%", md: "50%", lg: "40%" }} m={"auto"} mb={"30px"}>
         <Text fontSize={"21px"} fontWeight={"550"}>
           Be a partner with us and earn more
         </Text>
       </Box>
       <Box
-        w={"30%"}
+        w={{base:"90%", sm: "70%", md: "50%", lg: "30%" }}
         m={"auto"}
         mb={"60px"}
         boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}
