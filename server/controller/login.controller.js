@@ -28,7 +28,12 @@ loginController.post("/", async (req, res) => {
           process.env.SECRET,
         );
   
-        res.status(201).send({ msg: "Login Successful", token: token,"user":user });
+        res.status(201).send(
+          { 
+            msg: "Login Successful", 
+            token: token, 
+            "user": { id : user._id, name : user.name, phoneNo:user.phoneNo, role : user.role, email: user.email
+        } });
       } else {
         res.send({ msg: "please login again" });
       }
