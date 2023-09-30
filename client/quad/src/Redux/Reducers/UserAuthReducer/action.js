@@ -54,11 +54,11 @@ export const userLogin = (payload) => (dispatch) =>{
         }
     })
     .then((res)=>{
-        //console.log(res.data) 
+        console.log(res.data) 
 
         if(res.data.msg === "Login Successful")
         {
-            return dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data.token})
+            return dispatch({ type: USER_LOGIN_SUCCESS, payload: { token : res.data.token, user : res.data.user}})
         }
         else{
             return  dispatch({ type : USER_LOGIN_FAILURE})

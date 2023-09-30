@@ -1,9 +1,9 @@
 import { loadData, saveData } from "../../../Utilities/LocalStorage"
 import { USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from "./actionTypes"
 
-const initState = {
-    isAuth: loadData("rest_token") !== null ? true : false,
-    token: loadData("rest_token") || null,
+const initState = loadData("rest_token") || {
+    isAuth:false,
+    token:  null,
     userData: {},
     isLoading: false,
     isError: false
@@ -20,23 +20,25 @@ export const userReducer = ( state = initState , { type, payload })=>{
             }
         }
         case USER_LOGIN_SUCCESS:{
-            saveData("rest_token", payload)
+            saveData("rest_token", { token : payload.token, userData : payload.user})
             return{
                 ...state,
                 isLoading: false,
-                token: payload,
+                token: payload.token,
+                userData : payload.user
             }
         }
         case USER_LOGIN_FAILURE:{
-            saveData("rest_token", null)
+            saveData("rest_token", { token : null, userData : {}})
             return{
                 ...state,
                 isLoading: false,
-                token: null
+                token: null,
+                userData : {}
             }
         }
         case USER_LOGOUT:{
-            saveData("rest_token", null)
+            saveData("rest_token", { token : null, userData : {}})
             return{
                 ...state,
                 isLoading: false,
