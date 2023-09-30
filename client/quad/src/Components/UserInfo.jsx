@@ -10,9 +10,10 @@ import {
     Button,
     useDisclosure,
     useToast,
+    Flex,
   } from '@chakra-ui/react'
   import { FaUserCircle } from "react-icons/fa"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../Redux/Reducers/UserAuthReducer/action'
 
 const UserInfo = () => {
@@ -20,6 +21,7 @@ const UserInfo = () => {
     const btnRef = React.useRef() 
     const dispatch = useDispatch();
     const logoutToast = useToast();
+    const {token, isAuth, userData} = useSelector((state)=>state.userReducer)
 
     const handleLogout = () =>{
           dispatch(userLogout())
@@ -35,8 +37,8 @@ const UserInfo = () => {
 
   return (
     <>
-      <Button ref={btnRef} variant={"unstyled"} onClick={onOpen} size={"md"}>
-        <FaUserCircle size={"35px"}/>
+      <Button ref={btnRef} variant={"unstyled"} onClick={onOpen} size={"md"} fontSize={{base: "10px", sm: "10px", md: "15px", lg: "15px"}}>
+        <Flex alignItems={"center"}><FaUserCircle size={"18px"}/>{userData.name}</Flex >
       </Button>
       <Drawer
         isOpen={isOpen}

@@ -15,9 +15,15 @@ import {
   MenuItem,
   IconButton,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import UserInfo from "./UserInfo";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const {token, isAuth, userData} = useSelector((state)=>state.userReducer)
+  console.log(userData) 
+
+
   return (
     <Flex
       h={"80px"}
@@ -87,6 +93,10 @@ const Navbar = () => {
             Help
           </Text>
         </Flex>
+
+        {
+          token === null ? 
+        
         <Flex
           alignItems={"center"}
           gap={"10px"}
@@ -94,7 +104,7 @@ const Navbar = () => {
         >
           <FaUserAlt />
           <Login />
-        </Flex>
+        </Flex> : <UserInfo/>}
         <Flex
           alignItems={"center"}
           gap={"10px"}
@@ -115,6 +125,10 @@ const Navbar = () => {
         gap={"5px"}
         justifyContent={"flex-end"}
       >
+
+        {
+          token === null ?
+        
         <Flex
           alignItems={"center"}
           gap={"1px"}
@@ -123,6 +137,10 @@ const Navbar = () => {
           <FaUserAlt />
           <Login />
         </Flex>
+
+        : 
+          <UserInfo/>
+        }
         <Flex
           alignItems={"center"}
           gap={"5px"}

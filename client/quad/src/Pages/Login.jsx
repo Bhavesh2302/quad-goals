@@ -55,7 +55,7 @@ import {
 
          dispatch(userLogin(payload))
          .then((res)=>{
-          console.log("insideFunc",res)
+          console.log("insideFunc", res)
             if(res.type === "USER_LOGIN_SUCCESS")
             {
                 userSignupToast({
