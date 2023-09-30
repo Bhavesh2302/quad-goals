@@ -38,7 +38,7 @@ const UserInfo = () => {
   return (
     <>
       <Button ref={btnRef} variant={"unstyled"} onClick={onOpen} size={"md"} fontSize={{base: "10px", sm: "10px", md: "15px", lg: "15px"}}>
-        <Flex alignItems={"center"}><FaUserCircle size={"18px"}/>{userData.name}</Flex >
+        <Flex alignItems={"center"}><FaUserCircle size={"18px"}/>{userData?.name}</Flex >
       </Button>
       <Drawer
         isOpen={isOpen}
