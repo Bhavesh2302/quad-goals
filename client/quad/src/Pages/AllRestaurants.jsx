@@ -151,8 +151,7 @@ const AllRestaurants = () => {
         </Flex>
       </Flex>
       <hr w="100%" />
-
-      <SimpleGrid columns={[1, 2, 2, 4]} w="88%" m="auto" mt="20px">
+      <SimpleGrid columns={[1, 2, 2, 4]} w="88%" m="auto" mt="20px" pb="20px">
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link key={item._id} to={`/allrestaurants/${city}/${item._id}`}>
@@ -166,7 +165,6 @@ const AllRestaurants = () => {
                     boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
                     border: "0.3px solid #e0e5e9",
                   }
-                  //  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
                 }
               >
                 <Image src={item.image_rest} position="relative" />
@@ -174,13 +172,19 @@ const AllRestaurants = () => {
                   bg={"#3a3c41"}
                   color="white"
                   position="absolute"
-                  top="3"
+                  top="9"
+                  w={"80px"}
                   textOverflow={"ellipsis"}
                   overflow="hidden"
-                  left="-0.4"
+                  borderRadius={"2px"}
+                  left="0px"
                   p="0px 5px"
-                  fontSize={"14px"}
+                  display={"flex"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  fontSize={"10px"}
                   textShadow="inherit"
+                  transform={"rotate(-40deg)"}
                   letterSpacing={"1px"}
                   textTransform={"uppercase"}
                 >

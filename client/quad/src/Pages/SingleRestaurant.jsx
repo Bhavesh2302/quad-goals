@@ -17,10 +17,9 @@ const SingleRestaurant = () => {
   const [menu, setMenu] = useState([]);
   const AddTOCartToast = useToast();
   const [singleRestaurantData, setSingleRestaurantData] = useState({});
-  const token = useSelector((state) => state.userReducer.token);
+  const { token, userData } = useSelector((state) => state.userReducer);
   const { restId } = useParams();
   const noUserLoginToast = useToast();
-  const itemAddToCartToast = useToast();
   console.log(restId, token);
 
   useEffect(() => {
@@ -137,7 +136,7 @@ const SingleRestaurant = () => {
                       <FaStar fontSize={"12px"} />
                     </Box>
                     <Box>
-                      <Text>{singleRestaurantData.rating}</Text>
+                      <Text>{singleRestaurantData?.rating}</Text>
                     </Box>
                   </Box>
 
@@ -253,13 +252,12 @@ const SingleRestaurant = () => {
                   {item.description}
                 </Text>
               </Box>
-              <Box w="20%">
+              <Box w="20%" position={"relative"}>
                 <Image
                   src={item.item_image}
                   w="100px"
                   height="100px"
                   m="auto"
-                  position={"relative"}
                 />
               </Box>
               <Button
