@@ -21,8 +21,6 @@ import UserInfo from "./UserInfo";
 const Navbar = () => {
   const navigate = useNavigate();
   const {token, isAuth, userData} = useSelector((state)=>state.userReducer)
-  console.log(userData) 
-
 
   return (
     <Flex
