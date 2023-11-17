@@ -6,7 +6,8 @@ import {
   Image,
   Text,
   Button,
-  InputGroup
+  InputGroup,
+  useToast
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -19,6 +20,8 @@ const RestOwnerLoginComp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const loginToast = useToast();
+  const errorToast = useToast();
   const [restOwner, setRestOwner] = useState({
     email: "",
     password: ""
@@ -43,8 +46,24 @@ const RestOwnerLoginComp = () => {
 
     dispatch(userLogin(payload)).then((res) => {
       if (res.type === "USER_LOGIN_SUCCESS") {
+        loginToast({
+          title: "Login Successfully!",
+          description: "Successfully login as Restaurant owner",
+          position: "top-right",
+          duration: 3000,
+          status: "success",
+          isClosable: true
+        });
         navigate("/shopownerdashboard");
-      }
+      } else
+        errorToast({
+          title: "Login Fail!",
+          description: "Please check your login cridentials",
+          position: "top-right",
+          duration: 2000,
+          status: "error",
+          isClosable: true
+        });
     });
   };
 

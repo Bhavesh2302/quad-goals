@@ -13,14 +13,14 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  IconButton,
+  IconButton
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import UserInfo from "./UserInfo";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const {token, isAuth, userData} = useSelector((state)=>state.userReducer)
+  const { token, userData } = useSelector((state) => state.userReducer);
 
   return (
     <Flex
@@ -30,8 +30,7 @@ const Navbar = () => {
       alignItems={"center"}
       w={{ base: "100%", sm: "100%", md: "85%", lg: "85%" }}
       m={"auto"}
-      gap={{ base: "5px", sm: "5px", md: "100px" }} 
-      
+      gap={{ base: "5px", sm: "5px", md: "100px" }}
     >
       <Flex
         w={{ base: "65%", sm: "65%", md: "65%", lg: "30%" }}
@@ -49,9 +48,11 @@ const Navbar = () => {
             />
           </Link>
         </Box>
-        <Box>
-          <LocationSearch />
-        </Box>
+        {userData?.role === "user" && (
+          <Box>
+            <LocationSearch />
+          </Box>
+        )}
       </Flex>
       <Flex
         display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
@@ -61,61 +62,70 @@ const Navbar = () => {
         gap={"65px"}
         alignItems={"center"}
       >
-        <Flex
-          alignItems={"center"}
-          gap={"10px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-        >
-          <FiSearch fontWeight={"650"} />
-          <Text fontWeight={"650"} fontSize={"15px"}>
-            Search
-          </Text>
-        </Flex>
-        <Flex
-          alignItems={"center"}
-          gap={"10px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-        >
-          <MdLocalOffer />
-          <Text fontWeight={"650"} fontSize={"15px"}>
-            Offers
-          </Text>
-        </Flex>
-        <Flex
-          alignItems={"center"}
-          gap={"10px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-        >
-          <MdHelp />
-          <Text fontWeight={"650"} fontSize={"15px"}>
-            Help
-          </Text>
-        </Flex>
+        {userData?.role === "user" && (
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+          >
+            <FiSearch fontWeight={"650"} />
+            <Text fontWeight={"650"} fontSize={"15px"}>
+              Search
+            </Text>
+          </Flex>
+        )}
+        {userData?.role === "user" && (
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+          >
+            <MdLocalOffer />
+            <Text fontWeight={"650"} fontSize={"15px"}>
+              Offers
+            </Text>
+          </Flex>
+        )}
+        {userData?.role === "user" && (
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+          >
+            <MdHelp />
+            <Text fontWeight={"650"} fontSize={"15px"}>
+              Help
+            </Text>
+          </Flex>
+        )}
 
-        {
-          token === null ? 
-        
-        <Flex
-          alignItems={"center"}
-          gap={"10px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-        >
-          <FaUserAlt />
-          <Login />
-        </Flex> : <UserInfo/>}
-        <Flex
-          alignItems={"center"}
-          gap={"10px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-          onClick={() => {
-            navigate("/cart");
-          }}
-        >
-          <BsFillHandbagFill />
-          <Text fontWeight={"650"} fontSize={"15px"}>
-            Bag
-          </Text>
-        </Flex>
+        {token === null ? (
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+          >
+            <FaUserAlt />
+            <Login />
+          </Flex>
+        ) : (
+          <UserInfo />
+        )}
+        {userData?.role === "user" && (
+          <Flex
+            alignItems={"center"}
+            gap={"10px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+            onClick={() => {
+              navigate("/cart");
+            }}
+          >
+            <BsFillHandbagFill />
+            <Text fontWeight={"650"} fontSize={"15px"}>
+              Bag
+            </Text>
+          </Flex>
+        )}
       </Flex>
       <Flex
         display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
@@ -123,22 +133,18 @@ const Navbar = () => {
         gap={"5px"}
         justifyContent={"flex-end"}
       >
-
-        {
-          token === null ?
-        
-        <Flex
-          alignItems={"center"}
-          gap={"1px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-        >
-          <FaUserAlt />
-          <Login />
-        </Flex>
-
-        : 
-          <UserInfo/>
-        }
+        {token === null ? (
+          <Flex
+            alignItems={"center"}
+            gap={"1px"}
+            _hover={{ color: "red", cursor: "pointer" }}
+          >
+            <FaUserAlt />
+            <Login />
+          </Flex>
+        ) : (
+          <UserInfo />
+        )}
         <Flex
           alignItems={"center"}
           gap={"5px"}

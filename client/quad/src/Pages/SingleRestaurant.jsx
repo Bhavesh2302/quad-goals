@@ -17,16 +17,14 @@ const SingleRestaurant = () => {
   const [menu, setMenu] = useState([]);
   const AddTOCartToast = useToast();
   const [singleRestaurantData, setSingleRestaurantData] = useState({});
-  const { token, userData } = useSelector((state) => state.userReducer);
+  const { token } = useSelector((state) => state.userReducer);
   const { restId } = useParams();
   const noUserLoginToast = useToast();
-  console.log(restId, token);
 
   useEffect(() => {
     dispatch(singleRestaurant(restId)).then((res) => {
       if ((res.type = "GET_MENU_DATA_SUCCESS")) {
         let data = res.payload.menuList;
-        console.log(data);
         setMenu(data);
       }
     });
@@ -34,7 +32,6 @@ const SingleRestaurant = () => {
     dispatch(singleRestaurantName(restId)).then((res) => {
       if ((res.type = "GET_SINGLE_RESTAURANT_NAME_SUCCESS")) {
         let data = res.payload.singleRestaurant;
-
         setSingleRestaurantData(data);
       }
     });
@@ -59,7 +56,6 @@ const SingleRestaurant = () => {
   return (
     <Box>
       <Navbar />
-
       <Box bg="#171a29">
         <Box
           display={"flex"}
