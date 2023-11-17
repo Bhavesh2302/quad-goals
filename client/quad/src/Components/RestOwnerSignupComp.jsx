@@ -7,6 +7,7 @@ import {
   Text,
   Button,
   InputGroup,
+  useToast
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -17,7 +18,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const RestOwnerSignupComp = ({ show, setShow }) => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const signupToast = useToast();
+  const errorToast = useToast();
   const dispatch = useDispatch();
 
   const [restOwner, setRestOwner] = useState({
@@ -25,7 +27,7 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
     name: "",
     email: "",
     password: "",
-    role: "shopOwner",
+    role: "shopOwner"
   });
 
   const handleChange = (e) => {
@@ -33,7 +35,7 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
 
     setRestOwner({
       ...restOwner,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -45,21 +47,37 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
       name: restOwner.name,
       email: restOwner.email,
       password: restOwner.password,
-      role: "shopOwner",
+      role: "shopOwner"
     };
 
     console.log("owner", payload);
-    //setShow(!show)
+
     dispatch(restOwnerSignup(payload)).then((res) => {
       if (res.type === "REST_OWNER_SIGNUP_SUCCESS") {
         setShow(!show);
-      }
+        signupToast({
+          title: "Registration Successful!",
+          description: "Successfully Registered as Shop Owner",
+          position: "top-right",
+          isClosable: true,
+          duration: 3000,
+          status: "success"
+        });
+      } else
+        errorToast({
+          title: "Registration Fail!",
+          description: "Oops! Something went wrong",
+          position: "top-right",
+          isClosable: true,
+          duration: 2000,
+          status: "error"
+        });
     });
   };
 
   return (
-    <Box >
-      <Box w={{base:"50%", sm: "40%", md: "30%", lg: "20%" }} m={"auto"}>
+    <Box>
+      <Box w={{ base: "50%", sm: "40%", md: "30%", lg: "20%" }} m={"auto"}>
         <Link to={"/"}>
           <Image
             w={"100%"}
@@ -68,13 +86,17 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
           />
         </Link>
       </Box>
-      <Box w={{base:"85%", sm: "70%", md: "50%", lg: "40%" }} m={"auto"} mb={"30px"}>
+      <Box
+        w={{ base: "85%", sm: "70%", md: "50%", lg: "40%" }}
+        m={"auto"}
+        mb={"30px"}
+      >
         <Text fontSize={"21px"} fontWeight={"550"}>
           Be a partner with us and earn more
         </Text>
       </Box>
       <Box
-        w={{base:"90%", sm: "70%", md: "50%", lg: "30%" }}
+        w={{ base: "90%", sm: "70%", md: "50%", lg: "30%" }}
         m={"auto"}
         mb={"60px"}
         boxShadow={"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}

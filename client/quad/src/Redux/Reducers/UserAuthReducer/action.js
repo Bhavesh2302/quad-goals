@@ -1,77 +1,83 @@
-import { REST_OWNER_SIGNUP_FAILURE, REST_OWNER_SIGNUP_REQUEST, REST_OWNER_SIGNUP_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_SIGNUP_FAILURE, USER_SIGNUP_SUCCESS } from "./actionTypes"
-import axios from "axios"
+import {
+  REST_OWNER_SIGNUP_FAILURE,
+  REST_OWNER_SIGNUP_REQUEST,
+  REST_OWNER_SIGNUP_SUCCESS,
+  USER_LOGIN_FAILURE,
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
+  USER_SIGNUP_FAILURE,
+  USER_SIGNUP_SUCCESS
+} from "./actionTypes";
+import axios from "axios";
 
-export const userSignup = (payload)=>(dispatch)=>{
-   
-    return axios({
-        url:"http://localhost:7082/signup",
-        method:"post",
-        data: payload,
-        headers: {
-            "Content-Type": "application/json"
-        }
+export const userSignup = (payload) => (dispatch) => {
+  return axios({
+    url: "http://localhost:7082/signup",
+    method: "post",
+    data: payload,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: USER_SIGNUP_SUCCESS });
     })
-    .then((res)=>{
-        console.log(res.data)
-       return dispatch({ type: USER_SIGNUP_SUCCESS})
-    })
-    .catch((error)=>{
-        dispatch({ type : USER_SIGNUP_FAILURE})
-        console.log(error)
-    })
-}
+    .catch((error) => {
+      dispatch({ type: USER_SIGNUP_FAILURE });
+      console.log(error);
+    });
+};
 
-export const restOwnerSignup = (payload)=>(dispatch)=>{
-    
-    dispatch({ type: REST_OWNER_SIGNUP_REQUEST})
-    return axios({
-        url:"http://localhost:7082/signup",
-        method:"post",
-        data: payload,
-        headers: {
-            "Content-Type": "application/json"
-        }
+export const restOwnerSignup = (payload) => (dispatch) => {
+  dispatch({ type: REST_OWNER_SIGNUP_REQUEST });
+  return axios({
+    url: "http://localhost:7082/signup",
+    method: "post",
+    data: payload,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: REST_OWNER_SIGNUP_SUCCESS });
     })
-    .then((res)=>{
-        console.log(res.data)
-       return dispatch({ type: REST_OWNER_SIGNUP_SUCCESS})
-    })
-    .catch((error)=>{
-        dispatch({ type : REST_OWNER_SIGNUP_FAILURE})
-        console.log(error)
-    })
-}
+    .catch((error) => {
+      dispatch({ type: REST_OWNER_SIGNUP_FAILURE });
+      console.log(error);
+    });
+};
 
-export const userLogin = (payload) => (dispatch) =>{
+export const userLogin = (payload) => (dispatch) => {
+  dispatch({ type: USER_LOGIN_REQUEST });
+  return axios({
+    url: "http://localhost:7082/login",
+    method: "post",
+    data: payload,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((res) => {
+      console.log(res.data);
 
-    dispatch ({ type: USER_LOGIN_REQUEST})
-    return axios({
-        url:"http://localhost:7082/login",
-        method:"post",
-        data: payload,
-        headers: {
-            "Content-Type": "application/json"
-        }
+      if (res.data.msg === "Login Successful") {
+        return dispatch({
+          type: USER_LOGIN_SUCCESS,
+          payload: { token: res.data.token, user: res.data.user }
+        });
+      } else {
+        return dispatch({ type: USER_LOGIN_FAILURE });
+      }
     })
-    .then((res)=>{
-        console.log(res.data) 
+    .catch((error) => {
+      dispatch({ type: USER_LOGIN_FAILURE });
+      console.log(error);
+    });
+};
 
-        if(res.data.msg === "Login Successful")
-        {
-            return dispatch({ type: USER_LOGIN_SUCCESS, payload: { token : res.data.token, user : res.data.user}})
-        }
-        else{
-            return  dispatch({ type : USER_LOGIN_FAILURE})
-        }
-       
-    })
-    .catch((error)=>{
-        dispatch({ type : USER_LOGIN_FAILURE})
-        console.log(error)
-    })
-} 
-
-export const userLogout = ()=>(dispatch)=>{
-     
-    return  dispatch({ type: USER_LOGOUT})
-}
+export const userLogout = () => (dispatch) => {
+  return dispatch({ type: USER_LOGOUT });
+};
