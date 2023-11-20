@@ -21,7 +21,6 @@ export const userSignup = (payload) => (dispatch) => {
     }
   })
     .then((res) => {
-      console.log(res.data);
       return dispatch({ type: USER_SIGNUP_SUCCESS });
     })
     .catch((error) => {
@@ -40,8 +39,7 @@ export const restOwnerSignup = (payload) => (dispatch) => {
       "Content-Type": "application/json"
     }
   })
-    .then((res) => {
-      console.log(res.data);
+    .then(() => {
       return dispatch({ type: REST_OWNER_SIGNUP_SUCCESS });
     })
     .catch((error) => {
@@ -61,16 +59,12 @@ export const userLogin = (payload) => (dispatch) => {
     }
   })
     .then((res) => {
-      console.log(res.data);
-
       if (res.data.msg === "Login Successful") {
         return dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: { token: res.data.token, user: res.data.user }
         });
-      } else {
-        return dispatch({ type: USER_LOGIN_FAILURE });
-      }
+      } else return dispatch({ type: USER_LOGIN_FAILURE });
     })
     .catch((error) => {
       dispatch({ type: USER_LOGIN_FAILURE });
