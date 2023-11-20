@@ -1,14 +1,75 @@
-import { Box, Button } from "@chakra-ui/react";
-import React from "react";
-import Navbar from "../Components/Navbar";
+import { Box, Flex, Image } from "@chakra-ui/react";
+import React, { useState } from "react";
+import ShopOwnerSidebar from "../Components/ShopOwnerSidebar";
+import { BsShop, BsBagDash, BsPeople } from "react-icons/bs";
+import { AiOutlineLogout } from "react-icons/ai";
+import { FaRegUser } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ShopOwnerDashboard = () => {
+  const { userData } = useSelector((state) => state.userReducer);
+  const sideMenu = [
+    {
+      id: 1,
+      name: "Restaurants",
+      icon: <BsShop />
+    },
+    {
+      id: 2,
+      name: "Orders",
+      icon: <BsBagDash />
+    },
+    {
+      id: 3,
+      name: "My Consumers",
+      icon: <BsPeople />
+    },
+    {
+      id: 4,
+      name: "My Account",
+      icon: <FaRegUser />
+    },
+    {
+      id: 5,
+      name: "Logout",
+      icon: <AiOutlineLogout />
+    }
+  ];
+  const [activeSideMenu, setActiveSideMenu] = useState(sideMenu[0].name);
+
   return (
-    <Box w={{ base: "100%" }} border="1px solid">
-      <Navbar />
-      <Box>
-        <Button>Add New Restaurant</Button>
+    <Box w="100%" m="auto" backgroundColor="#f3f3f3" pt="10px">
+      <Box
+        w={{ base: "95%", sm: "95%", md: "90%", lg: "70%" }}
+        m="auto"
+        backgroundColor="white"
+        h="60px"
+        mb="10px"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        px="20px"
+      >
+        <Link to="/">
+          <Image src="https://i.imgur.com/Gex3smL.jpg" w={"100px"} h={"45px"} />
+        </Link>
+        <Box fontWeight="650" fontSize="15px">
+          {userData.name}
+        </Box>
       </Box>
+      <Flex
+        w={{ base: "95%", sm: "95%", md: "90%", lg: "70%" }}
+        m="auto"
+        gap="10px"
+      >
+        <ShopOwnerSidebar
+          sideMenu={sideMenu}
+          activeSideMenu={activeSideMenu}
+          setActiveSideMenu={setActiveSideMenu}
+        />
+        <Box w="80%" h="500px" backgroundColor="white"></Box>
+      </Flex>
     </Box>
   );
 };

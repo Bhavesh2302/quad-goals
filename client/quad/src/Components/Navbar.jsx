@@ -48,7 +48,7 @@ const Navbar = () => {
             />
           </Link>
         </Box>
-        {userData?.role === "user" && (
+        {userData?.role !== "shopOwner" && (
           <Box>
             <LocationSearch />
           </Box>
@@ -62,7 +62,7 @@ const Navbar = () => {
         gap={"65px"}
         alignItems={"center"}
       >
-        {userData?.role === "user" && (
+        {userData?.role !== "shopOwner" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}
@@ -74,7 +74,7 @@ const Navbar = () => {
             </Text>
           </Flex>
         )}
-        {userData?.role === "user" && (
+        {userData?.role !== "shopOwner" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}
@@ -86,7 +86,7 @@ const Navbar = () => {
             </Text>
           </Flex>
         )}
-        {userData?.role === "user" && (
+        {userData?.role !== "shopOwner" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}
@@ -111,7 +111,7 @@ const Navbar = () => {
         ) : (
           <UserInfo />
         )}
-        {userData?.role === "user" && (
+        {userData?.role !== "shopOwner" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}

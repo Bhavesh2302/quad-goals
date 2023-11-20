@@ -7,6 +7,7 @@ import SingleRestaurant from "../Pages/SingleRestaurant";
 import RestOwnerSignup from "../Pages/RestOwnerSignup";
 import Cart from "../Pages/Cart";
 import ShopOwnerDashboard from "../Pages/ShopOwnerDashboard";
+import ShopOwnerPrivateRoute from "../HOF/ShopOwnerPrivateRoute";
 
 const AllRoutes = () => (
   <div>
@@ -22,7 +23,14 @@ const AllRoutes = () => (
       ></Route>
       <Route path={"/restownersignup"} element={<RestOwnerSignup />}></Route>
       <Route path={"/cart"} element={<Cart />} />
-      <Route path={"/shopownerdashboard"} element={<ShopOwnerDashboard />} />
+      <Route
+        path={"/shopownerdashboard"}
+        element={
+          <ShopOwnerPrivateRoute>
+            <ShopOwnerDashboard />
+          </ShopOwnerPrivateRoute>
+        }
+      />
     </Routes>
     <Footer />
   </div>
