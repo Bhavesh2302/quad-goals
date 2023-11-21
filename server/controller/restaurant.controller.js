@@ -13,6 +13,14 @@ restaurantController.get("/get/:restId",async (req,res)=>{
     res.status(200).send({"singleRestaurant":singleRestaurant})
 })
 
+restaurantController.get("/get/shops/:shopownerId", authentication,authorization(["shopOwner"]), async (req,res)=>{
+    const { shopownerId } =req.params;
+    console.log("shopownerId", shopownerId)
+   const restaurants =await RestaurantModel.find({userId: shopownerId})
+   console.log(restaurants)
+    res.status(200).send({"restaurants":restaurants})
+});
+
 // authorization(["admin","shopOwner"])
 restaurantController.post("/create", authentication,authorization(["shopOwner"]),async (req,res)=>{
 

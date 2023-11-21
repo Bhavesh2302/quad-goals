@@ -1,10 +1,15 @@
 import { Box, Text, useToast } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { userLogout } from "../Redux/Reducers/UserAuthReducer/action";
+import { userLogout } from "../../Redux/Reducers/UserAuthReducer/action";
 import { useNavigate } from "react-router-dom";
 
-const ShopOwnerSidebar = ({ sideMenu, setActiveSideMenu, activeSideMenu }) => {
+const ShopOwnerSidebar = ({
+  sideMenu,
+  setActiveSideMenu,
+  activeSideMenu,
+  setActiveMenu
+}) => {
   const dispatch = useDispatch();
   const logoutToast = useToast();
   const navigate = useNavigate();
@@ -35,9 +40,13 @@ const ShopOwnerSidebar = ({ sideMenu, setActiveSideMenu, activeSideMenu }) => {
           _hover={{ color: "red", cursor: "pointer" }}
           color={activeSideMenu === el.name && "red"}
           key={i}
-          onClick={() =>
-            el.name === "Logout" ? handleLogout() : setActiveSideMenu(el.name)
-          }
+          onClick={() => {
+            if (el.name === "Logout") handleLogout();
+            else {
+              setActiveSideMenu(el.name);
+              setActiveMenu(el);
+            }
+          }}
         >
           <Box
             borderLeft={
