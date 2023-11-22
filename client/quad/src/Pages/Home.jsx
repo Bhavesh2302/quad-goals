@@ -23,15 +23,13 @@ import Signup from "./Signup";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, isAuth } = useSelector((state) => state.userReducer);
-
+  const { token, userData } = useSelector((state) => state.userReducer);
   const strings = [
     "Hungry?",
     "Unexpected Guest?",
     "Cooking gone Wrong?",
     "Late Night at office?"
   ];
-
   const [currentString, setCurrentString] = useState("");
   const [timer, settimer] = useState(0);
   const timerId = useRef(null);
@@ -57,13 +55,12 @@ const Home = () => {
         settimer(0);
       }
     };
-  }, [timerId.current]);
+  }, [timerId?.current]);
 
   const handleSearchByCity = () => {
     dispatch(getRestaurantsByCity(city)).then((res) => {
-      if (res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS") {
+      if (res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS")
         navigate(`/allrestaurants/${city}`);
-      }
     });
   };
 
@@ -107,14 +104,35 @@ const Home = () => {
             )}
           </Flex>
           <Flex pb={"10px"} justifyContent={"flex-end"} mb={"30px"}>
-            <Link to={"/restownersignup"}>
-              <Text
-                fontSize={{ base: "12px", sm: "12px", md: "15px", lg: "18px" }}
-                fontWeight={"550"}
-              >
-                Want to be a partner?
-              </Text>
-            </Link>
+            {userData?.role === "shopOwner" && token ? (
+              <Link to={"/shopownerdashboard"}>
+                <Text
+                  fontSize={{
+                    base: "12px",
+                    sm: "12px",
+                    md: "15px",
+                    lg: "18px"
+                  }}
+                  fontWeight={"550"}
+                >
+                  See Your Dashboard
+                </Text>
+              </Link>
+            ) : (
+              <Link to={"/restownersignup"}>
+                <Text
+                  fontSize={{
+                    base: "12px",
+                    sm: "12px",
+                    md: "15px",
+                    lg: "18px"
+                  }}
+                  fontWeight={"550"}
+                >
+                  Want to be a partner?
+                </Text>
+              </Link>
+            )}
           </Flex>
           <Box textAlign={"left"}>
             <SlideFade slideFade in={isOpen} offsetY="20px">
