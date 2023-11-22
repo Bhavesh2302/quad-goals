@@ -13,7 +13,7 @@ import axios from "axios";
 
 export const userSignup = (payload) => (dispatch) => {
   return axios({
-    url: "http://localhost:7082/signup",
+    url: `${process.env.REACT_APP_BASE_URL}/signup`,
     method: "post",
     data: payload,
     headers: {
@@ -32,7 +32,7 @@ export const userSignup = (payload) => (dispatch) => {
 export const restOwnerSignup = (payload) => (dispatch) => {
   dispatch({ type: REST_OWNER_SIGNUP_REQUEST });
   return axios({
-    url: "http://localhost:7082/signup",
+    url: `${process.env.REACT_APP_BASE_URL}/signup`,
     method: "post",
     data: payload,
     headers: {
@@ -51,7 +51,7 @@ export const restOwnerSignup = (payload) => (dispatch) => {
 export const userLogin = (payload) => (dispatch) => {
   dispatch({ type: USER_LOGIN_REQUEST });
   return axios({
-    url: "http://localhost:7082/login",
+    url: `${process.env.REACT_APP_BASE_URL}/login`,
     method: "post",
     data: payload,
     headers: {
