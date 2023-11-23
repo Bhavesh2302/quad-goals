@@ -20,7 +20,7 @@ export const userSignup = (payload) => (dispatch) => {
       "Content-Type": "application/json"
     }
   })
-    .then((res) => {
+    .then(() => {
       return dispatch({ type: USER_SIGNUP_SUCCESS });
     })
     .catch((error) => {

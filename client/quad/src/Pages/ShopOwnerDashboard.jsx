@@ -79,7 +79,7 @@ const ShopOwnerDashboard = () => {
           activeMenu={activeMenu}
           setActiveMenu={setActiveMenu}
         />
-        <Box w="80%" h="500px" backgroundColor="white">
+        <Box w="80%" h="500px" backgroundColor="#f3f3f3">
           {activeMenu?.component}
         </Box>
       </Flex>

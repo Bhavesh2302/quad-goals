@@ -1,50 +1,45 @@
-const {Router} = require("express")
-const { authentication } = require("../middlewares/authentication")
-const { CartModel } = require("../models/cart.model")
-const { MenuModel } = require("../models/menu.model")
-const { RestaurantModel } = require("../models/restaurant.model")
+const { Router } = require("express");
+const { authentication } = require("../middlewares/authentication");
+const { CartModel } = require("../models/cart.model");
+const { MenuModel } = require("../models/menu.model");
+const { RestaurantModel } = require("../models/restaurant.model");
 
-const cartController = Router()
+const cartController = Router();
 
+cartController.get("/get", authentication, async (req, res) => {
+  const { userId } = req.body;
 
-cartController.get("/get", authentication, async (req,res)=>{
+  const cart_data = await CartModel.find({ userId });
+  // console.log(cart_data)
 
-    const {userId} = req.body
+  res.send({ cartData: cart_data });
+});
 
-    const cart_data = await CartModel.find({userId})
-    // console.log(cart_data)
+cartController.post("/add/:menuId", authentication, async (req, res) => {
+  const { userId } = req.body;
+  console.log(userId);
+  const { menuId } = req.params;
+  const isExist = await CartModel.findOne({ menuId });
 
-    res.send({"cartData":cart_data})
-
-})
-
-cartController.post("/add/:menuId",authentication,async (req,res)=>{
-
-
-    const {userId} = req.body
-    console.log(userId)
-    const {menuId} = req.params
-
-    const menu  = await MenuModel.findOne({_id:menuId})
-    console.log(menu)
-    const rest_id =menu.restId
+  console.log("isExist", isExist);
+  if (!isExist) {
+    const menu = await MenuModel.findOne({ _id: menuId });
+    const rest_id = menu.restId;
     // const userId =menu.userId
 
-    const restaurant = await RestaurantModel.findOne({_id:rest_id})
+    const restaurant = await RestaurantModel.findOne({ _id: rest_id });
     // console.log(restaurant)
 
-    const payload ={
-
-        itemName:menu.title,
-        restName:restaurant.rest_name,
-        restImage:restaurant.image_rest,
-        itemImage:menu.item_image,
-        price:menu.price,
-        menuId:menuId,
-        userId:userId,
-        restId :rest_id,
-
-    }
+    const payload = {
+      itemName: menu.title,
+      restName: restaurant.rest_name,
+      restImage: restaurant.image_rest,
+      itemImage: menu.item_image,
+      price: menu.price,
+      menuId: menuId,
+      userId: userId,
+      restId: rest_id
+    };
     // "cartData": {
     //     "_id": "636917fe55b4e5a499d0436b",
     //     "title": "Kaju Curry",
@@ -79,46 +74,46 @@ cartController.post("/add/:menuId",authentication,async (req,res)=>{
     //     "__v": 0
     //   }
     // }
-    
-// console.log(payload)
-    const add_to_cart = new CartModel(
-        payload
-)
- await add_to_cart.save()
-    // const 
-    res.send({"restaurant":restaurant,"cartData":add_to_cart})
 
+    // console.log(payload)
+    const add_to_cart = new CartModel(payload);
+    await add_to_cart.save();
+    // const
+    res.send({ restaurant: restaurant, cartData: add_to_cart });
+  }
+});
 
-})
+cartController.delete("/delete/:cartId", authentication, async (req, res) => {
+  const { userId } = req.body;
+  const { cartId } = req.params;
+  const deletedItem = await CartModel.deleteOne({ _id: cartId, userId });
+  console.log(deletedItem);
 
+  res.send({ msg: "Item has been deleted" });
+});
 
-cartController.delete("/delete/:cartId",authentication,async (req,res)=>{
-   
-    const {userId} = req.body
-    const {cartId} = req.params
-    const  deletedItem =  await CartModel.deleteOne({_id:cartId,userId})
-    console.log(deletedItem)
+cartController.patch("/:cartId", authentication, async (req, res) => {
+  const { userId } = req.body;
+  // const payload = req.body
+  const { quantity } = req.body;
+  // console.log("payload",payload)
 
-    res.send({"msg":"Item has been deleted"})
-})
+  const { cartId } = req.params;
 
-
-cartController.patch("/:cartId",authentication, async (req,res)=>{
-    const {userId} = req.body
-    // const payload = req.body
-    const {quantity} =req.body
-    // console.log("payload",payload)
-   
-    const {cartId} = req.params
- 
-
-    const updatedCart = await CartModel.findByIdAndUpdate({_id : cartId,userId},{$inc :{quantity : quantity}})
-    console.log(updatedCart)
-    // const cart_data = await CartModel.find({userId})
-//  res.status(200).send({"updated cart":updatedCart,"cartData":cart_data})
-res.send({"msg" : "quantity has been updated","quantity" : updatedCart,"payload":quantity})
-})
+  const updatedCart = await CartModel.findByIdAndUpdate(
+    { _id: cartId, userId },
+    { $inc: { quantity: quantity } }
+  );
+  console.log(updatedCart);
+  // const cart_data = await CartModel.find({userId})
+  //  res.status(200).send({"updated cart":updatedCart,"cartData":cart_data})
+  res.send({
+    msg: "quantity has been updated",
+    quantity: updatedCart,
+    payload: quantity
+  });
+});
 
 module.exports = {
-    cartController
-}
+  cartController
+};

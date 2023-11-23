@@ -12,7 +12,6 @@ const cart_schema = new mongoose.Schema({
     menuId : {type:String},
     restId :{type:String},
     userId:{type:String},
-
 })
 
 const CartModel = mongoose.model("cart",cart_schema)
