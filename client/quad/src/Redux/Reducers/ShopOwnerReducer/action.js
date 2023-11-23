@@ -16,7 +16,6 @@ export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
     }
   })
     .then((res) => {
-      console.log(res.data);
       dispatch({
         type: GET_RESTAURANTS_OF_SHOPOWNER_SUCCESS,
         payload: res.data.restaurants
