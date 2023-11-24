@@ -4,29 +4,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../Components/Navbar";
-import {
-  getRestaurants,
-  getRestaurantsByCity,
-} from "../Redux/Reducers/RestaurantReducer/action";
+import { getRestaurants } from "../Redux/Reducers/RestaurantReducer/action";
 import { ImSpoonKnife } from "react-icons/im";
 import { FaStar } from "react-icons/fa";
 import { SimpleGrid } from "@chakra-ui/react";
+import RestaurantSkeleton from "../Components/Skeletons/RestaurantSkeleton";
 
 const AllRestaurants = () => {
   const dispatch = useDispatch();
   const { city } = useParams();
   const [sortBy, setSortBy] = useState("asc");
   const [deliveryTime, setDeliveryTime] = useState("desc");
-  const restaurants = useSelector(
-    (state) => state.restaurantReducer.allRestaurants
+  const { allRestaurants: restaurants, isLoading } = useSelector(
+    (state) => state.restaurantReducer
   );
-  // console.log(restaurants);
-
-  // useEffect(() => {
-  //   if (restaurants.length === 0) {
-  //     dispatch(getRestaurantsByCity(city));
-  //   }
-  // }, [restaurants.length]);
 
   useEffect(() => {
     // console.log(deliveryTime)
@@ -43,16 +34,25 @@ const AllRestaurants = () => {
       </Box>
 
       <Flex
-        w={{base : "95%", sm : "90%" , md : "90%" , lg : "88%"}}
+        w={{ base: "95%", sm: "90%", md: "90%", lg: "88%" }}
         m="auto"
-        direction={{base: "column", sm: "column", md: "column", lg : "row"}}
-        justifyContent={{base: "flex-start", sm: "flex-start", md: "flex-start", lg : "space-evenly"}}
+        direction={{ base: "column", sm: "column", md: "column", lg: "row" }}
+        justifyContent={{
+          base: "flex-start",
+          sm: "flex-start",
+          md: "flex-start",
+          lg: "space-evenly"
+        }}
         alignItems={"center"}
         color={"#282c3f"}
         p="15px"
         fontWeight="300"
-       >
-        <Box w={{base : "100%", sm : "100%" , md : "100%" , lg : "30%"}} display="flex" justifyContent={"space-between"}>
+      >
+        <Box
+          w={{ base: "100%", sm: "100%", md: "100%", lg: "30%" }}
+          display="flex"
+          justifyContent={"space-between"}
+        >
           <Text
             textAlign={"left"}
             fontWeight="600"
@@ -60,31 +60,36 @@ const AllRestaurants = () => {
           >{` ${restaurants.length} restaurants`}</Text>
         </Box>
         <Flex
-          w={{base : "100%", sm : "100%" , md : "100%" , lg : "70%"}}
+          w={{ base: "100%", sm: "100%", md: "100%", lg: "70%" }}
           direction={"row"}
-          gap={{base : "10px", sm : "10px" , md : "12px" , lg : "30px"}}
+          gap={{ base: "10px", sm: "10px", md: "12px", lg: "30px" }}
           flexWrap={"wrap"}
           color={"##282c3f"}
-          justifyContent={{base: "flex-start", sm: "flex-start", md: "flex-start", lg : "flex-end"}}
+          justifyContent={{
+            base: "flex-start",
+            sm: "flex-start",
+            md: "flex-start",
+            lg: "flex-end"
+          }}
           alignItems={"center"}
         >
-          <Box >
+          <Box>
             <Button
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               Relevance
             </Button>
           </Box>
-          <Box >
+          <Box>
             <Button
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => {
                 console.log("hello");
@@ -95,12 +100,12 @@ const AllRestaurants = () => {
               Delivery Time
             </Button>
           </Box>
-          <Box >
+          <Box>
             <Button
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => {
                 setSortBy("asc");
@@ -109,42 +114,47 @@ const AllRestaurants = () => {
               Cost Low To High
             </Button>
           </Box>
-          <Box >
+          <Box>
             <Button
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => setSortBy("desc")}
             >
               Cost High to Low
             </Button>
           </Box>
-          <Box >
+          <Box>
             <Button
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               Rating
             </Button>
           </Box>
-          <Box >
+          <Box>
             <Button
               display={"flex"}
               variant={"solid"}
               bg={"#83cd29"}
               color={"white"}
-              size={{base: "xs", sm : "sm" , md: "sm", lg: "sm"}}
+              size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               gap="10px"
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
             >
               <Text>Filters</Text>
-              <Box border={"1px solid #eee"} p="10px" borderRadius={"50%"} borderColor={"transparent"}>
-                <ImSpoonKnife color="#f9791e" size={"15px"}/>
+              <Box
+                border={"1px solid #eee"}
+                p="10px"
+                borderRadius={"50%"}
+                borderColor={"transparent"}
+              >
+                <ImSpoonKnife color="#f9791e" size={"15px"} />
               </Box>
             </Button>
           </Box>
@@ -152,6 +162,10 @@ const AllRestaurants = () => {
       </Flex>
       <hr w="100%" />
       <SimpleGrid columns={[1, 2, 2, 4]} w="88%" m="auto" mt="20px" pb="20px">
+        {isLoading &&
+          new Array(8)
+            .fill(0)
+            .map(() => <RestaurantSkeleton height="350px" mainPage={true} />)}
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link key={item._id} to={`/allrestaurants/${city}/${item._id}`}>
@@ -160,12 +174,10 @@ const AllRestaurants = () => {
                 height={"350px"}
                 p="25px"
                 position={"relative"}
-                _hover={
-                  {
-                    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
-                    border: "0.3px solid #e0e5e9",
-                  }
-                }
+                _hover={{
+                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
+                  border: "0.3px solid #e0e5e9"
+                }}
               >
                 <Image src={item.image_rest} position="relative" />
                 <Box
