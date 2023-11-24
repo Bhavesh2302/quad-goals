@@ -16,8 +16,9 @@ const Restaurants = () => {
 
   useEffect(() => {
     dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
-    return () => {};
-  }, []);
+  }, [shopOwner.id, token, dispatch]);
+
+  const handleAddNewRestaurant = () => {};
 
   return (
     <Box h="100%" w="100%">
@@ -32,6 +33,7 @@ const Restaurants = () => {
           bg="green.500"
           color="white"
           _hover={{ bg: "#f3f3f3", color: "black" }}
+          onClick={handleAddNewRestaurant}
         >
           Add New
         </Button>
@@ -42,9 +44,10 @@ const Restaurants = () => {
         alignItems="center"
         justifyContent="flex-start"
         px="20px"
+        gap="20px"
       >
         {isLoading ? (
-          <RestaurantSkeleton length={3} />
+          new Array(3).fill(0).map((_, i) => <RestaurantSkeleton key={i} />)
         ) : restaurants.length !== 0 ? (
           restaurants.map((item) => (
             <Box w="250px" h="auto" borderRadius="5px">
@@ -117,7 +120,12 @@ const Restaurants = () => {
               <Text fontSize="16px" fontWeight="550">
                 No Restaurant Added
               </Text>
-              <Button bg="green.500" color="white" _hover={{ bg: "blue.500" }}>
+              <Button
+                bg="green.500"
+                color="white"
+                _hover={{ bg: "blue.500" }}
+                onClick={handleAddNewRestaurant}
+              >
                 Add New Restaurant
               </Button>
             </Box>

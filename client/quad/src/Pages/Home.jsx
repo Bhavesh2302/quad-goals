@@ -35,6 +35,8 @@ const Home = () => {
   const timerId = useRef(null);
   const { isOpen, onToggle } = useDisclosure();
   const [city, setCity] = useState("");
+  const cityRef = useRef(null);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (!timerId.current) {
@@ -58,10 +60,15 @@ const Home = () => {
   }, [timerId?.current]);
 
   const handleSearchByCity = () => {
-    dispatch(getRestaurantsByCity(city)).then((res) => {
-      if (res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS")
-        navigate(`/allrestaurants/${city}`);
-    });
+    if (city !== "") {
+      dispatch(getRestaurantsByCity(city)).then((res) => {
+        if (res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS")
+          navigate(`/allrestaurants/${city}`);
+      });
+    } else {
+      cityRef.current.focus();
+      setShowMessage(true);
+    }
   };
 
   return (
@@ -152,13 +159,17 @@ const Home = () => {
               <Text>Order food from favourite restaurants near you.</Text>
             </Box>
           </Box>
-          <Flex mt={"23px"}>
+          <Flex mt={"23px"} position="relative">
             <Input
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => {
+                setCity(e.target.value);
+                setShowMessage(false);
+              }}
               border={"2px solid #969491"}
               h={{ base: "40px", sm: "40px", md: "40px", lg: "50px" }}
               borderRadius={"0px"}
               placeholder={"Enter your delivery location"}
+              ref={cityRef}
             />
             <Button
               onClick={handleSearchByCity}
@@ -169,7 +180,23 @@ const Home = () => {
             >
               Find Food
             </Button>
+            {showMessage && (
+              <Box
+                top="60px"
+                zIndex={2}
+                position="absolute"
+                bg={"yellow.200"}
+                fontWeight="550"
+                fontSize="14px"
+                w="50%"
+                p="10px"
+                borderRadius="8px"
+              >
+                Please Enter a city
+              </Box>
+            )}
           </Flex>
+
           <Box textAlign={"left"} mt={"20px"} mb={"20px"}>
             <Text
               fontSize={"16px"}

@@ -111,7 +111,6 @@ const Navbar = () => {
         ) : (
           <UserInfo />
         )}
-        {userData?.role !== "shopOwner" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}
@@ -125,7 +124,6 @@ const Navbar = () => {
               Bag
             </Text>
           </Flex>
-        )}
       </Flex>
       <Flex
         display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
