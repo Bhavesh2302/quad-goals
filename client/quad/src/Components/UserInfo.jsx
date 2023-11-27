@@ -15,7 +15,7 @@ import {
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../Redux/Reducers/UserAuthReducer/action";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,6 +23,7 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const logoutToast = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const { userData } = useSelector((state) => state.userReducer);
 
   const handleLogout = () => {
@@ -43,8 +44,14 @@ const UserInfo = () => {
         ref={btnRef}
         variant={"unstyled"}
         onClick={onOpen}
+        fontWeight="650"
         size={"md"}
-        fontSize={{ base: "10px", sm: "10px", md: "15px", lg: "15px" }}
+        fontSize={
+          location?.pathname === "/"
+            ? { base: "12px", sm: "15px", md: "16px", lg: "18px" }
+            : { base: "12px", sm: "15px" }
+        }
+        _hover={{ color: "red", cursor: "pointer" }}
       >
         <Flex alignItems={"center"}>
           <FaUserCircle size={"18px"} />

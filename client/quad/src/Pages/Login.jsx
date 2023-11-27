@@ -20,7 +20,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../Redux/Reducers/UserAuthReducer/action";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,6 +28,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userSignupToast = useToast();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
 
   const [signupForm, setSignupForm] = useState({
@@ -83,8 +84,12 @@ const Login = () => {
         border={"0px"}
         color={"black"}
         borderRadius={"0px"}
-        fontSize={{ base: "10px", sm: "11px", md: "15px" }}
-        _hover={{ color: "black", bg: "white" }}
+        fontSize={
+          location?.pathname === "/"
+            ? { base: "12px", sm: "15px", md: "16px", lg: "18px" }
+            : { base: "12px", sm: "15px" }
+        }
+        _hover={{ color: "red", cursor: "pointer" }}
         onClick={onOpen}
       >
         Login

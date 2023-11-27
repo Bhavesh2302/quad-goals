@@ -6,7 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { MdHelp, MdLocalOffer } from "react-icons/md";
 import { BsFillHandbagFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Menu,
@@ -20,7 +20,8 @@ import UserInfo from "./UserInfo";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { token, userData } = useSelector((state) => state.userReducer);
+  const { token } = useSelector((state) => state.userReducer);
+  const location = useLocation();
 
   return (
     <Flex
@@ -28,27 +29,32 @@ const Navbar = () => {
       p={"10px"}
       justifyContent={{ base: "space-between", sm: "", md: "space-around" }}
       alignItems={"center"}
-      w={{ base: "100%", sm: "100%", md: "85%", lg: "85%" }}
+      w={{ base: "95%", sm: "90%", md: "90%", lg: "88%" }}
       m={"auto"}
       gap={{ base: "5px", sm: "5px", md: "100px" }}
+      fontSize={
+        location.pathname === "/"
+          ? { base: "12px", sm: "15px", md: "16px", lg: "18px" }
+          : { base: "12px", sm: "15px" }
+      }
     >
       <Flex
         w={{ base: "65%", sm: "65%", md: "65%", lg: "30%" }}
-        justifyContent={{ base: "start", sm: "start", md: "space-evenly" }}
+        justifyContent="start"
         alignItems={"center"}
         direction={{ base: "row", sm: "row", md: "row" }}
       >
-        <Box w={"90px"}>
+        <Box w={location?.pathname === "/" ? "160px" : "100px"}>
           <Link to={"/"}>
             <Image
               w={"100%"}
-              h={"50px"}
+              h={location?.pathname === "/" ? "90px" : "50px"}
               src={"https://i.imgur.com/Gex3smL.jpg"}
               alt={"logo"}
             />
           </Link>
         </Box>
-        {userData?.role !== "shopOwner" && (
+        {location?.pathname !== "/" && (
           <Box>
             <LocationSearch />
           </Box>
@@ -62,42 +68,36 @@ const Navbar = () => {
         gap={"65px"}
         alignItems={"center"}
       >
-        {userData?.role !== "shopOwner" && (
+        {location?.pathname !== "/" && (
           <Flex
             alignItems={"center"}
             gap={"10px"}
             _hover={{ color: "red", cursor: "pointer" }}
           >
             <FiSearch fontWeight={"650"} />
-            <Text fontWeight={"650"} fontSize={"15px"}>
-              Search
-            </Text>
+            <Text fontWeight={"650"}>Search</Text>
           </Flex>
         )}
-        {userData?.role !== "shopOwner" && (
+        {
           <Flex
             alignItems={"center"}
             gap={"10px"}
             _hover={{ color: "red", cursor: "pointer" }}
           >
             <MdLocalOffer />
-            <Text fontWeight={"650"} fontSize={"15px"}>
-              Offers
-            </Text>
+            <Text fontWeight={"650"}>Offers</Text>
           </Flex>
-        )}
-        {userData?.role !== "shopOwner" && (
+        }
+        {
           <Flex
             alignItems={"center"}
             gap={"10px"}
             _hover={{ color: "red", cursor: "pointer" }}
           >
             <MdHelp />
-            <Text fontWeight={"650"} fontSize={"15px"}>
-              Help
-            </Text>
+            <Text fontWeight={"650"}>Help</Text>
           </Flex>
-        )}
+        }
 
         {token === null ? (
           <Flex
@@ -111,19 +111,17 @@ const Navbar = () => {
         ) : (
           <UserInfo />
         )}
-          <Flex
-            alignItems={"center"}
-            gap={"10px"}
-            _hover={{ color: "red", cursor: "pointer" }}
-            onClick={() => {
-              navigate("/cart");
-            }}
-          >
-            <BsFillHandbagFill />
-            <Text fontWeight={"650"} fontSize={"15px"}>
-              Bag
-            </Text>
-          </Flex>
+        <Flex
+          alignItems={"center"}
+          gap={"10px"}
+          _hover={{ color: "red", cursor: "pointer" }}
+          onClick={() => {
+            navigate("/cart");
+          }}
+        >
+          <BsFillHandbagFill />
+          <Text fontWeight={"650"}>Bag</Text>
+        </Flex>
       </Flex>
       <Flex
         display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
@@ -174,9 +172,7 @@ const Navbar = () => {
                 _hover={{ color: "red", cursor: "pointer" }}
               >
                 <FiSearch fontWeight={"650"} />
-                <Text fontWeight={"650"} fontSize={"15px"}>
-                  Search
-                </Text>
+                <Text fontWeight={"650"}>Search</Text>
               </Flex>
             </MenuItem>
             <MenuItem command="⌘">
@@ -186,9 +182,7 @@ const Navbar = () => {
                 _hover={{ color: "red", cursor: "pointer" }}
               >
                 <MdLocalOffer />
-                <Text fontWeight={"650"} fontSize={"15px"}>
-                  Offers
-                </Text>
+                <Text fontWeight={"650"}>Offers</Text>
               </Flex>
             </MenuItem>
             <MenuItem command="⌘">
@@ -198,9 +192,7 @@ const Navbar = () => {
                 _hover={{ color: "red", cursor: "pointer" }}
               >
                 <MdHelp />
-                <Text fontWeight={"650"} fontSize={"15px"}>
-                  Help
-                </Text>
+                <Text fontWeight={"650"}>Help</Text>
               </Flex>
             </MenuItem>
           </MenuList>
