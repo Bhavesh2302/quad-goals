@@ -19,6 +19,7 @@ import UserInfo from "../Components/UserInfo";
 import { getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
 import Login from "./Login";
 import Signup from "./Signup";
+import Navbar from "../Components/Navbar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -74,6 +75,109 @@ const Home = () => {
   return (
     <Box w="100%">
       <Box
+        h="700px"
+        w="100%"
+        display="flex"
+        justifyContent="space-between"
+        color="white"
+        position="relative"
+        overflow="hidden"
+      >
+        <Box zIndex="1" position="absolute" w="100%" color="black" pt="30px">
+          <Navbar />
+        </Box>
+        <Box
+          position="absolute"
+          bg="#c2d6ab"
+          h="900px"
+          zIndex="-1"
+          w="45%"
+          top="-14%"
+          right="-17%"
+          borderLeftRadius="50%"
+        ></Box>
+        <Box w="70%" position="absolute" zIndex="1" top="100px" left="0" px="100px" mt="200px">
+          <Box textAlign={"left"}>
+            {/* <SlideFade slideFade in={isOpen} offsetY="20px"> */}
+            {/* <Text
+              fontSize={{ base: "25px", sm: "25px", md: "30px", lg: "40px" }}
+              fontWeight={"bold"}
+              mb={"12px"}
+            >
+              {currentString}
+            </Text> */}
+            {/* </SlideFade> */}
+            <Box
+              fontSize={{ base: "12px", sm: "12px", md: "15px", lg: "18px" }}
+              fontWeight={"bold"}
+              color={"gray"}
+            >
+              <Text>Order food from favourite restaurants near you.</Text>
+            </Box>
+          </Box>
+          <Flex mt={"23px"} position="relative" w="80%">
+            <Input
+              onChange={(e) => {
+                setCity(e.target.value);
+                setShowMessage(false);
+              }}
+              border={"2px solid #969491"}
+              h={{ base: "40px", sm: "40px", md: "40px", lg: "50px" }}
+              borderRadius={"0px"}
+              placeholder={"Enter your delivery location"}
+              ref={cityRef}
+            />
+            <Button
+              onClick={handleSearchByCity}
+              h={{ base: "40px", sm: "40px", md: "40px", lg: "50px" }}
+              borderRadius={"0px"}
+              color={"white"}
+              bg={"#ef234b "}
+            >
+              Find Food
+            </Button>
+            {showMessage && (
+              <Box
+                top="60px"
+                zIndex={2}
+                position="absolute"
+                bg={"yellow.200"}
+                fontWeight="550"
+                fontSize="14px"
+                w="50%"
+                p="10px"
+                borderRadius="8px"
+              >
+                Please Enter a city
+              </Box>
+            )}
+          </Flex>
+        </Box>
+        <Box
+          w="400px"
+          h="400px"
+          borderRadius="50%"
+          top="150px"
+          p="5px"
+          zIndex="1"
+          right="12%"
+          position="absolute"
+          border="5px solid #c2d6ab"
+          bg="white"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Image
+            src="/Images/Indian-Thali--preview.png"
+            h="100%"
+            w="100%"
+            borderRadius="50%"
+            objectFit="cover"
+          />
+        </Box>
+      </Box>
+      {/* <Box
         display={{ base: "block", sm: "block", md: "block", lg: "flex" }}
         w={"100%"}
         m={"auto"}
@@ -230,9 +334,9 @@ const Home = () => {
         >
           <Image src={"/brooke-lark-HlNcigvUi4Q-unsplash.jpg"} alt={"cover"} />
         </Box>
-      </Box>
-      <OrderDeliveryTrackingComponent />
-      <BannerAppStore />
+      </Box> */}
+      {/* <OrderDeliveryTrackingComponent /> */}
+      {/* <BannerAppStore /> */}
     </Box>
   );
 };
