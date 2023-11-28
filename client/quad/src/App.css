@@ -28,11 +28,17 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes dish-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 492px) {
+  .chakra-slide.chakra-modal__content {
+    width: 50% !important;
   }
 }

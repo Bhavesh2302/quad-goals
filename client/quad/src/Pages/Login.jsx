@@ -13,7 +13,8 @@ import {
   FormControl,
   InputGroup,
   FormLabel,
-  useToast
+  useToast,
+  Text
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -21,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../Redux/Reducers/UserAuthReducer/action";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import Signup from "./Signup";
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -86,8 +88,8 @@ const Login = () => {
         borderRadius={"0px"}
         fontSize={
           location?.pathname === "/"
-            ? { base: "12px", sm: "15px", md: "16px", lg: "18px" }
-            : { base: "12px", sm: "15px" }
+            ? { base: "11px", sm: "11px", md: "16px", lg: "18px" }
+            : { base: "12px", sm: "15px", md: "15px", lg: "15px" }
         }
         _hover={{ color: "red", cursor: "pointer" }}
         onClick={onOpen}
@@ -104,16 +106,20 @@ const Login = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize={"30px"}>Login</DrawerHeader>
-
-          <DrawerBody pl={"50px"}>
+          <DrawerHeader
+            fontSize={"30px"}
+            pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}
+          >
+            Login
+          </DrawerHeader>
+          <DrawerBody pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}>
             <form onSubmit={handleLogin}>
               <FormControl isRequired>
                 <Box mb={"20px"}>
                   <FormLabel>Email</FormLabel>
                   <Input
                     type={"email"}
-                    w={"60%"}
+                    w={"90%"}
                     name={"email"}
                     value={signupForm.email}
                     onChange={handleChangeLogin}
@@ -128,7 +134,7 @@ const Login = () => {
                   <InputGroup>
                     <Input
                       type={showPassword ? "text" : "password"}
-                      w={"50%"}
+                      w={{ base: "70%", sm: "70%", md: "75%", lg: "80%" }}
                       name={"password"}
                       value={signupForm.password}
                       onChange={handleChangeLogin}
@@ -137,6 +143,7 @@ const Login = () => {
                     />
                     <Button
                       variant={"solid"}
+                      w="22px"
                       borderRadius={"0px"}
                       onClick={() =>
                         setShowPassword((showPassword) => !showPassword)
@@ -150,8 +157,8 @@ const Login = () => {
               <Box mb={"20px"}>
                 <Button
                   type={"submit"}
-                  w={"60%"}
                   bg={"#5aa02c"}
+                  w="90%"
                   color={"white"}
                   _hover={{ bg: "#ef234b" }}
                   borderRadius={"0px"}
@@ -160,8 +167,11 @@ const Login = () => {
                 </Button>
               </Box>
             </form>
+            <Box w={"90%"} textAlign="center" fontWeight="550">
+              <Text>New to foodie?</Text>
+              <Signup />
+            </Box>
           </DrawerBody>
-
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel

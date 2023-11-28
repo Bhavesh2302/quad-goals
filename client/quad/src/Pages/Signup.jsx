@@ -13,13 +13,13 @@ import {
   FormControl,
   FormLabel,
   useToast,
-  InputGroup,
+  InputGroup
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userSignup } from "../Redux/Reducers/UserAuthReducer/action";
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const Signup = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,13 +32,13 @@ const Signup = () => {
     name: "",
     email: "",
     phoneNo: "",
-    password: "",
+    password: ""
   });
   const handleChangeSignup = (e) => {
     let { name, value } = e.target;
     setSignupForm({
       ...signupForm,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -49,7 +49,7 @@ const Signup = () => {
       name: signupForm.name,
       email: signupForm.email,
       phoneNo: Number(signupForm.phoneNo),
-      password: signupForm.password,
+      password: signupForm.password
     };
     console.log(payload);
     dispatch(userSignup(payload));
@@ -57,7 +57,7 @@ const Signup = () => {
       title: "Signup Successful",
       status: "success",
       duration: 1500,
-      position: "top",
+      position: "top"
     });
   };
 
@@ -78,21 +78,25 @@ const Signup = () => {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size={{base: "xs", sm: "xs", md: "sm"}}
+        size={{ base: "xs", sm: "xs", md: "sm" }}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader fontSize={"30px"}>Signup</DrawerHeader>
-
-          <DrawerBody pl={"50px"}>
+          <DrawerHeader
+            fontSize={"30px"}
+            pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}
+          >
+            Signup
+          </DrawerHeader>
+          <DrawerBody pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}>
             <form onSubmit={handleSignup}>
               <FormControl isRequired>
                 <Box mb={"20px"}>
                   <FormLabel>Name</FormLabel>
                   <Input
                     type={"text"}
-                    w={"60%"}
+                    w={"90%"}
                     name={"name"}
                     value={signupForm.name}
                     onChange={handleChangeSignup}
@@ -106,7 +110,7 @@ const Signup = () => {
                   <FormLabel>Email</FormLabel>
                   <Input
                     type={"email"}
-                    w={"60%"}
+                    w={"90%"}
                     name={"email"}
                     value={signupForm.email}
                     onChange={handleChangeSignup}
@@ -120,7 +124,7 @@ const Signup = () => {
                   <FormLabel>Mobile Number</FormLabel>
                   <Input
                     type={"number"}
-                    w={"60%"}
+                    w={"90%"}
                     name={"phoneNo"}
                     value={signupForm.phoneNo}
                     onChange={handleChangeSignup}
@@ -133,29 +137,32 @@ const Signup = () => {
                 <Box mb={"20px"}>
                   <FormLabel>Password</FormLabel>
                   <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'}
-                w={"50%"}
-                name={"password"}
-                value={signupForm.password}
-                onChange={handleChangeSignup}
-                borderRadius={"0px"}
-                variant={"filled"}
-                />
-                  <Button
-                    variant={'solid'}
-                    borderRadius={"0px"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }>
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-              </InputGroup>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      w={{ base: "70%", sm: "70%", md: "75%", lg: "80%" }}
+                      name={"password"}
+                      value={signupForm.password}
+                      onChange={handleChangeSignup}
+                      borderRadius={"0px"}
+                      variant={"filled"}
+                    />
+                    <Button
+                      variant={"solid"}
+                      borderRadius={"0px"}
+                      w="22px"
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputGroup>
                 </Box>
               </FormControl>
               <Box mb={"20px"}>
                 <Button
+                  w="90%"
                   type={"submit"}
-                  w={"60%"}
                   bg={"#5aa02c"}
                   color={"white"}
                   _hover={{ bg: "#ef234b" }}

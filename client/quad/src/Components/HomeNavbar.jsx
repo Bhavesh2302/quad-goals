@@ -1,4 +1,17 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Image,
+  Text,
+  useDisclosure
+} from "@chakra-ui/react";
 import React from "react";
 import Login from "../Pages/Login";
 import LocationSearch from "./LocationSearch";
@@ -18,7 +31,9 @@ import {
 import { useSelector } from "react-redux";
 import UserInfo from "./UserInfo";
 
-const Navbar = () => {
+const HomeNavbar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.userReducer);
   const location = useLocation();
@@ -49,11 +64,11 @@ const Navbar = () => {
         alignItems={"center"}
         direction={{ base: "row", sm: "row", md: "row" }}
       >
-        <Box w={location?.pathname === "/" ? "160px" : "100px"}>
+        <Box w={{ base: "80px", sm: "90px", md: "120px", lg: "160px" }}>
           <Link to={"/"}>
             <Image
               w={"100%"}
-              h={location?.pathname === "/" ? "90px" : "50px"}
+              h={{ base: "40px", sm: "40px", md: "70px", lg: "90px" }}
               src={"https://i.imgur.com/Gex3smL.jpg"}
               alt={"logo"}
             />
@@ -66,7 +81,7 @@ const Navbar = () => {
         )}
       </Flex>
       <Flex
-        display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
+        display={{ base: "none", sm: "flex", md: "flex", lg: "flex" }}
         w={{ base: "50%", sm: "50%", md: "50%", lg: "70%" }}
         direction={"row"}
         justifyContent={"end"}
@@ -83,26 +98,22 @@ const Navbar = () => {
             <Text fontWeight={"650"}>Search</Text>
           </Flex>
         )}
-        {
-          <Flex
-            alignItems={"center"}
-            gap={"10px"}
-            _hover={{ color: "red", cursor: "pointer" }}
-          >
-            <MdLocalOffer fontSize="20px" />
-            <Text fontWeight={"650"}>Offers</Text>
-          </Flex>
-        }
-        {
-          <Flex
-            alignItems={"center"}
-            gap={"10px"}
-            _hover={{ color: "red", cursor: "pointer" }}
-          >
-            <MdHelp fontSize="20px" />
-            <Text fontWeight={"650"}>Help</Text>
-          </Flex>
-        }
+        <Flex
+          alignItems={"center"}
+          gap={"10px"}
+          _hover={{ color: "red", cursor: "pointer" }}
+        >
+          <MdLocalOffer fontSize="20px" />
+          <Text fontWeight={"650"}>Offers</Text>
+        </Flex>
+        <Flex
+          alignItems={"center"}
+          gap={"10px"}
+          _hover={{ color: "red", cursor: "pointer" }}
+        >
+          <MdHelp fontSize="20px" />
+          <Text fontWeight={"650"}>Help</Text>
+        </Flex>
 
         {token === null ? (
           <Flex
@@ -120,16 +131,14 @@ const Navbar = () => {
           alignItems={"center"}
           gap={"10px"}
           _hover={{ color: "red", cursor: "pointer" }}
-          onClick={() => {
-            navigate("/cart");
-          }}
+          onClick={() => navigate("/cart")}
         >
           <BsFillHandbagFill fontSize="20px" />
           <Text fontWeight={"650"}>Bag</Text>
         </Flex>
       </Flex>
       <Flex
-        display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
+        display={{ base: "flex", sm: "none", md: "none", lg: "none" }}
         w={{ base: "30%", sm: "30%", md: "70%" }}
         gap={"5px"}
         justifyContent={"flex-end"}
@@ -140,7 +149,7 @@ const Navbar = () => {
             gap={"1px"}
             _hover={{ color: "red", cursor: "pointer" }}
           >
-            <FaUserAlt fontSize="20px" />
+            <FaUserAlt fontSize={{ base: "10px", sm: "11px", md: "15px" }} />
             <Login />
           </Flex>
         ) : (
@@ -162,49 +171,66 @@ const Navbar = () => {
             Bag
           </Text>
         </Flex>
-        <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<HamburgerIcon />}
-            variant="unstyled"
-          />
-          <MenuList>
-            <MenuItem command="⌘">
-              <Flex
-                alignItems={"center"}
-                gap={"10px"}
-                _hover={{ color: "red", cursor: "pointer" }}
-              >
-                <FiSearch fontWeight={"650"} />
-                <Text fontWeight={"650"}>Search</Text>
-              </Flex>
-            </MenuItem>
-            <MenuItem command="⌘">
-              <Flex
-                alignItems={"center"}
-                gap={"10px"}
-                _hover={{ color: "red", cursor: "pointer" }}
-              >
-                <MdLocalOffer />
-                <Text fontWeight={"650"}>Offers</Text>
-              </Flex>
-            </MenuItem>
-            <MenuItem command="⌘">
-              <Flex
-                alignItems={"center"}
-                gap={"10px"}
-                _hover={{ color: "red", cursor: "pointer" }}
-              >
-                <MdHelp />
-                <Text fontWeight={"650"}>Help</Text>
-              </Flex>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <Button
+          ref={btnRef}
+          fontWeight={"650"}
+          variant={"unstyled"}
+          border={"0px"}
+          color={"black"}
+          borderRadius={"0px"}
+          fontSize={
+            location?.pathname === "/"
+              ? { base: "11px", sm: "11px", md: "16px", lg: "18px" }
+              : { base: "12px", sm: "15px", md: "15px", lg: "15px" }
+          }
+          _hover={{ color: "red", cursor: "pointer" }}
+          onClick={onOpen}
+        >
+          <HamburgerIcon />
+        </Button>
+        <Box w={{ base: "50px", sm: "100px", md: "170px", lg: "170px" }}>
+          <Drawer
+            isOpen={isOpen}
+            placement="right"
+            onClose={onClose}
+            finalFocusRef={btnRef}
+            size={{ base: "xs", sm: "xs", md: "xs", lg: "xs" }}
+          >
+            <DrawerOverlay />
+            <DrawerContent pl={"50px"} w="100px">
+              <DrawerCloseButton />
+              <DrawerBody>
+                <Flex
+                  alignItems={"center"}
+                  gap={"10px"}
+                  _hover={{ color: "red", cursor: "pointer" }}
+                >
+                  <FiSearch fontWeight={"650"} />
+                  <Text fontWeight={"650"}>Search</Text>
+                </Flex>
+                <Flex
+                  alignItems={"center"}
+                  gap={"10px"}
+                  _hover={{ color: "red", cursor: "pointer" }}
+                >
+                  <MdLocalOffer />
+                  <Text fontWeight={"650"}>Offers</Text>
+                </Flex>
+                <Flex
+                  alignItems={"center"}
+                  gap={"10px"}
+                  _hover={{ color: "red", cursor: "pointer" }}
+                >
+                  <MdHelp />
+                  <Text fontWeight={"650"}>Help</Text>
+                </Flex>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+        </Box>
       </Flex>
     </Flex>
   );
 };
 
-export default Navbar;
+export default HomeNavbar;
