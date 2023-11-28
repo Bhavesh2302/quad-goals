@@ -10,7 +10,8 @@ import {
   Button,
   useDisclosure,
   useToast,
-  Flex
+  Flex,
+  Box
 } from "@chakra-ui/react";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,9 +54,24 @@ const UserInfo = () => {
         }
         _hover={{ color: "red", cursor: "pointer" }}
       >
-        <Flex alignItems={"center"}>
-          <FaUserCircle size={"18px"} />
-          {userData?.name}
+        <Flex alignItems={"center"} gap="10px">
+          {/* <FaUserCircle size={"22px"} /> */}
+          <Box
+            w="24px"
+            h="24px"
+            borderRadius="50%"
+            border="1px solid"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            color="white"
+            bg="pink.600"
+            fontSize="12px"
+            fontWeight="550"
+          >
+            {userData?.name[0]}
+          </Box>
+          <Box>{userData?.name}</Box>
         </Flex>
       </Button>
       <Drawer

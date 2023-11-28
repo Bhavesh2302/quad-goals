@@ -15,7 +15,7 @@ const restaurant_schema = new mongoose.Schema({
     address:{type:String},
     menu:{type:Array},
     userId:{type:String}
-     
+    
 
 })
 
