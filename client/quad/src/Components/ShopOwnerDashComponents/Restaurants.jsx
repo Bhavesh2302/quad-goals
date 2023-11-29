@@ -1,13 +1,17 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurantsOfShopowner } from "../../Redux/Reducers/ShopOwnerReducer/action";
+import { deleteRestaurantOfShopOwner, getRestaurantsOfShopowner } from "../../Redux/Reducers/ShopOwnerReducer/action";
 import { BsShopWindow } from "react-icons/bs";
 import RestaurantSkeleton from "../Skeletons/RestaurantSkeleton";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Restaurants = () => {
+  const [isHovering, setIsHovering] = useState(false);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { restaurants, isLoading } = useSelector(
     (state) => state.shopOwnerReducer
   );
@@ -18,7 +22,23 @@ const Restaurants = () => {
     dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
   }, [shopOwner.id, token, dispatch]);
 
-  const handleAddNewRestaurant = () => {};
+
+  const handleMouseOver = () => {
+    setIsHovering(!isHovering);
+  };
+
+  const handleEdit =() => {
+  dispatch()
+  }
+
+  const handleDelete = (id) => {
+dispatch(deleteRestaurantOfShopOwner(id,token))
+  }
+
+
+  const handleAddNewRestaurant = () => {
+    navigate("/shopownerdashboard/form")
+  };
 
   return (
     <Box h="100%" w="100%">
@@ -102,6 +122,18 @@ const Restaurants = () => {
                 <Box textAlign="start" color="#686b78" fontSize="14px">
                   {item.address}
                 </Box>
+                <Box textAlign='end' color="blue" fontSize="14px" textDecoration={'underline'}
+                _hover={''} 
+                onClick={handleMouseOver}
+                > More</Box>
+{ isHovering && (
+  <Box display={'flex'} justifyContent={'space-between'} m='3'>
+    <Button bg="green.500"
+          color="white" onClick={handleEdit}>Edit</Button>
+    <Button bg="green.500"
+          color="white" onClick={()=>handleDelete(item._id)}>Delete </Button>
+  </Box>
+)}
               </Box>
             </Box>
           ))

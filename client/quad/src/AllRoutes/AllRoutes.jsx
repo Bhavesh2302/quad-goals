@@ -8,6 +8,7 @@ import RestOwnerSignup from "../Pages/RestOwnerSignup";
 import Cart from "../Pages/Cart";
 import ShopOwnerDashboard from "../Pages/ShopOwnerDashboard";
 import ShopOwnerPrivateRoute from "../HOF/ShopOwnerPrivateRoute";
+import { RestaurantForm } from "../Components/ShopOwnerDashComponents/RestaurantForm";
 
 const AllRoutes = () => (
   <div>
@@ -31,6 +32,14 @@ const AllRoutes = () => (
           </ShopOwnerPrivateRoute>
         }
       />
+      <Route 
+      path={"/shopownerdashboard/form"} 
+      element = {
+
+        <ShopOwnerPrivateRoute>
+          <RestaurantForm />
+        </ShopOwnerPrivateRoute>     
+      } />
     </Routes>
     <Footer />
   </div>
