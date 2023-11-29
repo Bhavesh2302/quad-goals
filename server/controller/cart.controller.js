@@ -19,7 +19,7 @@ cartController.post("/add/:menuId", authentication, async (req, res) => {
   const { userId } = req.body;
   console.log(userId);
   const { menuId } = req.params;
-  const isExist = await CartModel.findOne({ menuId });
+  const isExist = await CartModel.findOne({ menuId : menuId, userId : userId});
 
   console.log("isExist", isExist);
   if (!isExist) {
