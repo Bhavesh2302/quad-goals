@@ -5,7 +5,6 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   Image,
@@ -14,20 +13,11 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Login from "../Pages/Login";
-import LocationSearch from "./LocationSearch";
 import { FaUserAlt } from "react-icons/fa";
-import { FiSearch } from "react-icons/fi";
 import { MdHelp, MdLocalOffer } from "react-icons/md";
 import { BsFillHandbagFill } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton
-} from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import UserInfo from "./UserInfo";
 
@@ -42,7 +32,7 @@ const HomeNavbar = () => {
     <Flex
       h={"80px"}
       p={"10px"}
-      justifyContent={{ base: "space-between", sm: "", md: "space-around" }}
+      justifyContent={{ base: "space-between", sm: "", md: "space-between" }}
       alignItems={"center"}
       w={{
         base: "95%",
@@ -52,52 +42,26 @@ const HomeNavbar = () => {
       }}
       m={"auto"}
       gap={{ base: "5px", sm: "5px", md: "100px" }}
-      fontSize={
-        location.pathname === "/"
-          ? { base: "12px", sm: "15px", md: "16px", lg: "18px" }
-          : { base: "12px", sm: "15px" }
-      }
+      fontSize={{ base: "12px", sm: "15px", md: "16px", lg: "18px" }}
     >
-      <Flex
-        w={{ base: "65%", sm: "65%", md: "65%", lg: "30%" }}
-        justifyContent="start"
-        alignItems={"center"}
-        direction={{ base: "row", sm: "row", md: "row" }}
-      >
-        <Box w={{ base: "80px", sm: "90px", md: "120px", lg: "160px" }}>
-          <Link to={"/"}>
-            <Image
-              w={"100%"}
-              h={{ base: "40px", sm: "40px", md: "70px", lg: "90px" }}
-              src={"https://i.imgur.com/Gex3smL.jpg"}
-              alt={"logo"}
-            />
-          </Link>
-        </Box>
-        {location?.pathname !== "/" && (
-          <Box>
-            <LocationSearch />
-          </Box>
-        )}
-      </Flex>
-      <Flex
-        display={{ base: "none", sm: "flex", md: "flex", lg: "flex" }}
-        w={{ base: "50%", sm: "50%", md: "50%", lg: "70%" }}
+      <Box w={{ base: "80px", sm: "90px", md: "120px", lg: "160px" }}>
+        <Link to={"/"}>
+          <Image
+            w={"100%"}
+            h={{ base: "40px", sm: "40px", md: "70px", lg: "90px" }}
+            src={"https://i.imgur.com/Gex3smL.jpg"}
+            alt={"logo"}
+          />
+        </Link>
+      </Box>
+      <Box
+        display={{ base: "none", sm: "none", md: "none", lg: "flex" }}
+        w="auto"
         direction={"row"}
-        justifyContent={"end"}
-        gap={"65px"}
+        justifyContent="flex-end"
         alignItems={"center"}
+        bg="red"
       >
-        {location?.pathname !== "/" && (
-          <Flex
-            alignItems={"center"}
-            gap={"10px"}
-            _hover={{ color: "red", cursor: "pointer" }}
-          >
-            <FiSearch fontWeight={"650"} />
-            <Text fontWeight={"650"}>Search</Text>
-          </Flex>
-        )}
         <Flex
           alignItems={"center"}
           gap={"10px"}
@@ -114,7 +78,6 @@ const HomeNavbar = () => {
           <MdHelp fontSize="20px" />
           <Text fontWeight={"650"}>Help</Text>
         </Flex>
-
         {token === null ? (
           <Flex
             alignItems={"center"}
@@ -136,10 +99,10 @@ const HomeNavbar = () => {
           <BsFillHandbagFill fontSize="20px" />
           <Text fontWeight={"650"}>Bag</Text>
         </Flex>
-      </Flex>
+      </Box>
       <Flex
-        display={{ base: "flex", sm: "none", md: "none", lg: "none" }}
-        w={{ base: "30%", sm: "30%", md: "70%" }}
+        display={{ base: "flex", sm: "flex", md: "flex", lg: "none" }}
+        w={{ base: "70%", sm: "70%", md: "70%" }}
         gap={"5px"}
         justifyContent={"flex-end"}
       >
@@ -149,28 +112,12 @@ const HomeNavbar = () => {
             gap={"1px"}
             _hover={{ color: "red", cursor: "pointer" }}
           >
-            <FaUserAlt fontSize={{ base: "10px", sm: "11px", md: "15px" }} />
+            <FaUserAlt fontSize={{ base: "12px", sm: "12px", md: "15px" }} />
             <Login />
           </Flex>
         ) : (
           <UserInfo />
         )}
-        <Flex
-          alignItems={"center"}
-          gap={"5px"}
-          _hover={{ color: "red", cursor: "pointer" }}
-          onClick={() => {
-            navigate("/cart");
-          }}
-        >
-          <BsFillHandbagFill />
-          <Text
-            fontWeight={"650"}
-            fontSize={{ base: "10px", sm: "11px", md: "15px" }}
-          >
-            Bag
-          </Text>
-        </Flex>
         <Button
           ref={btnRef}
           fontWeight={"650"}
@@ -188,46 +135,68 @@ const HomeNavbar = () => {
         >
           <HamburgerIcon />
         </Button>
-        <Box w={{ base: "50px", sm: "100px", md: "170px", lg: "170px" }}>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-            size={{ base: "xs", sm: "xs", md: "xs", lg: "xs" }}
-          >
-            <DrawerOverlay />
-            <DrawerContent pl={"50px"} w="100px">
-              <DrawerCloseButton />
-              <DrawerBody>
-                <Flex
-                  alignItems={"center"}
-                  gap={"10px"}
-                  _hover={{ color: "red", cursor: "pointer" }}
-                >
-                  <FiSearch fontWeight={"650"} />
-                  <Text fontWeight={"650"}>Search</Text>
-                </Flex>
-                <Flex
-                  alignItems={"center"}
-                  gap={"10px"}
-                  _hover={{ color: "red", cursor: "pointer" }}
-                >
-                  <MdLocalOffer />
-                  <Text fontWeight={"650"}>Offers</Text>
-                </Flex>
-                <Flex
-                  alignItems={"center"}
-                  gap={"10px"}
-                  _hover={{ color: "red", cursor: "pointer" }}
-                >
-                  <MdHelp />
-                  <Text fontWeight={"650"}>Help</Text>
-                </Flex>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
-        </Box>
+        <Drawer
+          isOpen={isOpen}
+          placement="right"
+          onClose={onClose}
+          finalFocusRef={btnRef}
+          size={{ base: "xs", sm: "xs", md: "xs", lg: "xs" }}
+        >
+          <DrawerOverlay />
+          <DrawerContent pl={"0px"} w="100px">
+            <DrawerCloseButton />
+            <DrawerBody
+              pl="20px"
+              pt="50px"
+              display="flex"
+              flexDirection="column"
+              gap="25px"
+            >
+              <Flex
+                alignItems={"center"}
+                gap={"10px"}
+                _hover={{ color: "red", cursor: "pointer" }}
+                fontSize={{ base: "12px", sm: "12px", md: "15px" }}
+              >
+                <MdLocalOffer />
+                <Text fontWeight={"650"}>Offers</Text>
+              </Flex>
+              <Flex
+                alignItems={"center"}
+                gap={"10px"}
+                _hover={{ color: "red", cursor: "pointer" }}
+                fontSize={{ base: "12px", sm: "12px", md: "15px" }}
+              >
+                <MdHelp />
+                <Text fontWeight={"650"}>Help</Text>
+              </Flex>
+              <Flex
+                alignItems={"center"}
+                gap={"10px"}
+                _hover={{ color: "red", cursor: "pointer" }}
+                fontSize={{ base: "12px", sm: "12px", md: "15px" }}
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              >
+                <BsFillHandbagFill />
+                <Text fontWeight={"650"}>Bag</Text>
+              </Flex>
+              <Flex
+                alignItems={"center"}
+                gap={"10px"}
+                _hover={{ color: "red", cursor: "pointer" }}
+                fontSize={{ base: "12px", sm: "12px", md: "15px" }}
+                // onClick={() => {
+                //   navigate("/cart");
+                // }}
+              >
+                <BsFillHandbagFill />
+                <Text fontWeight={"650"}>My Account</Text>
+              </Flex>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
       </Flex>
     </Flex>
   );

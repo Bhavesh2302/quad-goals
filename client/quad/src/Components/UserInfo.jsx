@@ -54,7 +54,7 @@ const UserInfo = () => {
         }
         _hover={{ color: "red", cursor: "pointer" }}
       >
-        <Flex alignItems={"center"} gap="10px">
+        <Flex alignItems={"center"} gap={{base: "5px", sm: "5px", md: "5px", lg: "10px"}}>
           {/* <FaUserCircle size={"22px"} /> */}
           <Box
             w="24px"
@@ -71,7 +71,7 @@ const UserInfo = () => {
           >
             {userData?.name[0]}
           </Box>
-          <Box>{userData?.name}</Box>
+          <Box>{userData?.name?.trim().split(" ")[0]}</Box>
         </Flex>
       </Button>
       <Drawer
