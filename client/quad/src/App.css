@@ -39,6 +39,42 @@
 
 @media screen and (max-width: 492px) {
   .chakra-slide.chakra-modal__content {
-    width: 50% !important;
+    width: 55% !important;
+  }
+}
+
+@media screen and (max-width: 300px) and (min-width: 180px) {
+  .banner-thali-box {
+    right: -100px !important;
+  }
+}
+
+@media screen and (max-width: 390px) and (min-width: 290px) {
+  .banner-thali-box {
+    right: 30px !important;
+  }
+}
+
+@media screen and (max-width: 400px) and (min-width: 380px) {
+  .banner-thali-box {
+    right: 1px !important;
+  }
+}
+
+@media screen and (max-width: 380px) and (min-width: 200px) {
+  .banner-thali-box {
+    right: -10px !important;
+  }
+}
+
+@media screen and (max-width: 510px) and (min-width: 400px) {
+  .banner-thali-box {
+    right: 25px !important;
+  }
+}
+
+@media screen and (max-width: 1080px) and (min-width: 840px) {
+  .banner-thali-box {
+    right: 25px !important;
   }
 }

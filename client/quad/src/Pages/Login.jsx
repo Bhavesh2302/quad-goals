@@ -5,14 +5,9 @@ import {
   DrawerOverlay,
   Button,
   DrawerContent,
-  DrawerFooter,
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-  Input,
-  FormControl,
-  InputGroup,
-  FormLabel,
   useToast,
   Text
 } from "@chakra-ui/react";
@@ -20,9 +15,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../Redux/Reducers/UserAuthReducer/action";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Signup from "./Signup";
+import InputField from "../BaseComponents/InputField";
 
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -93,6 +88,7 @@ const Login = () => {
         }
         _hover={{ color: "red", cursor: "pointer" }}
         onClick={onOpen}
+        p="0"
       >
         Login
       </Button>
@@ -107,76 +103,61 @@ const Login = () => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader
-            fontSize={"30px"}
             pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}
+            fontSize={{ base: "18px", sm: "18px", md: "20px", lg: "30px" }}
           >
             Login
           </DrawerHeader>
           <DrawerBody pl={{ base: "15px", sm: "15px", md: "20px", lg: "50px" }}>
             <form onSubmit={handleLogin}>
-              <FormControl isRequired>
-                <Box mb={"20px"}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    type={"email"}
-                    w={"90%"}
-                    name={"email"}
-                    value={signupForm.email}
-                    onChange={handleChangeLogin}
-                    borderRadius={"0px"}
-                    variant={"filled"}
-                  />
-                </Box>
-              </FormControl>
-              <FormControl isRequired>
-                <Box mb={"20px"}>
-                  <FormLabel>Password</FormLabel>
-                  <InputGroup>
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      w={{ base: "70%", sm: "70%", md: "75%", lg: "80%" }}
-                      name={"password"}
-                      value={signupForm.password}
-                      onChange={handleChangeLogin}
-                      borderRadius={"0px"}
-                      variant={"filled"}
-                    />
-                    <Button
-                      variant={"solid"}
-                      w="22px"
-                      borderRadius={"0px"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputGroup>
-                </Box>
-              </FormControl>
+              <Box>
+                <InputField
+                  type="email"
+                  w="100%"
+                  title="Email"
+                  name="email"
+                  value={signupForm.email}
+                  onChange={handleChangeLogin}
+                  variant="filled"
+                />
+              </Box>
+              <Box>
+                <InputField
+                  type={showPassword ? "text" : "password"}
+                  value={signupForm.password}
+                  onChange={handleChangeLogin}
+                  name="password"
+                  borderRadius={"0px"}
+                  variant={"filled"}
+                  h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
+                  setShowPassword={setShowPassword}
+                  showPassword={showPassword}
+                  showPasswordField
+                />
+              </Box>
               <Box mb={"20px"}>
                 <Button
                   type={"submit"}
                   bg={"#5aa02c"}
-                  w="90%"
+                  w="100%"
                   color={"white"}
                   _hover={{ bg: "#ef234b" }}
                   borderRadius={"0px"}
+                  h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
                 >
                   Submit
                 </Button>
               </Box>
             </form>
-            <Box w={"90%"} textAlign="center" fontWeight="550">
-              <Text>New to foodie?</Text>
+            <Box w={"100%"} textAlign="center" fontWeight="550">
+              <Text
+                fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "15px" }}
+              >
+                New to foodie?
+              </Text>
               <Signup />
             </Box>
           </DrawerBody>
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

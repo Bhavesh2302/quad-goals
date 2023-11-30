@@ -17,9 +17,7 @@ import BannerAppStore from "../Components/BannerAppStore";
 import OrderDeliveryTrackingComponent from "../Components/OrderDeliveryTrackingComponent";
 import UserInfo from "../Components/UserInfo";
 import { getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
-import Login from "./Login";
-import Signup from "./Signup";
-import HomeNavbar from "../Components/HomeNavbar";
+import Navbar from "../Components/Navbar";
 import { MdOutlineMyLocation, MdOutlineClose } from "react-icons/md";
 
 const Home = () => {
@@ -98,7 +96,7 @@ const Home = () => {
           color="black"
           pt={{ base: "10px", sm: "10px", md: "30px", lg: "30px" }}
         >
-          <HomeNavbar />
+          <Navbar />
         </Box>
         <Box
           position="absolute"
@@ -115,7 +113,7 @@ const Home = () => {
           position="absolute"
           zIndex="1"
           top={{ base: "-15px", sm: "-20px", md: "100px", lg: "100px" }}
-          left={{ base: "10%", sm: "10%", md: "10%", lg: "16%" }}
+          left={{ base: "5%", sm: "5%", md: "10%", lg: "16%" }}
           pr={{ base: "250px", sm: "250px", md: "250px", lg: "250px" }}
           mt="200px"
         >
@@ -222,13 +220,14 @@ const Home = () => {
           top={{ base: "140px", sm: "240px", md: "210px", lg: "150px" }}
           p="5px"
           zIndex="1"
-          right={{ base: "5%", sm: "5%", md: "12%", lg: "12%" }}
+          right={{ base: "2%", sm: "1%", md: "12%", lg: "12%" }}
           position="absolute"
           border="5px solid #c2d6ab"
           bg="white"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          className="banner-thali-box"
         >
           <Image
             src="/Images/Indian-Thali--preview.png"
@@ -243,9 +242,9 @@ const Home = () => {
           zIndex="1"
           position="absolute"
           transform={"rotate(270deg)"}
-          w={{ base: "150px", sm: "150px", md: "180px", lg: "270px" }}
+          w={{ base: "120px", sm: "130px", md: "150px", lg: "270px" }}
           h="auto"
-          bottom="-70px"
+          bottom={{ base: "-40px", sm: "-20px", md: "-40px", lg: "-70px" }}
           left="0"
         >
           <Image w="100%" h="100%" src="/Images/idli_sambar.png" />
