@@ -8,13 +8,11 @@ import {
 import { BsShopWindow } from "react-icons/bs";
 import RestaurantSkeleton from "../Skeletons/RestaurantSkeleton";
 import { FaStar } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { RestaurantForm } from "./RestaurantForm";
 
 const Restaurants = ({ addNew, setAddNew }) => {
   const [isHovering, setIsHovering] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { restaurants, isLoading } = useSelector(
     (state) => state.shopOwnerReducer
   );
@@ -24,10 +22,6 @@ const Restaurants = ({ addNew, setAddNew }) => {
   useEffect(() => {
     dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
   }, [shopOwner.id, token, dispatch]);
-
-  const handleMouseOver = () => {
-    setIsHovering(!isHovering);
-  };
 
   const handleEdit = () => {
     dispatch();
@@ -80,10 +74,9 @@ const Restaurants = ({ addNew, setAddNew }) => {
         ) : restaurants.length !== 0 ? (
           restaurants.map((item, i) => (
             <Box
-              w={{ base: "100%", base: "100%", md: "45%", lg: "250px" }}
+              w={{ base: "100%", sm: "100%", md: "45%", lg: "250px" }}
               h="auto"
               borderRadius="5px"
-              key={i}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               position="relative"
@@ -152,22 +145,20 @@ const Restaurants = ({ addNew, setAddNew }) => {
                     display={"flex"}
                     h="100%"
                     w="100%"
-                    bg="black"
-                    opacity="0.7"
+                    bg="rgba(0, 0, 0, 0.6)"
                     position="absolute"
                     top="0"
                     left="0"
                     alignItems="center"
                     justifyContent="center"
                     borderRadius="5px"
-                    zIndex="2"
+                    gap="10px"
                   >
                     <Button
                       bg="blue.500"
                       opacity="1"
                       color="white"
                       onClick={handleEdit}
-                      zIndex="3"
                     >
                       Edit
                     </Button>
@@ -176,7 +167,6 @@ const Restaurants = ({ addNew, setAddNew }) => {
                       opacity="1"
                       color="white"
                       onClick={() => handleDelete(item._id)}
-                      zIndex="3"
                     >
                       Delete
                     </Button>

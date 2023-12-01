@@ -46,6 +46,7 @@ const ShopOwnerSidebar = ({
             if (el.name === "Logout") handleLogout();
             else {
               if (addNew && activeSideMenu === "Restaurants") setAddNew(false);
+              else if (addNew && activeSideMenu !== "Restaurants") setAddNew(false)
 
               setActiveSideMenu(el.name);
               setActiveMenu(el);
