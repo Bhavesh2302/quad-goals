@@ -32,14 +32,14 @@ const AllRoutes = () => (
           </ShopOwnerPrivateRoute>
         }
       />
-      <Route 
-      path={"/shopownerdashboard/form"} 
-      element = {
-
-        <ShopOwnerPrivateRoute>
-          <RestaurantForm />
-        </ShopOwnerPrivateRoute>     
-      } />
+      <Route
+        path={"/shopownerdashboard/form"}
+        element={
+          <ShopOwnerPrivateRoute>
+            <RestaurantForm />
+          </ShopOwnerPrivateRoute>
+        }
+      />
     </Routes>
     <Footer />
   </div>

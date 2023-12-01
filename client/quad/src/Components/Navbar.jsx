@@ -12,7 +12,7 @@ import {
   Text,
   useDisclosure
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import Login from "../Pages/Login";
 import LocationSearch from "./LocationSearch";
 import { FaUserAlt } from "react-icons/fa";
@@ -30,7 +30,7 @@ import UserInfo from "./UserInfo";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+  const btnRef = useRef();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.userReducer);
   const location = useLocation();

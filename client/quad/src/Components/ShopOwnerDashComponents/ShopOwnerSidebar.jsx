@@ -8,7 +8,9 @@ const ShopOwnerSidebar = ({
   sideMenu,
   setActiveSideMenu,
   activeSideMenu,
-  setActiveMenu
+  setActiveMenu,
+  addNew,
+  setAddNew
 }) => {
   const dispatch = useDispatch();
   const logoutToast = useToast();
@@ -27,7 +29,7 @@ const ShopOwnerSidebar = ({
   };
 
   return (
-    <Box w="20%" h="500px" backgroundColor="white">
+    <Box w="100%" h={addNew ? "690px" : "400px"} backgroundColor="white">
       {sideMenu.map((el, i) => (
         <Box
           display="flex"
@@ -43,16 +45,20 @@ const ShopOwnerSidebar = ({
           onClick={() => {
             if (el.name === "Logout") handleLogout();
             else {
+              if (addNew && activeSideMenu === "Restaurants") setAddNew(false);
+              else if (addNew && activeSideMenu !== "Restaurants") setAddNew(false)
+
               setActiveSideMenu(el.name);
               setActiveMenu(el);
             }
           }}
+          fontSize={{ base: "12px", sm: "12px", md: "16px", lg: "16px" }}
         >
           <Box
             borderLeft={
               activeSideMenu === el.name ? "2px solid red" : "2px solid white "
             }
-            pl="20px"
+            pl={{ base: "10px", sm: "10px", md: "20px" }}
           >
             {el.icon}
           </Box>
