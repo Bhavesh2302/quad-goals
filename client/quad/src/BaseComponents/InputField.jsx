@@ -8,6 +8,7 @@ import {
   InputGroup
 } from "@chakra-ui/react";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const InputField = ({
   title,
@@ -21,15 +22,17 @@ const InputField = ({
   setShowPassword,
   showPasswordField = false
 }) => {
+  const location = useLocation();
+
   return !showPasswordField ? (
     <FormControl isRequired={isRequired}>
-      <Box mb={"20px"}>
+      <Box mb={"20px"} w="100%">
         <FormLabel
           fontSize={{
             base: "12px",
             sm: "12px",
             md: "15px",
-            lg: "18px"
+            lg: location?.pathname === "/" ? "18px" : "16px"
           }}
         >
           {title}

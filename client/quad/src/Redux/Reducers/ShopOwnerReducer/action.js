@@ -17,6 +17,8 @@ import {
 } from "./actionTypes";
 
 export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
+  console.log(shopownerId, token);
+
   dispatch({ type: GET_RESTAURANTS_OF_SHOPOWNER_REQUEST });
   axios({
     url: `${process.env.REACT_APP_BASE_URL}/restaurant/get/shops/${shopownerId}`,
@@ -27,6 +29,7 @@ export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
     }
   })
     .then((res) => {
+      console.log(res.data);
       dispatch({
         type: GET_RESTAURANTS_OF_SHOPOWNER_SUCCESS,
         payload: res.data.restaurants
