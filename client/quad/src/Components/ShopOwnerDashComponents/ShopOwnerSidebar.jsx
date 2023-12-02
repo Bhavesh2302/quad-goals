@@ -21,7 +21,7 @@ const ShopOwnerSidebar = ({
       title: "Logout successfully",
       status: "success",
       isClosable: true,
-      duration: 1500,
+      duration: 2000,
       position: "top"
     });
   };

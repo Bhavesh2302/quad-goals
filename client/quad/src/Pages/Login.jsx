@@ -59,7 +59,7 @@ const Login = () => {
         userSignupToast({
           title: "Login Successful",
           status: "success",
-          duration: 1500,
+          duration: 2000,
           position: "top",
           isClosable: true
         });
@@ -70,7 +70,7 @@ const Login = () => {
           title: "Login Fail",
           description: "Please Check your login cridentials",
           status: "error",
-          duration: 1500,
+          duration: 2000,
           position: "top",
           isClosable: true
         });

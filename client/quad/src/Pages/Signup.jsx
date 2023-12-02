@@ -56,8 +56,9 @@ const Signup = () => {
     userSignupToast({
       title: "Signup Successful",
       status: "success",
-      duration: 1500,
-      position: "top"
+      duration: 2000,
+      position: "top",
+      isClosable: true
     });
   };
 
