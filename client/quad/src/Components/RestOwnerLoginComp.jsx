@@ -60,7 +60,7 @@ const RestOwnerLoginComp = () => {
           title: "Login Fail!",
           description: "Please check your login cridentials",
           position: "top-right",
-          duration: 2000,
+          duration: 3000,
           status: "error",
           isClosable: true
         });

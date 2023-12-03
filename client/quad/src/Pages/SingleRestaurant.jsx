@@ -43,8 +43,9 @@ const SingleRestaurant = () => {
         AddTOCartToast({
           title: "Item Added to cart",
           status: "success",
-          duration: 3000,
-          position: "top-right"
+          duration: 2000,
+          position: "top-right",
+          isClosable: true
         });
         dispatch(getCart(token));
       }
