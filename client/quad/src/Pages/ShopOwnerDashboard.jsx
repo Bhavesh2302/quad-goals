@@ -63,13 +63,7 @@ const ShopOwnerDashboard = () => {
   const btnRef = useRef();
 
   return (
-    <Box
-      w="100%"
-      m="auto"
-      backgroundColor="#f3f3f3"
-      pt="10px"
-      h={addNew ? "770px" : "480px"}
-    >
+    <Box w="100%" m="auto" backgroundColor="#f3f3f3" pt="10px" h="780px">
       <Box
         w={{ base: "95%", sm: "95%", md: "95%", lg: "70%" }}
         m="auto"
@@ -86,6 +80,7 @@ const ShopOwnerDashboard = () => {
             ref={btnRef}
             icon={<GiHamburgerMenu />}
             bg="transparent"
+            display={{ base: "block", sm: "block", md: "block", lg: "none" }}
             onClick={onOpen}
           ></IconButton>
           <Link to="/">
@@ -122,10 +117,14 @@ const ShopOwnerDashboard = () => {
         </Box>
         <Box
           w={{ base: "100%", sm: "100%", md: "100%", lg: "80%" }}
-          h={addNew ? "690px" : "400px"}
+          h={addNew ? "700px" : "400px"}
           backgroundColor="#f3f3f3"
         >
-          {addNew ? <RestaurantForm /> : activeMenu?.component}
+          {addNew ? (
+            <RestaurantForm setAddNew={setAddNew} />
+          ) : (
+            activeMenu?.component
+          )}
         </Box>
       </Flex>
       <Drawer

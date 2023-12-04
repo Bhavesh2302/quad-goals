@@ -29,7 +29,7 @@ const ShopOwnerSidebar = ({
   };
 
   return (
-    <Box w="100%" h={addNew ? "690px" : "400px"} backgroundColor="white">
+    <Box w="100%" h="700px" backgroundColor="white">
       {sideMenu.map((el, i) => (
         <Box
           display="flex"

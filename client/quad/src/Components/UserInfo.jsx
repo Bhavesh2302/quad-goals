@@ -11,12 +11,12 @@ import {
   useDisclosure,
   useToast,
   Flex,
-  Box
+  Box,
+  Text
 } from "@chakra-ui/react";
-import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../Redux/Reducers/UserAuthReducer/action";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,7 +54,10 @@ const UserInfo = () => {
         }
         _hover={{ color: "red", cursor: "pointer" }}
       >
-        <Flex alignItems={"center"} gap={{base: "5px", sm: "5px", md: "5px", lg: "10px"}}>
+        <Flex
+          alignItems={"center"}
+          gap={{ base: "5px", sm: "5px", md: "5px", lg: "10px" }}
+        >
           {/* <FaUserCircle size={"22px"} /> */}
           <Box
             w="24px"
@@ -85,6 +88,11 @@ const UserInfo = () => {
           <DrawerCloseButton />
           <DrawerHeader></DrawerHeader>
           <DrawerBody>
+            {userData?.role === "shopOwner" && (
+              <Link to="/shopownerdashboard">
+                <Text>See Dashboard</Text>
+              </Link>
+            )}
             <Button onClick={handleLogout}>Logout</Button>
           </DrawerBody>
           <DrawerFooter>

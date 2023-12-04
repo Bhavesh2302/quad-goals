@@ -1,38 +1,39 @@
-import {
-  Button,
-  Box,
-  Input,
-  FormControl,
-  FormLabel,
-  Text
-} from "@chakra-ui/react";
+import { Button, Box, Flex, Tooltip } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestaurantOfShopOwner } from "../../Redux/Reducers/ShopOwnerReducer/action";
+import {
+  addRestaurantOfShopOwner,
+  editRestaurantOfShopOwner,
+  getRestaurantsOfShopowner
+} from "../../Redux/Reducers/ShopOwnerReducer/action";
 import InputField from "../../BaseComponents/InputField";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 
-export const RestaurantForm = () => {
+export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
   const shopOwner = useSelector((state) => state.userReducer.userData);
   const token = useSelector((state) => state.userReducer.token);
   const dispatch = useDispatch();
 
-  const [restaurant, setRestaurant] = useState({
-    image_rest: "",
-    rest_name: "",
-    cuisines: [],
-    rating: "3.0",
-    d_time: "",
-    cost: "",
-    offer: "none", //by default we will take this none for now
-    promoted: "none", //by default we will take this none for now
-    city: "",
-    address: "",
-    menu: [],
-    userId: shopOwner?.id
-  });
+  const [restaurant, setRestaurant] = useState(
+    data
+      ? data
+      : {
+          image_rest: "",
+          rest_name: "",
+          cuisines: [],
+          rating: "3.0",
+          d_time: "",
+          cost: "",
+          offer: "none", //by default we will take this none for now
+          promoted: "none", //by default we will take this none for now
+          city: "",
+          address: "",
+          menu: [],
+          userId: shopOwner?.id
+        }
+  );
 
-  console.log("restaurant form page ");
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -46,9 +47,25 @@ export const RestaurantForm = () => {
     const cuisineList = restaurant.cuisines
       ? restaurant.cuisines.split(",").map((value) => value.trim())
       : [];
+
     const payload = { ...restaurant, cuisines: cuisineList };
-    console.log(payload);
-    dispatch(addRestaurantOfShopOwner(payload, token));
+
+    dispatch(addRestaurantOfShopOwner(payload, token)).then((res) => {
+      if (res?.type === "ADD_RESTAURANT_OF_SHOPOWNER_SUCCESS")
+        dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
+      setAddNew(false);
+    });
+  };
+
+  const updateRestaurant = () => {
+    dispatch(editRestaurantOfShopOwner(restaurant, token, data?._id)).then(
+      (res) => {
+        if (res?.type === "EDIT_RESTAURANT_OF_SHOPOWNER_SUCCESS") {
+          dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
+          setIsEdit(false);
+        }
+      }
+    );
   };
 
   return (
@@ -57,18 +74,31 @@ export const RestaurantForm = () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      height="auto"
-      h="100%"
+      h="700px"
       w="100%"
       bg="white"
     >
-      <Text
-        fontSize={{ base: "14px", sm: "14px", md: "16px", lg: "18px" }}
-        fontWeight="600"
-        pt="20px"
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        w="100%"
+        px="10px"
+        py="10px"
       >
-        Restaurant Details
-      </Text>
+        <Tooltip label="Back to Restaurants" placement="end-end">
+          <Box
+            onClick={() => (data ? setIsEdit(false) : setAddNew(false))}
+            fontSize={{ base: "14px", sm: "14px", md: "15px", lg: "18px" }}
+            fontWeight="650"
+            cursor="pointer"
+            p="5px"
+            borderRadius="50%"
+            _hover={{ bg: "#dcdcdb" }}
+          >
+            <IoArrowBackCircleSharp />
+          </Box>
+        </Tooltip>
+      </Flex>
       <Box w="95%" h="100%" pb="20px" pt="10px">
         <Box>
           <InputField
@@ -144,9 +174,9 @@ export const RestaurantForm = () => {
             bg="green.500"
             color="white"
             _hover={{ bg: "blue.500" }}
-            onClick={handleSubmit}
+            onClick={data ? updateRestaurant : handleSubmit}
           >
-            Save
+            {data ? "Update" : "Save"}
           </Button>
         </Box>
       </Box>
