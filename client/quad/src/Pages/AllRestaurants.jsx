@@ -20,9 +20,8 @@ const AllRestaurants = () => {
   );
 
   useEffect(() => {
-    // console.log(deliveryTime)
     dispatch(getRestaurants(city, sortBy));
-  }, [sortBy]);
+  }, [sortBy, city]);
 
   return (
     <Box w="100%">
@@ -169,7 +168,7 @@ const AllRestaurants = () => {
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link key={item._id} to={`/allrestaurants/${city}/${item._id}`}>
-              <Box
+              {/* <Box
                 textAlign="left"
                 height={"350px"}
                 p="25px"
@@ -246,6 +245,79 @@ const AllRestaurants = () => {
                   <Box color={"#686b78"}>{`₹ ${item.cost} For Two`}</Box>
                 </Box>
                 <Box></Box>
+              </Box> */}
+              <Box
+                w={{ base: "100%", sm: "100%", md: "45%", lg: "300px" }}
+                h="300px"
+                borderRadius="5px"
+                position="relative"
+                _hover={{
+                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
+                  border: "0.3px solid #e0e5e9",
+                  p: "10px"
+                }}
+                p="10px"
+              >
+                <Box h="155px" w="100%">
+                  <Image
+                    w="100%"
+                    h="100%"
+                    src={item.image_rest}
+                    objectFit="fill"
+                    borderTopRadius="5px"
+                  />
+                </Box>
+                <Box p="10px" bg="white" borderBottomRadius="5px">
+                  <Text
+                    fontWeight="600"
+                    w="100%"
+                    height="20px"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                  >
+                    {item.rest_name}
+                  </Text>
+                  <Box
+                    height="15px"
+                    fontSize="14px"
+                    color="#686b78"
+                    textAlign="start"
+                  >
+                    {item.cuisines.join(", ")}
+                  </Box>
+                  <Box
+                    display="flex"
+                    fontSize="14px"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    mt="15px"
+                  >
+                    <Box
+                      display="flex"
+                      justifyContent="space-evenly"
+                      borderRadius="4px"
+                      gap="2px"
+                      p="0px 5px"
+                      alignItems="center"
+                      color="white"
+                      bg={item.rating > 4 ? "#48c479" : "#f9791e"}
+                    >
+                      <Box>
+                        <FaStar fontSize="12px" />
+                      </Box>
+                      <Box>
+                        <Text>{item.rating}</Text>
+                      </Box>
+                    </Box>
+                    <Box>|</Box>
+                    <Box color="#686b78">{`${item.d_time} MINS`}</Box>
+                    <Box>|</Box>
+                    <Box color="#686b78">{`₹ ${item.cost} For Two`}</Box>
+                  </Box>
+                  <Box textAlign="start" color="#686b78" fontSize="14px">
+                    {item.address}
+                  </Box>
+                </Box>
               </Box>
             </Link>
           ))}

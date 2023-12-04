@@ -3,17 +3,15 @@ import {
   GET_RESTAURANTS_OF_SHOPOWNER_FAILURE,
   GET_RESTAURANTS_OF_SHOPOWNER_REQUEST,
   GET_RESTAURANTS_OF_SHOPOWNER_SUCCESS,
-
   ADD_RESTAURANT_OF_SHOPOWNER_REQUEST,
   ADD_RESTAURANT_OF_SHOPOWNER_SUCCESS,
   ADD_RESTAURANT_OF_SHOPOWNER_FAILURE,
-
-  
-
-
   DELETE_RESTAURANT_OF_SHOPOWNER_REQUEST,
   DELETE_RESTAURANT_OF_SHOPOWNER_SUCCESS,
-  DELETE_RESTAURANT_OF_SHOPOWNER_FAILURE
+  DELETE_RESTAURANT_OF_SHOPOWNER_FAILURE,
+  EDIT_RESTAURANT_OF_SHOPOWNER_REQUEST,
+  EDIT_RESTAURANT_OF_SHOPOWNER_SUCCESS,
+  EDIT_RESTAURANT_OF_SHOPOWNER_FAILURE
 } from "./actionTypes";
 
 export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
@@ -40,44 +38,65 @@ export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
     });
 };
 
-export const addRestaurantOfShopOwner = (payload,token) => (dispatch) => {
-  dispatch({type:ADD_RESTAURANT_OF_SHOPOWNER_REQUEST})
-  axios({
+export const addRestaurantOfShopOwner = (payload, token) => (dispatch) => {
+  dispatch({ type: ADD_RESTAURANT_OF_SHOPOWNER_REQUEST });
+  return axios({
     url: `${process.env.REACT_APP_BASE_URL}/restaurant/create`,
     method: "post",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     },
-    data:payload
+    data: payload
   })
-  .then((res) => {
-    return   dispatch({
-      type:ADD_RESTAURANT_OF_SHOPOWNER_SUCCESS,
+    .then((res) => {
+      return dispatch({
+        type: ADD_RESTAURANT_OF_SHOPOWNER_SUCCESS
+      });
     })
-  })
-  .catch(()=> {
-    dispatch({type:ADD_RESTAURANT_OF_SHOPOWNER_FAILURE})
-  })
-}
+    .catch(() => {
+      dispatch({ type: ADD_RESTAURANT_OF_SHOPOWNER_FAILURE });
+    });
+};
 
+export const deleteRestaurantOfShopOwner =
+  (restaurantId, token) => (dispatch) => {
+    dispatch({ type: DELETE_RESTAURANT_OF_SHOPOWNER_REQUEST });
+    return axios({
+      url: `${process.env.REACT_APP_BASE_URL}/restaurant/remove/${restaurantId}`,
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        return dispatch({
+          type: DELETE_RESTAURANT_OF_SHOPOWNER_SUCCESS
+        });
+      })
+      .catch(() => {
+        dispatch({ type: DELETE_RESTAURANT_OF_SHOPOWNER_FAILURE });
+      });
+  };
 
-export const deleteRestaurantOfShopOwner = (restaurantId,token) => (dispatch) => {
-   dispatch({type:DELETE_RESTAURANT_OF_SHOPOWNER_REQUEST})
-   axios({
-    url: `${process.env.REACT_APP_BASE_URL}/restaurant/remove/${restaurantId}`,
-    method: "delete",
+export const editRestaurantOfShopOwner = (payload, token, id) => (dispatch) => {
+  dispatch({ type: EDIT_RESTAURANT_OF_SHOPOWNER_REQUEST });
+  return axios({
+    url: `${process.env.REACT_APP_BASE_URL}/restaurant/update/${id}`,
+    method: "patch",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     },
-   })
-   .then((res) => {
-    return dispatch({
-      type:DELETE_RESTAURANT_OF_SHOPOWNER_SUCCESS
+    data: payload
+  })
+    .then((res) => {
+      return dispatch({
+        type: EDIT_RESTAURANT_OF_SHOPOWNER_SUCCESS
+      });
     })
-   })
-   .catch(()=>{
-    dispatch({type:DELETE_RESTAURANT_OF_SHOPOWNER_FAILURE})
-   })
-}
+    .catch(() => {
+      dispatch({ type: EDIT_RESTAURANT_OF_SHOPOWNER_FAILURE });
+    });
+};
