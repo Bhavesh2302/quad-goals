@@ -64,11 +64,12 @@ export const deleteRestaurantOfShopOwner =
     dispatch({ type: DELETE_RESTAURANT_OF_SHOPOWNER_REQUEST });
     return axios({
       url: `${process.env.REACT_APP_BASE_URL}/restaurant/remove/${restaurantId}`,
-      method: "delete",
+      method: "put",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
-      }
+      },
+      data: { active: false }
     })
       .then(() => {
         return dispatch({

@@ -20,23 +20,26 @@ const InputField = ({
   isRequired = true,
   showPassword = false,
   setShowPassword,
-  showPasswordField = false
+  showPasswordField = false,
+  placeholder = ""
 }) => {
   const location = useLocation();
 
   return !showPasswordField ? (
     <FormControl isRequired={isRequired}>
       <Box mb={"20px"} w="100%">
-        <FormLabel
-          fontSize={{
-            base: "12px",
-            sm: "12px",
-            md: "15px",
-            lg: location?.pathname === "/" ? "18px" : "16px"
-          }}
-        >
-          {title}
-        </FormLabel>
+        {title && (
+          <FormLabel
+            fontSize={{
+              base: "12px",
+              sm: "12px",
+              md: "15px",
+              lg: location?.pathname === "/" ? "18px" : "16px"
+            }}
+          >
+            {title}
+          </FormLabel>
+        )}
         <Input
           type={type}
           w={"100%"}
@@ -52,6 +55,7 @@ const InputField = ({
             lg: "14px"
           }}
           h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
+          placeholder={placeholder}
         />
       </Box>
     </FormControl>
