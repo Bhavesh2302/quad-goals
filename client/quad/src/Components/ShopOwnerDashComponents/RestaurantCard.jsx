@@ -1,7 +1,7 @@
-import { Box, Image, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Image, Text, Tooltip, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaStar, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
-import { MdFormatListBulletedAdd } from "react-icons/md";
+import { FaStar, FaPencilAlt, FaTrashAlt, FaInfoCircle } from "react-icons/fa";
+import ConformationModal from "../../Modals/ConformationModal";
 
 const RestaurantCard = ({
   rest_name,
@@ -16,9 +16,11 @@ const RestaurantCard = ({
   handleEdit
 }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const actionButtons = [
     { title: "Edit", onClick: () => handleEdit(_id), icon: <FaPencilAlt /> },
-    { title: "Delete", onClick: () => handleDelete(_id), icon: <FaTrashAlt /> }
+    { title: "Delete", onClick: () => onOpen(), icon: <FaTrashAlt /> },
+    { title: "More Details", onClick: () => {}, icon: <FaInfoCircle /> }
   ];
 
   return (
@@ -98,28 +100,50 @@ const RestaurantCard = ({
             borderRadius="5px"
             gap="10px"
           >
-            {actionButtons.map((item) => (
-              <Tooltip label={item.title} placement="bottom">
-                <Box
-                  bg={item.title === "Edit" ? "blue.400" : "red.400"}
-                  color="white"
-                  h={{ base: "25px", sm: "25px", md: "30px", lg: "40px" }}
-                  w={{ base: "25px", sm: "25px", md: "30px", lg: "40px" }}
-                  onClick={item.onClick}
-                  borderRadius="50%"
-                  fontSize={{
-                    base: "12px",
-                    sm: "12px",
-                    md: "14px",
-                    lg: "16px"
-                  }}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  cursor="pointer"
-                >
-                  {item.icon}
-                </Box>
+            {actionButtons.map((item, i) => (
+              <Tooltip label={item.title} placement="bottom" key={i}>
+                {item.title === "Delete" ? (
+                  <ConformationModal
+                    content={item.icon}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    onOpen={onOpen}
+                    headerText="Remove Restaurant"
+                    name={rest_name}
+                    onClick={() => {
+                      onClose();
+                      setIsHovering(false);
+                      handleDelete(_id);
+                    }}
+                  />
+                ) : (
+                  <Box
+                    bg={
+                      item.title === "Edit"
+                        ? "blue.400"
+                        : item?.title === "Delete"
+                        ? "red.400"
+                        : "green.400"
+                    }
+                    color="white"
+                    h={{ base: "25px", sm: "25px", md: "30px", lg: "40px" }}
+                    w={{ base: "25px", sm: "25px", md: "30px", lg: "40px" }}
+                    onClick={item.onClick}
+                    borderRadius="50%"
+                    fontSize={{
+                      base: "12px",
+                      sm: "12px",
+                      md: "14px",
+                      lg: "16px"
+                    }}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    cursor="pointer"
+                  >
+                    {item.icon}
+                  </Box>
+                )}
               </Tooltip>
             ))}
           </Box>

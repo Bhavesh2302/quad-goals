@@ -134,7 +134,7 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
         </Box>
         <Box>
           <InputField
-            title="Couisines (Please add Qumma Searated values, e.g. Pasta, Cake, etc)"
+            title="Couisines (Please add Qumma Separated values, e.g. Pasta, Cake, etc)"
             value={restaurant.cuisines}
             onChange={handleChange}
             name="cuisines"

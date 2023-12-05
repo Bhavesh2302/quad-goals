@@ -19,7 +19,10 @@ restaurantController.get(
   async (req, res) => {
     const { shopownerId } = req.params;
     console.log("shopownerId", shopownerId);
-    const restaurants = await RestaurantModel.find({ userId: shopownerId });
+    const restaurants = await RestaurantModel.find({
+      userId: shopownerId,
+      active: true
+    });
     console.log(restaurants);
     res.status(200).send({ restaurants: restaurants });
   }
@@ -64,7 +67,7 @@ restaurantController.patch(
   }
 );
 
-restaurantController.delete(
+restaurantController.put(
   "/remove/:id",
   authentication,
   authorization(["admin", "shopOwner"]),
@@ -79,5 +82,15 @@ restaurantController.delete(
     res.status(201).send("Deleted restaurant");
   }
 );
+
+restaurantController.patch("/updatemany", async (req, res) => {
+  try {
+    const a = await RestaurantModel.updateMany({}, { $set: { active: true } });
+    console.log(a);
+    res.send({ msg: "updated with active as true" });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = { restaurantController };
