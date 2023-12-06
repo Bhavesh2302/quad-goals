@@ -82,13 +82,13 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
         alignItems="center"
         justifyContent="space-between"
         w="100%"
-        px="10px"
-        py="10px"
+        px="6px"
+        py="6px"
       >
-        <Tooltip label="Back to Restaurants" placement="end-end">
+        <Tooltip label="Back to Restaurants" placement="right">
           <Box
             onClick={() => (data ? setIsEdit(false) : setAddNew(false))}
-            fontSize={{ base: "14px", sm: "14px", md: "15px", lg: "18px" }}
+            fontSize={{ base: "15px", sm: "15px", md: "20px", lg: "25px" }}
             fontWeight="650"
             cursor="pointer"
             p="5px"
@@ -98,6 +98,13 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
             <IoArrowBackCircleSharp />
           </Box>
         </Tooltip>
+        <Box
+          fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "16px" }}
+          fontWeight="650"
+        >
+          Restaurant Details
+        </Box>
+        <Box></Box>
       </Flex>
       <Box w="95%" h="100%" pb="20px" pt="10px">
         <Box>
