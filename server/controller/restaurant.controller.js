@@ -83,14 +83,14 @@ restaurantController.put(
   }
 );
 
-restaurantController.patch("/updatemany", async (req, res) => {
-  try {
-    const a = await RestaurantModel.updateMany({}, { $set: { active: true } });
-    console.log(a);
-    res.send({ msg: "updated with active as true" });
-  } catch (error) {
-    console.log(error);
-  }
-});
+// restaurantController.patch("/updatemany", async (req, res) => {
+//   try {
+//     const a = await RestaurantModel.updateMany({}, { $set: { active: true } });
+//     console.log(a);
+//     res.send({ msg: "updated with active as true" });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 module.exports = { restaurantController };
