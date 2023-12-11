@@ -248,13 +248,12 @@ const AllRestaurants = () => {
               </Box> */}
               <Box
                 w={{ base: "100%", sm: "100%", md: "45%", lg: "300px" }}
-                h="300px"
+                h="auto"
                 borderRadius="5px"
                 position="relative"
                 _hover={{
-                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px;",
-                  border: "0.3px solid #e0e5e9",
-                  p: "10px"
+                  boxShadow:
+                    "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
                 }}
                 p="10px"
               >
@@ -267,30 +266,41 @@ const AllRestaurants = () => {
                     borderTopRadius="5px"
                   />
                 </Box>
-                <Box p="10px" bg="white" borderBottomRadius="5px">
+                <Box
+                  p="10px"
+                  bg="white"
+                  borderBottomRadius="5px"
+                  h="auto"
+                  fontSize={{
+                    base: "12px",
+                    sm: "12px",
+                    md: "13px",
+                    lg: "14px"
+                  }}
+                >
                   <Text
                     fontWeight="600"
                     w="100%"
                     height="20px"
                     textOverflow="ellipsis"
                     overflow="hidden"
+                    fontSize={{
+                      base: "12px",
+                      sm: "12px",
+                      md: "14px",
+                      lg: "15px"
+                    }}
                   >
                     {item.rest_name}
                   </Text>
-                  <Box
-                    height="15px"
-                    fontSize="14px"
-                    color="#686b78"
-                    textAlign="start"
-                  >
+                  <Box height="45px" color="#686b78" textAlign="start">
                     {item.cuisines.join(", ")}
                   </Box>
                   <Box
                     display="flex"
-                    fontSize="14px"
                     justifyContent="space-between"
                     alignItems="center"
-                    mt="15px"
+                    mt="1px"
                   >
                     <Box
                       display="flex"
@@ -314,7 +324,7 @@ const AllRestaurants = () => {
                     <Box>|</Box>
                     <Box color="#686b78">{`₹ ${item.cost} For Two`}</Box>
                   </Box>
-                  <Box textAlign="start" color="#686b78" fontSize="14px">
+                  <Box textAlign="start" color="#686b78">
                     {item.address}
                   </Box>
                 </Box>
