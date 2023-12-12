@@ -54,7 +54,7 @@ const InputField = ({
             md: "12px",
             lg: "14px"
           }}
-          h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
+          h={{ base: "30px", sm: "30px", md: "40px", lg: "40px" }}
           placeholder={placeholder}
         />
       </Box>
@@ -80,13 +80,13 @@ const InputField = ({
             borderRadius={"0px"}
             name={name}
             variant={variant}
-            h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
+            h={{ base: "30px", sm: "30px", md: "40px", lg: "40px" }}
           />
           <Button
             variant={"solid"}
             borderRadius={"0px"}
             onClick={() => setShowPassword((showPassword) => !showPassword)}
-            h={{ base: "30px", sm: "30px", md: "40px", lg: "45px" }}
+            h={{ base: "30px", sm: "30px", md: "40px", lg: "40px" }}
           >
             {showPassword ? <ViewIcon /> : <ViewOffIcon />}
           </Button>

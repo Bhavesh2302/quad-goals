@@ -10,7 +10,7 @@ import RestaurantSkeleton from "../Skeletons/RestaurantSkeleton";
 import { RestaurantForm } from "./RestaurantForm";
 import RestaurantCard from "./RestaurantCard";
 
-const Restaurants = ({ addNew, setAddNew }) => {
+const Restaurants = ({ setAddNew }) => {
   const dispatch = useDispatch();
   const { restaurants, isLoading } = useSelector(
     (state) => state.shopOwnerReducer
