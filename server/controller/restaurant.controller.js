@@ -28,6 +28,22 @@ restaurantController.get(
   }
 );
 
+restaurantController.get(
+  "/get/shop-details/:restId",
+  authentication,
+  authorization(["shopOwner"]),
+  async (req, res) => {
+    const { restId } = req.params;
+
+    const restaurants = await RestaurantModel.find({
+      _id: restId,
+      active: true
+    });
+    console.log("restaurants-----", restaurants, restId);
+    res.status(200).send({ restaurant: restaurants[0] });
+  }
+);
+
 // authorization(["admin","shopOwner"])
 restaurantController.post(
   "/create",

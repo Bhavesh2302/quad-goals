@@ -1,7 +1,8 @@
 import { Box, Image, Text, Tooltip, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaStar, FaPencilAlt, FaTrashAlt, FaInfoCircle } from "react-icons/fa";
-import ConformationModal from "../../Modals/ConformationModal";
+import { ConfirmationModal } from "../../Modals";
+import { useNavigate } from "react-router-dom";
 
 const RestaurantCard = ({
   rest_name,
@@ -17,10 +18,15 @@ const RestaurantCard = ({
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
   const actionButtons = [
     { title: "Edit", onClick: () => handleEdit(_id), icon: <FaPencilAlt /> },
     { title: "Delete", onClick: () => onOpen(), icon: <FaTrashAlt /> },
-    { title: "More Details", onClick: () => {}, icon: <FaInfoCircle /> }
+    {
+      title: "More Details",
+      onClick: () => navigate(`/restaurant-details/${_id}`),
+      icon: <FaInfoCircle />
+    }
   ];
 
   return (
@@ -103,7 +109,7 @@ const RestaurantCard = ({
             {actionButtons.map((item, i) => (
               <Tooltip label={item.title} placement="bottom" key={i}>
                 {item.title === "Delete" ? (
-                  <ConformationModal
+                  <ConfirmationModal
                     content={item.icon}
                     isOpen={isOpen}
                     onClose={onClose}

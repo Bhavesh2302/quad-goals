@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import InputField from "../../BaseComponents/InputField";
 
-const ConformationModal = ({
+const ConfirmationModal = ({
   isOpen,
   onOpen,
   onClose,
@@ -91,4 +91,4 @@ const ConformationModal = ({
   );
 };
 
-export default ConformationModal;
+export default ConfirmationModal;
