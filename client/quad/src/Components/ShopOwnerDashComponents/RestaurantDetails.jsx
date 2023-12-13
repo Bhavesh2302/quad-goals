@@ -1,5 +1,5 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import { Box, Flex, Image, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -9,23 +9,25 @@ import {
 import UserInfo from "../UserInfo";
 import StarRating from "../StarRating";
 import RestaurantMenus from "./RestaurantMenus";
+import { AddEditMenuDrawer } from "../../Drawers";
 
 const RestaurantDetails = () => {
   const { token } = useSelector((state) => state.userReducer);
-  const { restaurant, isLoading, menus } = useSelector(
+  const { restaurant, menus } = useSelector(
     (state) => state.shopOwnerReducer.restaurantData
   );
   const dispatch = useDispatch();
   const { restId } = useParams();
-  console.log(restId, restaurant, isLoading, menus);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
 
   useEffect(() => {
     dispatch(getSingleRestaurant(restId, token));
     dispatch(getRestaurantMenus(restId));
-  }, [restId]);
+  }, [restId, token, dispatch]);
 
   return (
-    <Box w="100%" h="auto" mb="50px" mt="20px">
+    <Box w="100%" h="650px" mb="50px" mt="20px">
       <Box
         w={{ base: "95%", sm: "95%", md: "95%", lg: "80%" }}
         m="auto"
@@ -162,21 +164,64 @@ const RestaurantDetails = () => {
       </Box>
       <Box
         w={{ base: "95%", sm: "95%", md: "95%", lg: "80%" }}
-        h="100%"
         m="auto"
+        mt="10px"
       >
-        <Text
-          fontWeight="550"
-          fontSize={{
-            base: "14px",
-            sm: "14px",
-            md: "14px",
-            lg: "15px"
-          }}
+        <hr style={{ marginBottom: "20px" }} />
+        <Box
+          w="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          h="40px"
+          mb="40px"
         >
-          Menus
-        </Text>
-        <RestaurantMenus menus={menus} />
+          <Box></Box>
+          <Box
+            fontWeight="550"
+            fontSize={{
+              base: "14px",
+              sm: "14px",
+              md: "16px",
+              lg: "18px"
+            }}
+          >
+            Menus
+          </Box>
+          <Box
+            h="30px"
+            w="120px"
+            fontWeight="550"
+            fontSize={{
+              base: "12px",
+              sm: "12px",
+              md: "14px",
+              lg: "14px"
+            }}
+            bg="green.500"
+            color="white"
+            borderRadius="4px"
+            cursor="pointer"
+          >
+            <AddEditMenuDrawer
+              btnRef={btnRef}
+              onClose={onClose}
+              onOpen={onOpen}
+              isOpen={isOpen}
+              title="Add New Menu"
+              restaurant={restaurant}
+              data={null}
+            />
+          </Box>
+        </Box>
+        <RestaurantMenus
+          menus={menus}
+          btnRef={btnRef}
+          onClose={onClose}
+          onOpen={onOpen}
+          isOpen={isOpen}
+          restaurant={restaurant}
+        />
       </Box>
     </Box>
   );

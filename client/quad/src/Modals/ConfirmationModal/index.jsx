@@ -23,6 +23,7 @@ const ConfirmationModal = ({
   guideline = "Are you sure want to remove"
 }) => {
   const [text, setText] = useState("");
+
   return (
     <>
       <Box
