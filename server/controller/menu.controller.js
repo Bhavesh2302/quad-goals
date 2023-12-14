@@ -11,7 +11,7 @@ menuController.get("/getMenu/:restId", async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const menuList = await MenuModel.find({ restId });
+    const menuList = await MenuModel.find({ restId, active: true });
 
     console.log(menuList);
 

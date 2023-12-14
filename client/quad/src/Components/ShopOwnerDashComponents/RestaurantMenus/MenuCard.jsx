@@ -15,7 +15,12 @@ const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
       onMouseEnter={() => setHoverActive(true)}
       onMouseLeave={() => setHoverActive(false)}
     >
-      <Box w="100%" h="150px" objectFit="fill" borderTopRadius="4px">
+      <Box
+        w="100%"
+        h={{ base: "110px", sm: "110px", md: "140px", lg: "150px" }}
+        objectFit="fill"
+        borderTopRadius="4px"
+      >
         <Image w="100%" h="100%" src={el?.item_image} borderTopRadius="4px" />
       </Box>
       <Box w="100%" h="70px" p="5px" fontWeight="550">
@@ -82,8 +87,9 @@ const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            bg="red.400"
+            bg="#fcd5d1"
             borderBottomRightRadius="5px"
+            color="red"
           >
             Delete
           </Box>

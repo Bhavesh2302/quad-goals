@@ -27,7 +27,7 @@ const RestaurantDetails = () => {
   }, [restId, token, dispatch]);
 
   return (
-    <Box w="100%" h="650px" mb="50px" mt="20px">
+    <Box w="100%" h="auto" mb="50px" mt="20px">
       <Box
         w={{ base: "95%", sm: "95%", md: "95%", lg: "80%" }}
         m="auto"
@@ -59,14 +59,15 @@ const RestaurantDetails = () => {
         mt="50px"
       >
         <Box
-          h="220px"
+          h="auto"
           w="100%"
           display="flex"
           alignItems="flex-start"
           p="5px"
           borderRadius="5px"
+          flexDirection={{ base: "column", sm: "column", md: "row"}}
         >
-          <Box h="210px" w="350px" borderRadius="5px">
+          <Box h="210px" w={{base: "100%", sm: "100%", md: "450px", lg: "450px"}} borderRadius="5px">
             <Image
               src={restaurant?.image_rest}
               w="100%"
@@ -74,15 +75,15 @@ const RestaurantDetails = () => {
               borderRadius="5px"
             />
           </Box>
-          <Box w="calc(100% - 250px)" textAlign="left" pt="40px">
+          <Box w="100%" textAlign="left" pt="40px">
             <Box
-              pl="20px"
+              pl={{base: "20px", sm: "10px", md: "10px", lg: "20px"}}
               fontWeight="650"
               fontSize={{ base: "18px", sm: "18px", md: "22px", lg: "22px" }}
             >
               {restaurant.rest_name}
             </Box>
-            <Box display="flex">
+            <Box display="flex" flexDirection={{ base: "column", sm: "column", md: "row"}}>
               <Box
                 display="flex"
                 justifyContent="flex-start"
@@ -131,7 +132,7 @@ const RestaurantDetails = () => {
                 justifyContent="flex-start"
                 flexDirection="column"
                 textAlign="left"
-                pl="100px"
+                pl={{base: "20px", sm: "20px", md: "40px", lg: "100px"}}
                 gap="5px"
                 pt="20px"
               >
