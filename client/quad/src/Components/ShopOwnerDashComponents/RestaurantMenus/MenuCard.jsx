@@ -1,9 +1,43 @@
-import { Box, Image, Text, Tooltip } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Image,
+  Text,
+  Tooltip,
+  useDisclosure,
+  useToast
+} from "@chakra-ui/react";
+import React, { useRef, useState } from "react";
 import { AddEditMenuDrawer } from "../../../Drawers";
+import { useDispatch, useSelector } from "react-redux";
+import { updateMenu } from "../../../Redux/Reducers/ShopOwnerReducer/action";
 
-const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
+const MenuCard = ({ el, restaurant }) => {
   const [hoverActive, setHoverActive] = useState(false);
+  const [menu, setMenu] = useState(el);
+  const { token } = useSelector((state) => state.userReducer);
+  const { onClose, onOpen, isOpen } = useDisclosure();
+  const btnRef = useRef();
+  const dispatch = useDispatch();
+  const updateMenuToast = useToast();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMenu({ ...menu, [name]: value });
+  };
+
+  const handleEditMenu = (e) => {
+    e.preventDefault();
+    dispatch(updateMenu(menu, token, el._id)).then((res) => {
+      if (res.type === "UPDATE_MENU_SUCCESS")
+        updateMenuToast({
+          title: "Menu Updated successfully!",
+          isClosable: true,
+          duration: 2000,
+          status: "success",
+          position: "top-right"
+        });
+    });
+  };
 
   return (
     <Box
@@ -36,7 +70,7 @@ const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
         <Tooltip placement="bottom" label={el.description}>
           <Text
             fontSize={{ base: "10px", sm: "10px", md: "11px", lg: "11px" }}
-            h="20px"
+            h="45px"
             textOverflow="ellipsis"
             whiteSpace="nowrap"
             overflow="hidden"
@@ -51,7 +85,7 @@ const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
           zIndex="10"
           h="30px"
           w="100%"
-          bottom="0"
+          bottom="-22px"
           bg="white"
           borderRadius="5px"
           display="flex"
@@ -79,6 +113,8 @@ const MenuCard = ({ el, btnRef, onClose, onOpen, isOpen, restaurant }) => {
               title="Edit"
               restaurant={restaurant}
               data={el}
+              onChange={handleChange}
+              handleSave={handleEditMenu}
             />
           </Box>
           <Box

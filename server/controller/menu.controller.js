@@ -59,7 +59,7 @@ menuController.patch(
   }
 );
 
-menuController.delete(
+menuController.patch(
   "/remove/:id",
   authentication,
   authorization(["shopOwner"]),
@@ -67,7 +67,10 @@ menuController.delete(
     const { userId } = req.body;
     const { id } = req.params;
 
-    const menu_delete = await MenuModel.findByIdAndDelete({ _id: id, userId });
+    const menu_delete = await MenuModel.findByIdAndUpdate(
+      { _id: id, userId },
+      { ...req.body }
+    );
     console.log(menu_delete);
     res.status(201).send({ msg: "item deleted successfull" });
   }
