@@ -27,7 +27,7 @@ const AllRestaurants = () => {
     <Box w="100%">
       <Navbar />
       <Box>
-        {restaurants.length === 0 && (
+        {restaurants.length === 0 && !isLoading && (
           <Heading>Sorry No Restaurants Found</Heading>
         )}
       </Box>
