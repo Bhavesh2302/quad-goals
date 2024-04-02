@@ -11,11 +11,8 @@ import {
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import BannerAppStore from "../Components/BannerAppStore";
-import OrderDeliveryTrackingComponent from "../Components/OrderDeliveryTrackingComponent";
-import UserInfo from "../Components/UserInfo";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
 import Navbar from "../Components/Navbar";
 import { MdOutlineMyLocation, MdOutlineClose } from "react-icons/md";
@@ -23,7 +20,6 @@ import { MdOutlineMyLocation, MdOutlineClose } from "react-icons/md";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token, userData } = useSelector((state) => state.userReducer);
   const strings = [
     "Starving?",
     "",
@@ -62,7 +58,7 @@ const Home = () => {
         settimer(0);
       }
     };
-  }, [timerId?.current]);
+  }, [timerId?.current, strings, timer]);
 
   const handleSearchByCity = (e) => {
     e.preventDefault();
@@ -76,7 +72,6 @@ const Home = () => {
       setShowMessage(true);
     }
   };
-  console.log(currentString, timer);
 
   return (
     <Box w="100%">
@@ -219,7 +214,7 @@ const Home = () => {
           borderRadius="50%"
           top={{ base: "140px", sm: "240px", md: "210px", lg: "150px" }}
           p="5px"
-          zIndex="1"
+          zIndex="0"
           right={{ base: "2%", sm: "1%", md: "12%", lg: "12%" }}
           position="absolute"
           border="5px solid #c2d6ab"
@@ -235,11 +230,10 @@ const Home = () => {
             w="100%"
             borderRadius="50%"
             objectFit="cover"
-            // animation="dish-spin 15s linear infinite"
           />
         </Box>
         <Box
-          zIndex="1"
+          zIndex="0"
           position="absolute"
           transform={"rotate(270deg)"}
           w={{ base: "120px", sm: "130px", md: "150px", lg: "270px" }}

@@ -14,7 +14,6 @@ import ShopOwnerSidebar from "../Components/ShopOwnerDashComponents/ShopOwnerSid
 import { BsShop, BsBagDash, BsPeople } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Restaurants from "../Components/ShopOwnerDashComponents/Restaurants";
 import Orders from "../Components/ShopOwnerDashComponents/Orders";
@@ -22,9 +21,9 @@ import Customers from "../Components/ShopOwnerDashComponents/Customers";
 import ShopOwnerAccount from "../Components/ShopOwnerDashComponents/ShopOwnerAccount";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RestaurantForm } from "../Components/ShopOwnerDashComponents/RestaurantForm";
+import { UserInfoDrawer } from "../Drawers";
 
 const ShopOwnerDashboard = () => {
-  const { userData } = useSelector((state) => state.userReducer);
   const [addNew, setAddNew] = useState(false);
   const sideMenu = [
     {
@@ -91,9 +90,7 @@ const ShopOwnerDashboard = () => {
             />
           </Link>
         </Flex>
-        <Box fontWeight="650" fontSize="15px">
-          {userData.name}
-        </Box>
+        <UserInfoDrawer />
       </Box>
       <Flex
         w={{ base: "95%", sm: "95%", md: "95%", lg: "70%" }}
