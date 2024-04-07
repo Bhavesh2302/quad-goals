@@ -11,6 +11,7 @@ const { searchCityController } = require("./controller/searchCity.controller");
 const { checkEmailController } = require("./controller/checkEmail.controller");
 const { costController } = require("./controller/cost.controller");
 const { cartController } = require("./controller/cart.controller");
+const { paymentController } = require("./controller/payment.controller")
 
 
 const PORT = process.env.PORT || 7082;
@@ -26,6 +27,7 @@ app.use("/menu",menuController)
 app.use("/allRestaurants",searchCityController)
 app.use("/check",checkEmailController)
 app.use("/cart",cartController)
+app.use("/api/payment/",paymentController)
 
 
 app.listen(PORT, async () => {
