@@ -1,8 +1,9 @@
-import { Box, Flex, Image, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Image, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
+  addNewMenu,
   getRestaurantMenus,
   getSingleRestaurant
 } from "../../Redux/Reducers/ShopOwnerReducer/action";
@@ -18,13 +19,14 @@ const RestaurantDetails = () => {
   const dispatch = useDispatch();
   const { restId } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const addMenuToast = useToast();
   const btnRef = useRef();
   const [menu, setMenu] = useState({
     title: "",
     price: "",
     description: "",
     active: true,
-    userId: userData.id,
+    userId: userData?.id,
     item_image: "",
     type: "veg",
     rating: 1
@@ -44,16 +46,18 @@ const RestaurantDetails = () => {
     e.preventDefault();
     const menuData = { ...menu, restId: restaurant?._id };
     console.log(menuData);
-    // dispatch(addNewMenu(menuData, token)).then((res) => {
-    //   if (res.type === "ADD_NEW_MENU_SUCCESS")
-    //     addMenuToast({
-    //       title: "Menu added successfully!",
-    //       isClosable: true,
-    //       duration: 2000,
-    //       status: "success",
-    //       position: "top-right"
-    //     });
-    // });
+    dispatch(addNewMenu(menuData, token)).then((res) => {
+      if (res.type === "ADD_NEW_MENU_SUCCESS") {
+        addMenuToast({
+          title: "Menu added successfully!",
+          isClosable: true,
+          duration: 2000,
+          status: "success",
+          position: "top-right"
+        });
+        dispatch(getRestaurantMenus(restId));
+      }
+    });
   };
 
   return (

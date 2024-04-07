@@ -45,7 +45,8 @@ const SingleRestaurant = () => {
           status: "success",
           duration: 2000,
           position: "top-right",
-          isClosable: true
+          isClosable: true,
+          description: "Please click on bag icon to see your bag"
         });
         dispatch(getCart(token));
       }

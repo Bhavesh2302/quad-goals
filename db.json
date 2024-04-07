@@ -1,0 +1,241 @@
+{
+  "data": [
+    {
+      "title": "Chole Bhature",
+      "price": 250,
+      "description": "Spicy chickpea curry served with deep-fried bread",
+      "item_image": "https://i.imgur.com/3V4kV62.png",
+      "type": "veg",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "6569cbb200932af59ad08720",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Paneer Butter Masala",
+      "price": 240,
+      "description": "Rich tomato gravy with cubes of paneer and butter",
+      "item_image": "https://i.imgur.com/fQlXgSW.png",
+      "type": "veg",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "6569cbb200932af59ad08720",
+      "rating": 5,
+      "active": true
+    },
+    {
+      "title": "Dal Makhani",
+      "price": 210,
+      "description": "Creamy lentil curry simmered with spices and butter",
+      "item_image": "https://i.imgur.com/VPHCUhj.png",
+      "type": "veg",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "6569cbb200932af59ad08720",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Veg Pulao",
+      "price": 190,
+      "description": "Fragrant rice cooked with mixed vegetables and spices",
+      "item_image": "https://i.imgur.com/t2xe2DA.png",
+      "type": "veg",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "6569cbb200932af59ad08720",
+      "rating": 4,
+      "active": true
+    }
+  ],
+  "icecream": [
+    {
+      "title": "Vanilla Ice Cream",
+      "price": 150,
+      "description": "Classic creamy vanilla flavored ice cream",
+      "item_image": "https://i.imgur.com/N75zA1O.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Chocolate Chip Ice Cream",
+      "price": 180,
+      "description": "Rich chocolate ice cream with chunks of chocolate chips",
+      "item_image": "https://i.imgur.com/U1yBnvU.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 5,
+      "active": true
+    },
+    {
+      "title": "Strawberry Ice Cream",
+      "price": 160,
+      "description": "Delicious strawberry flavored ice cream with real fruit chunks",
+      "item_image": "https://i.imgur.com/6aps3jp.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Cookies and Cream Ice Cream",
+      "price": 200,
+      "description": "Creamy ice cream with crushed chocolate cookies",
+      "item_image": "https://i.imgur.com/R9YzUDo.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Mint Chocolate Chip Ice Cream",
+      "price": 190,
+      "description": "Refreshing mint ice cream with chocolate chips",
+      "item_image": "https://i.imgur.com/lssmhnx.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Salted Caramel Ice Cream",
+      "price": 210,
+      "description": "Creamy caramel ice cream with a hint of sea salt",
+      "item_image": "https://i.imgur.com/KV2Kfth.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Pistachio Ice Cream",
+      "price": 170,
+      "description": "Smooth and nutty pistachio flavored ice cream",
+      "item_image": "https://i.imgur.com/74wUhfb.png",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Coffee Ice Cream",
+      "price": 180,
+      "description": "Creamy coffee flavored ice cream",
+      "item_image": "blob:https://imgur.com/4f774f40-06b3-4e2e-9a88-6228e7867757",
+      "type": "dessert",
+      "userId": "6368a6868b872abb8c0122b0",
+      "restId": "636e33ff479160cad3679add",
+      "rating": 4,
+      "active": true
+    }
+  ],
+  "veggieBurgers": [
+    {
+      "title": "Mushroom Burger",
+      "price": 240,
+      "description": "Grilled portobello mushroom cap topped with melted Swiss cheese, roasted red peppers, spinach, and garlic aioli, served on a whole wheat bun",
+      "item_image": "https://i.imgur.com/t089WDK.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Paneer Burger",
+      "price": 220,
+      "description": "Grilled Bun with melted sauce and filling of crispy paneer",
+      "item_image": "https://i.imgur.com/Ht1G1iJ.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 5,
+      "active": true
+    },
+    {
+      "title": "Crispy Veg Double Patty Burger",
+      "price": 210,
+      "description": "Crispy veg double patty served on a whole wheat bun",
+      "item_image": "https://i.imgur.com/M2lk0Ck.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Veg Hooper",
+      "price": 230,
+      "description": "Our Signature Whopper with Crunchy Veg Patty, Onions, Lettuce, Tomatoes (Seasonal), Gherkins, Creamy And Smoky Sauces",
+      "item_image": "https://i.imgur.com/anqKdNh.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Crispy Veg Burger",
+      "price": 160,
+      "description": "Crispy veg double patty served on a whole wheat bun",
+      "item_image": "https://i.imgur.com/HGQuBcp.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 4,
+      "active": true
+    },
+    {
+      "title": "Cheese Burger",
+      "price": 260,
+      "description": "Topped with fresh mozzarella cheese, tomato served on a brioche bun",
+      "item_image": "https://i.imgur.com/MxKqa2U.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 5,
+      "active": true
+    },
+    {
+      "title": "Spinach Burger",
+      "price": 240,
+      "description": "Homemade spinach and feta cheese patty topped with tzatziki sauce, lettuce, tomato, and red onion, served on a sesame seed bun",
+      "item_image": "https://i.imgur.com/anqKdNh.png",
+      "type": "burger",
+      "userId": "6368a81e8b872abb8c0122b6",
+      "restId": "636e1659479160cad3679ad2",
+      "rating": 4,
+      "active": true
+    }
+  ],
+  "chaska": {
+    "_id": { "$oid": "636e17aa479160cad3679ad7" },
+    "image_rest": "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/yd3ynllwx9jvwi1aqc6n",
+    "rest_name": "Maheshwari Chaska Restaurant",
+    "cuisines": [
+      "Pasta",
+      "Chinese",
+      "North Indian",
+      "Ice Cream",
+      "Pizzas",
+      "Biryani"
+    ],
+    "rating": { "$numberDouble": "3.9" },
+    "d_time": "37",
+    "cost": { "$numberInt": "200" },
+    "offer": "60",
+    "promoted": "promoted",
+    "city": "Kota",
+    "address": "Keshavpura, Talwandi, Rajasthan",
+    "menu": [],
+    "userId": "636e0aba479160cad3679ac4",
+    "__v": { "$numberInt": "0" },
+    "active": true
+  }
+}

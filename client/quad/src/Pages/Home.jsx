@@ -63,9 +63,10 @@ const Home = () => {
   const handleSearchByCity = (e) => {
     e.preventDefault();
     if (city !== "") {
-      dispatch(getRestaurantsByCity(city)).then((res) => {
+      const enteredCity = city?.toLowerCase();
+      dispatch(getRestaurantsByCity(enteredCity)).then((res) => {
         if (res.type === "GET_RESTAURANTS_BY_CITY_SUCCESS")
-          navigate(`/allrestaurants/${city}`);
+          navigate(`/allrestaurants/${enteredCity}`);
       });
     } else {
       cityRef.current.focus();
@@ -156,7 +157,7 @@ const Home = () => {
                 border={"2px solid #969491"}
                 h={{ base: "30px", sm: "30px", md: "40px", lg: "50px" }}
                 borderRadius={"0px"}
-                placeholder={"Enter your delivery location"}
+                placeholder={"Enter your delivery locations as Pune or Kota"}
                 _focusVisible={{ outline: "none" }}
                 ref={cityRef}
                 color="black"
