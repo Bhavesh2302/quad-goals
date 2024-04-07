@@ -1,21 +1,29 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text, useToast } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Components/Navbar";
+import axios from "axios";
 import {
   deleteFromCart,
   getCart,
   updateQuantity,
 } from "../Redux/Reducers/RestaurantReducer/action";
+import { useNavigate } from "react-router-dom";
 
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const paymentSuccessfull = useToast();
+  const paymentFailed = useToast();
   const [restaurant, setRestaurant] =useState({})  
   const cart = useSelector((state) => state.restaurantReducer.cart);
   const token = useSelector((state)=>state.userReducer.token)
+  const test =  useSelector((state) =>{
+console.log(state, "satete")
+  })
 
   // const [cart, setCart] =useState([])
 
@@ -25,7 +33,7 @@ const Cart = () => {
     }
   }, [cart.length]);
 
-  const Total = cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0)
+  let Total = cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0)
   console.log("total",Total)
   const cartLength = cart.reduce((acc, item)=> acc + (item.quantity), 0)
   console.log("cartLength",cartLength)
@@ -42,6 +50,8 @@ const Cart = () => {
         }
     })
 
+
+    
     // let updatedData = cart.map((item)=>{
     //     if(item._id === id){
     //       return {
@@ -63,6 +73,63 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getCart(token));
   }, [dispatch]);
+
+  const handlePayment = async () => {
+    try {
+      const orderUrl = `${process.env.REACT_APP_BASE_URL}/api/payment/orders`;
+      const { data } = await axios.post(orderUrl, { amount: Total, currency :"INR" });
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const initPayment = (data) => {
+    const options = {
+      key: process.env.RAZORPAY_KEY_ID,
+      amount: Total,
+      currency: data.currency,
+      name: "Foodie",
+      description: "Test Transaction",
+      image: "test",
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          const verifyUrl = `${process.env.REACT_APP_BASE_URL}/api/payment/verify`;
+          console.log("verify")
+          const { data } = await axios.post(verifyUrl, response);
+          if(data && data.status && data.status == 1){
+            paymentSuccessfull({
+              title: "Payment Successful",
+              status: "success",
+              duration: 2000,
+              position: "top",
+              isClosable: true
+            });
+            navigate("/")
+          }
+          else{
+            paymentFailed({
+              title: "Payment Failure",
+              description: "payment has been failed due to some error",
+              status: "error",
+              duration: 2000,
+              position: "top",
+              isClosable: true
+            });
+          }
+          console.log(data,"check");
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
 
   const handleRemoveFromCart = (cartId) => {
     dispatch(deleteFromCart(token,cartId)).then((res) => {
@@ -203,6 +270,21 @@ const Cart = () => {
                             <Flex justifyContent={"space-between"} pb={"20px"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
                                   <Text fontSize={"17px"} fontWeight={"640"}>Total Payable Amount</Text>
                                   <Text fontSize={"17px"} fontWeight={"640"}>₹ {Total}</Text>
+                            </Flex>
+                            <Flex justifyContent={"center"} pb={"20px"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
+                              <Button
+                               fontSize={"12px"}
+                               variant={"unstyled"}
+                               size={{ base: "xs", sm: "sm" }}
+                               w={{ base: "50%", md: "60%" }}
+                               display="block"
+                               color="white"
+                               margin={"auto"}
+                               bg={"green.500"}
+                               onClick ={handlePayment}
+                              >
+                               Pay ₹ {Total}
+                              </Button>
                             </Flex>
                         </Box>
         {/* <Box></Box> */}
