@@ -1,16 +1,14 @@
-import { Box, Flex, Image, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, Flex, Image, useDisclosure } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import {
-  addNewMenu,
   getRestaurantMenus,
   getSingleRestaurant
 } from "../../Redux/Reducers/ShopOwnerReducer/action";
-import UserInfo from "../UserInfo";
 import StarRating from "../StarRating";
 import RestaurantMenus from "./RestaurantMenus";
-import { AddEditMenuDrawer } from "../../Drawers";
+import { AddEditMenuDrawer, UserInfoDrawer } from "../../Drawers";
 
 const RestaurantDetails = () => {
   const { token, userData } = useSelector((state) => state.userReducer);
@@ -19,7 +17,6 @@ const RestaurantDetails = () => {
   );
   const dispatch = useDispatch();
   const { restId } = useParams();
-  const addMenuToast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const [menu, setMenu] = useState({
@@ -82,7 +79,7 @@ const RestaurantDetails = () => {
           </Link>
         </Flex>
         <Box fontWeight="650" fontSize="15px">
-          <UserInfo />
+          <UserInfoDrawer />
         </Box>
       </Box>
       <Box

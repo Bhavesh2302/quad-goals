@@ -26,7 +26,7 @@ import { BsFillHandbagFill } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
-import UserInfo from "./UserInfo";
+import UserInfo from "../Drawers/UserInfoDrawer";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,7 +56,7 @@ const Navbar = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        gap={{ base: "15px", base: "15px", md: "25px" }}
+        gap={{ base: "15px", sm: "15px", md: "25px" }}
         w="auto"
       >
         <Link to={"/"}>
@@ -256,9 +256,6 @@ const Navbar = () => {
                 gap={"10px"}
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
-                // onClick={() => {
-                //   navigate("/cart");
-                // }}
               >
                 <MdManageAccounts />
                 <Text fontWeight={"650"}>My Account</Text>
