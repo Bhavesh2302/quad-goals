@@ -28,9 +28,9 @@ const InputField = ({
         {title && (
           <FormLabel
             fontSize={{
-              base: "12px",
-              sm: "12px",
-              md: "15px",
+              base: "11px",
+              sm: "11px",
+              md: "14px",
               lg: "16px"
             }}
           >
@@ -46,8 +46,8 @@ const InputField = ({
           borderRadius={"0px"}
           variant={variant}
           fontSize={{
-            base: "10px",
-            sm: "10px",
+            base: "11px",
+            sm: "11px",
             md: "12px",
             lg: "14px"
           }}
@@ -61,9 +61,9 @@ const InputField = ({
       <Box mb={"20px"}>
         <FormLabel
           fontSize={{
-            base: "12px",
-            sm: "12px",
-            md: "15px",
+            base: "11px",
+            sm: "11px",
+            md: "14px",
             lg: "16px"
           }}
         >

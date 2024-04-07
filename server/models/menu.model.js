@@ -7,7 +7,9 @@ const menu_schema = new mongoose.Schema({
   item_image: { type: String },
   type: { type: String },
   userId: { type: String },
-  restId: { type: String }
+  restId: { type: String },
+  rating: { type: Number },
+  active: { type: Boolean }
 });
 
 const MenuModel = mongoose.model("menuList", menu_schema);

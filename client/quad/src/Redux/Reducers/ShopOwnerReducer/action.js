@@ -17,7 +17,16 @@ import {
   GET_SINGLE_RESTAURANT_FAILURE,
   GET_MENUES_OF_RESTAURANT_REQUEST,
   GET_MENUES_OF_RESTAURANT_SUCCESS,
-  GET_MENUES_OF_RESTAURANT_FAILURE
+  GET_MENUES_OF_RESTAURANT_FAILURE,
+  ADD_NEW_MENU_REQUEST,
+  ADD_NEW_MENU_SUCCESS,
+  ADD_NEW_MENU_FAILURE,
+  UPDATE_MENU_REQUEST,
+  UPDATE_MENU_SUCCESS,
+  UPDATE_MENU_FAILURE,
+  DELETE_MENU_REQUEST,
+  DELETE_MENU_SUCCESS,
+  DELETE_MENU_FAILURE
 } from "./actionTypes";
 
 export const getRestaurantsOfShopowner = (shopownerId, token) => (dispatch) => {
@@ -138,4 +147,61 @@ export const getRestaurantMenus = (restId) => (dispatch) => {
       });
     })
     .catch({ type: GET_MENUES_OF_RESTAURANT_FAILURE });
+};
+
+export const addNewMenu = (payload, token) => (dispatch) => {
+  dispatch({ type: ADD_NEW_MENU_REQUEST });
+  return axios({
+    method: "post",
+    url: `${process.env.REACT_APP_BASE_URL}/menu/addMenuItems`,
+    data: payload,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(() => {
+      return dispatch({ type: ADD_NEW_MENU_SUCCESS });
+    })
+    .catch(() => {
+      dispatch({ type: ADD_NEW_MENU_FAILURE });
+    });
+};
+
+export const updateMenu = (token, payload, id) => (dispatch) => {
+  dispatch({ type: UPDATE_MENU_REQUEST });
+  return axios({
+    method: "patch",
+    url: `${process.env.REACT_APP_BASE_URL}/menu/update/${id}`,
+    data: payload,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then((res) => {
+      return dispatch({ type: UPDATE_MENU_SUCCESS });
+    })
+    .catch(() => {
+      dispatch({ type: UPDATE_MENU_FAILURE });
+    });
+};
+
+export const removeMenu = (token, id) => (dispatch) => {
+  dispatch({ type: DELETE_MENU_REQUEST });
+  return axios({
+    method: "patch",
+    url: `${process.env.REACT_APP_BASE_URL}/menu/remove/${id}`,
+    data: { active: false },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+  })
+    .then(() => {
+      return dispatch({ type: DELETE_MENU_SUCCESS });
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_MENU_FAILURE });
+    });
 };
