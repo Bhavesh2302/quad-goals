@@ -150,6 +150,13 @@ const AddEditMenuDrawer = ({
               justifyContent="center"
               borderRadius="0"
               type="submit"
+              onClick={() => {
+                if (data) {
+                } else {
+                  handleSave();
+                }
+                onClose();
+              }}
             >
               Save
             </Button>

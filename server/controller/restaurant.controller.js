@@ -90,10 +90,13 @@ restaurantController.put(
   async (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
-    const delete_restaurant = await RestaurantModel.findByIdAndDelete({
-      _id: id,
-      userId
-    });
+    const delete_restaurant = await RestaurantModel.findByIdAndUpdate(
+      {
+        _id: id,
+        userId
+      },
+      { active: false }
+    );
     console.log(delete_restaurant);
     res.status(201).send("Deleted restaurant");
   }
