@@ -13,7 +13,7 @@ const restaurant_schema = new mongoose.Schema({
   address: { type: String },
   menu: { type: Array },
   userId: { type: String },
-  active: { type: Boolean, default: false }
+  active: { type: Boolean, default: true }
 });
 
 const RestaurantModel = mongoose.model("restaurant", restaurant_schema);
