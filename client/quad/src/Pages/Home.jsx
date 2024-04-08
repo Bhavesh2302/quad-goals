@@ -11,8 +11,8 @@ import {
 import React from "react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import { getRestaurantsByCity } from "../Redux/Reducers/RestaurantReducer/action";
 import Navbar from "../Components/Navbar";
 import { MdOutlineMyLocation, MdOutlineClose } from "react-icons/md";
@@ -38,6 +38,8 @@ const Home = () => {
   const [city, setCity] = useState("");
   const cityRef = useRef(null);
   const [showMessage, setShowMessage] = useState(false);
+  const { userData } = useSelector((state) => state.userReducer);
+  const { token } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     if (!timerId.current) {
@@ -134,10 +136,21 @@ const Home = () => {
                 {currentString}
               </Text>
             </SlideFade>
+            { userData && userData?.role != "shopOwner" && !token && (
             <Box
               fontSize={{ base: "10px", sm: "10px", md: "15px", lg: "18px" }}
               fontWeight={"bold"}
               color={"gray"}
+              margin={"0px"}
+            >
+             <Text>Wanna partner with us, Be a restaurant owner <Link color ={"blue"} to={"/restownersignup"}><span style={{color: "blue",textDecoration : "underline"}}>click here</span></Link> </Text>
+            </Box>
+            )}
+            <Box
+              fontSize={{ base: "10px", sm: "10px", md: "15px", lg: "18px" }}
+              fontWeight={"bold"}
+              color={"gray"}
+              marginTop={"10px"}
             >
               <Text>Order your favourite food from restaurants near you.</Text>
             </Box>

@@ -9,6 +9,7 @@ import { BsShopWindow } from "react-icons/bs";
 import RestaurantSkeleton from "../Skeletons/RestaurantSkeleton";
 import { RestaurantForm } from "./RestaurantForm";
 import RestaurantCard from "./RestaurantCard";
+import { useNavigate } from "react-router-dom";
 
 const Restaurants = ({ setAddNew }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Restaurants = ({ setAddNew }) => {
   const token = useSelector((state) => state.userReducer.token);
   const [isEdit, setIsEdit] = useState(false);
   const [data, setData] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getRestaurantsOfShopowner(shopOwner.id, token));
@@ -27,7 +29,6 @@ const Restaurants = ({ setAddNew }) => {
   const handleEdit = (id) => {
     setIsEdit(true);
     const required = restaurants?.find((el) => el._id === id);
-    console.log(required);
     setData(required);
   };
 
@@ -40,6 +41,10 @@ const Restaurants = ({ setAddNew }) => {
 
   const handleAddNewRestaurant = () => setAddNew(true);
 
+  const handleNavigate = () =>{
+    navigate("/")
+  }
+
   return isEdit ? (
     <RestaurantForm setAddNew={setAddNew} data={data} setIsEdit={setIsEdit} />
   ) : (
@@ -48,11 +53,23 @@ const Restaurants = ({ setAddNew }) => {
         display="flex"
         alignItems="center"
         justifyContent="flex-end"
-        p="10px"
+        p="15px"
         bg="white"
+        gap="10px"
         m="auto"
         w="100%"
       >
+        <Button
+          bg="green.500"
+          color="white"
+          _hover={{ bg: "#f3f3f3", color: "black" }}
+          onClick={handleNavigate}
+          p="3px 8px 3px 8px"
+          h={{ base: "24px", sm: "24px", md: "28px", lg: "30px" }}
+          fontSize={{ base: "10px", sm: "10px", md: "12px", lg: "14px" }}
+        >
+          Home Page
+        </Button>
         <Button
           bg="green.500"
           color="white"
