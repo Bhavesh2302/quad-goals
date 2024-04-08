@@ -45,7 +45,6 @@ const RestaurantDetails = () => {
   const handleSaveMenu = (e) => {
     e.preventDefault();
     const menuData = { ...menu, restId: restaurant?._id };
-    console.log(menuData);
     dispatch(addNewMenu(menuData, token)).then((res) => {
       if (res.type === "ADD_NEW_MENU_SUCCESS") {
         addMenuToast({

@@ -21,9 +21,6 @@ const Cart = () => {
   const [restaurant, setRestaurant] =useState({})  
   const cart = useSelector((state) => state.restaurantReducer.cart);
   const token = useSelector((state)=>state.userReducer.token)
-  const test =  useSelector((state) =>{
-console.log(state, "satete")
-  })
 
   // const [cart, setCart] =useState([])
 
@@ -34,9 +31,7 @@ console.log(state, "satete")
   }, [cart.length]);
 
   let Total = cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0)
-  console.log("total",Total)
   const cartLength = cart.reduce((acc, item)=> acc + (item.quantity), 0)
-  console.log("cartLength",cartLength)
 
   const handleChangeQuantity = (cartId,quantity,value) => {
     const payload ={
@@ -66,7 +61,6 @@ console.log(state, "satete")
     // })
     // // cart = updatedData
     // dispatch(getCart(token))
-    // console.log("updated data",updatedData)
 
 
   };
@@ -95,7 +89,6 @@ console.log(state, "satete")
       handler: async (response) => {
         try {
           const verifyUrl = `${process.env.REACT_APP_BASE_URL}/api/payment/verify`;
-          console.log("verify")
           const { data } = await axios.post(verifyUrl, response);
           if(data && data.status && data.status == 1){
             paymentSuccessfull({
@@ -117,7 +110,6 @@ console.log(state, "satete")
               isClosable: true
             });
           }
-          console.log(data,"check");
         } catch (error) {
           console.log(error);
         }
@@ -133,9 +125,7 @@ console.log(state, "satete")
 
   const handleRemoveFromCart = (cartId) => {
     dispatch(deleteFromCart(token,cartId)).then((res) => {
-      console.log(res);
       if (res.type === "DELETE_ITEM_CART_SUCCESS") {
-        console.log("hello");
         dispatch(getCart(token));
       }
     });

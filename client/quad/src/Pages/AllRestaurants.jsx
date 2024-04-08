@@ -91,8 +91,6 @@ const AllRestaurants = () => {
               size={{ base: "xs", sm: "sm", md: "sm", lg: "sm" }}
               _hover={{ color: "red", cursor: "pointer", bg: "none" }}
               onClick={() => {
-                console.log("hello");
-                console.log(deliveryTime);
                 setDeliveryTime("desc");
               }}
             >

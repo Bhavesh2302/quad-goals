@@ -50,7 +50,6 @@ const RestOwnerSignupComp = ({ show, setShow }) => {
       role: "shopOwner"
     };
 
-    console.log("owner", payload);
 
     dispatch(restOwnerSignup(payload)).then((res) => {
       if (res.type === "REST_OWNER_SIGNUP_SUCCESS") {

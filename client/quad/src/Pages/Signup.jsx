@@ -48,7 +48,6 @@ const Signup = () => {
       phoneNo: Number(signupForm.phoneNo),
       password: signupForm.password
     };
-    console.log(payload);
     dispatch(userSignup(payload));
     userSignupToast({
       title: "Signup Successful",

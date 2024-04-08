@@ -42,7 +42,6 @@ const UserInfoDrawer = () => {
     });
   };
 
-  console.log(userData);
 
   return (
     <>

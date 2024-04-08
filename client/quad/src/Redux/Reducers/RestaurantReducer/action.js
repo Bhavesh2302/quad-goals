@@ -121,7 +121,7 @@ export const singleRestaurantName = (restId) => (dispatch) => {
 //  *****  Get cart ******
 
 export const getCart = (token) => (dispatch) => {
-  console.log("getdata");
+  // console.log("getdata");
 
   dispatch({ type: GET_CART_REQUEST });
   return axios({
@@ -133,7 +133,7 @@ export const getCart = (token) => (dispatch) => {
     }
   })
     .then((res) => {
-      console.log("get", res);
+      // console.log("get", res);
       return dispatch({ type: GET_CART_SUCCESS, payload: res.data.cartData });
     })
     .catch((err) => {
@@ -176,7 +176,7 @@ export const deleteFromCart = (token, cartId) => (dispatch) => {
     }
   })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       return dispatch({ type: DELETE_ITEM_CART_SUCCESS });
       // dispatch(getCart())
     })
@@ -201,7 +201,7 @@ export const updateQuantity = (token, cartId, payload) => (dispatch) => {
     data: JSON.stringify(payload)
   })
     .then((res) => {
-      console.log("patch", res);
+      // console.log("patch", res);
       return dispatch({ type: UPDATE_ITEM_CART_SUCCESS });
       // getCart()
     })
