@@ -8,45 +8,41 @@ import axios from "axios";
 import {
   deleteFromCart,
   getCart,
-  updateQuantity,
+  updateQuantity
 } from "../Redux/Reducers/RestaurantReducer/action";
 import { useNavigate } from "react-router-dom";
 
-
 const Cart = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const paymentSuccessfull = useToast();
   const paymentFailed = useToast();
-  const [restaurant, setRestaurant] =useState({})  
+  const [restaurant, setRestaurant] = useState({});
   const cart = useSelector((state) => state.restaurantReducer.cart);
-  const token = useSelector((state)=>state.userReducer.token)
+  const token = useSelector((state) => state.userReducer.token);
 
   // const [cart, setCart] =useState([])
 
   useEffect(() => {
     if (cart.length === 0) {
-      dispatch(getCart(token))
+      dispatch(getCart(token));
     }
   }, [cart.length]);
 
-  let Total = cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0)
-  const cartLength = cart.reduce((acc, item)=> acc + (item.quantity), 0)
+  let Total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const cartLength = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  const handleChangeQuantity = (cartId,quantity,value) => {
-    const payload ={
-        quantity : value
-    }
+  const handleChangeQuantity = (cartId, quantity, value) => {
+    const payload = {
+      quantity: value
+    };
 
-    dispatch(updateQuantity(token,cartId,payload))
-    .then((res)=>{
-        if(res.type === "UPDATE_ITEM_CART_SUCCESS"){
-            dispatch(getCart(token))
-        }
-    })
+    dispatch(updateQuantity(token, cartId, payload)).then((res) => {
+      if (res.type === "UPDATE_ITEM_CART_SUCCESS") {
+        dispatch(getCart(token));
+      }
+    });
 
-
-    
     // let updatedData = cart.map((item)=>{
     //     if(item._id === id){
     //       return {
@@ -61,8 +57,6 @@ const Cart = () => {
     // })
     // // cart = updatedData
     // dispatch(getCart(token))
-
-
   };
   useEffect(() => {
     dispatch(getCart(token));
@@ -71,7 +65,10 @@ const Cart = () => {
   const handlePayment = async () => {
     try {
       const orderUrl = `${process.env.REACT_APP_BASE_URL}/api/payment/orders`;
-      const { data } = await axios.post(orderUrl, { amount: Total, currency :"INR" });
+      const { data } = await axios.post(orderUrl, {
+        amount: Total,
+        currency: "INR"
+      });
       initPayment(data.data);
     } catch (error) {
       console.log(error);
@@ -90,7 +87,7 @@ const Cart = () => {
         try {
           const verifyUrl = `${process.env.REACT_APP_BASE_URL}/api/payment/verify`;
           const { data } = await axios.post(verifyUrl, response);
-          if(data && data.status && data.status == 1){
+          if (data && data.status && data.status == 1) {
             paymentSuccessfull({
               title: "Payment Successful",
               status: "success",
@@ -98,9 +95,8 @@ const Cart = () => {
               position: "top",
               isClosable: true
             });
-            navigate("/")
-          }
-          else{
+            navigate("/");
+          } else {
             paymentFailed({
               title: "Payment Failure",
               description: "payment has been failed due to some error",
@@ -115,16 +111,15 @@ const Cart = () => {
         }
       },
       theme: {
-        color: "#3399cc",
-      },
+        color: "#3399cc"
+      }
     };
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
 
-
   const handleRemoveFromCart = (cartId) => {
-    dispatch(deleteFromCart(token,cartId)).then((res) => {
+    dispatch(deleteFromCart(token, cartId)).then((res) => {
       if (res.type === "DELETE_ITEM_CART_SUCCESS") {
         dispatch(getCart(token));
       }
@@ -133,22 +128,32 @@ const Cart = () => {
 
   return (
     <Box w="100%">
-        <Navbar/>
+      <Navbar />
       {/* cart items */}
       {/* <Box w="70%"></Box> */}
       <Box mb="40px">
-      {
-            cart.length === 0 && <Box w="50%" m="auto"alignItems="center">
-                
-                <Image w="100%" h="400px"src="https://assets.materialup.com/uploads/66fb8bdf-29db-40a2-996b-60f3192ea7f0/preview.png"/>
-                <Text color={"#b1b2b7"}>Looks like you have not added anything to the cart. Go <br />
-                ahead and explore Restaurants.
-                </Text>
-            </Box>
-        }
+        {cart.length === 0 && (
+          <Box w="50%" m="auto" alignItems="center">
+            <Image
+              w="100%"
+              h="400px"
+              src="https://assets.materialup.com/uploads/66fb8bdf-29db-40a2-996b-60f3192ea7f0/preview.png"
+            />
+            <Text color={"#b1b2b7"}>
+              Looks like you have not added anything to the cart. Go <br />
+              ahead and explore Restaurants.
+            </Text>
+          </Box>
+        )}
       </Box>
-      <Box display={"flex"} flexDirection={{base:"column",sm:"column",md:"row"}} m="auto" w={{md:"90%",lg:"80%"}}  gap={{md:"10px",lg:"20px"}}>
-        <Box w={{base : "80%",sm:"80%",md:"60%"}} m="auto">
+      <Box
+        display={"flex"}
+        flexDirection={{ base: "column", sm: "column", md: "row" }}
+        m="auto"
+        w={{ md: "90%", lg: "80%" }}
+        gap={{ md: "10px", lg: "20px" }}
+      >
+        <Box w={{ base: "80%", sm: "80%", md: "60%" }}>
           {cart?.length > 0 &&
             cart?.map((item) => (
               <Box
@@ -185,42 +190,48 @@ const Cart = () => {
                       ₹ {item.price}
                     </Text>
                   </Box>
-                  <Box pl={"15px"} >
-                        <Flex justifyContent={"center"}>
-                    <Flex alignItems={"center"} textAlign="center"gap={"15px"} w={{base:"50",sm:"50%",md:"100%"}} m="auto">
-                      <Text fontWeight={"480"} fontSize={"16px"}>
-                        Quantity:
-                      </Text>
-                      <Button
-                        size={"xs"}
-                        fontWeight={"700"}
-                        fontSize={"14px"}
-                        disabled={item.quantity === 1}
-                        onClick={() =>
-                          handleChangeQuantity(item._id,item.quantity, -1)
-                        }
+                  <Box pl={"15px"}>
+                    <Flex justifyContent={"center"}>
+                      <Flex
+                        alignItems={"center"}
+                        textAlign="center"
+                        gap={"15px"}
+                        w={{ base: "50", sm: "50%", md: "100%" }}
+                        m="auto"
                       >
-                        -
-                      </Button>
-                      <Text
-                        fontWeight={"500"}
-                        fontSize={"13.5px"}
-                        pl={"5px"}
-                        pr={"5px"}
-                      >
-                        {item.quantity}
-                      </Text>
-                      <Button
-                        size={"xs"}
-                        fontWeight={"700"}
-                        fontSize={"14px"}
-                        onClick={() =>
-                          handleChangeQuantity(item._id, item.quantity,1)
-                        }
-                      >
-                        +
-                      </Button>
-                    </Flex>
+                        <Text fontWeight={"480"} fontSize={"16px"}>
+                          Quantity:
+                        </Text>
+                        <Button
+                          size={"xs"}
+                          fontWeight={"700"}
+                          fontSize={"14px"}
+                          disabled={item.quantity === 1}
+                          onClick={() =>
+                            handleChangeQuantity(item._id, item.quantity, -1)
+                          }
+                        >
+                          -
+                        </Button>
+                        <Text
+                          fontWeight={"500"}
+                          fontSize={"13.5px"}
+                          pl={"5px"}
+                          pr={"5px"}
+                        >
+                          {item.quantity}
+                        </Text>
+                        <Button
+                          size={"xs"}
+                          fontWeight={"700"}
+                          fontSize={"14px"}
+                          onClick={() =>
+                            handleChangeQuantity(item._id, item.quantity, 1)
+                          }
+                        >
+                          +
+                        </Button>
+                      </Flex>
                     </Flex>
 
                     <Box pt="20px">
@@ -244,39 +255,91 @@ const Cart = () => {
             ))}
         </Box>
         {/* total price box */}
-        <Box w={{base : "80%",sm:"80%",md:"40%"}} display={cart.length===0 ? "none" : "block"}>
-                              <Flex justifyContent={"space-between"} pt={"20px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
-                                  <Text fontSize={"14px"} fontWeight={"600"}>Price ({cartLength} Items.)</Text>
-                                  <Text fontSize={"14px"} fontWeight={"600"}>₹ {Total}</Text>
-                              </Flex>
-                            <Flex justifyContent={"space-between"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
-                                  <Text fontSize={"14px"} fontWeight={"600"}>Discount</Text>
-                                  <Text fontSize={"14px"} fontWeight={"600"}>0.00</Text>
-                            </Flex>
-                            <Flex justifyContent={"space-between"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
-                                  <Text fontSize={"14px"} fontWeight={"600"}>Delivery Charges</Text>
-                                  <Text fontSize={"14px"} fontWeight={"600"} color={"green.400"}>Free</Text>
-                            </Flex>
-                            <Flex justifyContent={"space-between"} pb={"20px"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
-                                  <Text fontSize={"17px"} fontWeight={"640"}>Total Payable Amount</Text>
-                                  <Text fontSize={"17px"} fontWeight={"640"}>₹ {Total}</Text>
-                            </Flex>
-                            <Flex justifyContent={"center"} pb={"20px"} mt={"10px"} mb={"40px"} pl={"20px"}  alignItems={"center"}>
-                              <Button
-                               fontSize={"12px"}
-                               variant={"unstyled"}
-                               size={{ base: "xs", sm: "sm" }}
-                               w={{ base: "50%", md: "60%" }}
-                               display="block"
-                               color="white"
-                               margin={"auto"}
-                               bg={"green.500"}
-                               onClick ={handlePayment}
-                              >
-                               Pay ₹ {Total}
-                              </Button>
-                            </Flex>
-                        </Box>
+        <Box
+          w={{ base: "80%", sm: "80%", md: "40%" }}
+          display={cart.length === 0 ? "none" : "block"}
+        >
+          <Flex
+            justifyContent={"space-between"}
+            pt={"20px"}
+            mb={"40px"}
+            pl={"20px"}
+            alignItems={"center"}
+          >
+            <Text fontSize={"14px"} fontWeight={"600"}>
+              Price ({cartLength} Items.)
+            </Text>
+            <Text fontSize={"14px"} fontWeight={"600"}>
+              ₹ {Total}
+            </Text>
+          </Flex>
+          <Flex
+            justifyContent={"space-between"}
+            mt={"10px"}
+            mb={"40px"}
+            pl={"20px"}
+            alignItems={"center"}
+          >
+            <Text fontSize={"14px"} fontWeight={"600"}>
+              Discount
+            </Text>
+            <Text fontSize={"14px"} fontWeight={"600"}>
+              0.00
+            </Text>
+          </Flex>
+          <Flex
+            justifyContent={"space-between"}
+            mt={"10px"}
+            mb={"40px"}
+            pl={"20px"}
+            alignItems={"center"}
+          >
+            <Text fontSize={"14px"} fontWeight={"600"}>
+              Delivery Charges
+            </Text>
+            <Text fontSize={"14px"} fontWeight={"600"} color={"green.400"}>
+              Free
+            </Text>
+          </Flex>
+          <Flex
+            justifyContent={"space-between"}
+            pb={"20px"}
+            mt={"10px"}
+            mb={"40px"}
+            pl={"20px"}
+            alignItems={"center"}
+          >
+            <Text fontSize={"17px"} fontWeight={"640"}>
+              Total Payable Amount
+            </Text>
+            <Text fontSize={"17px"} fontWeight={"640"}>
+              ₹ {Total}
+            </Text>
+          </Flex>
+          <Flex
+            justifyContent={"center"}
+            pb={"20px"}
+            mt={"10px"}
+            mb={"40px"}
+            pl={"20px"}
+            alignItems={"center"}
+          >
+            <Button
+              fontSize={"12px"}
+              variant={"unstyled"}
+              size={{ base: "xs", sm: "sm" }}
+              w={{ base: "100%", md: "100%" }}
+              display="block"
+              h={{ base: "50px", md: "40px" }}
+              color="white"
+              margin={"auto"}
+              bg={"green.500"}
+              onClick={handlePayment}
+            >
+              Pay ₹ {Total}
+            </Button>
+          </Flex>
+        </Box>
         {/* <Box></Box> */}
       </Box>
     </Box>

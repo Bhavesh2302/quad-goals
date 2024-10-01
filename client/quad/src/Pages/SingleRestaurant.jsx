@@ -109,7 +109,6 @@ const SingleRestaurant = () => {
               >
                 {singleRestaurantData.address}
               </Text>
-
               <Box
                 display={"flex"}
                 mt="20px"
@@ -197,10 +196,11 @@ const SingleRestaurant = () => {
             m={"auto"}
           >
             <Image
-              src={singleRestaurantData.image_rest}
+              src={singleRestaurantData?.image_rest}
               height="200px"
               w={{ base: "100%", sm: "70%", md: "100%", lg: "100%" }}
               m={"auto"}
+              objectFit="fill"
             />
           </Box>
         </Box>
@@ -215,7 +215,8 @@ const SingleRestaurant = () => {
         mb="30px"
         css={{
           "&::-webkit-scrollbar": {
-            width: "4px"
+            width: "4px",
+            color: "var(var(--heading_text)"
           },
           "&::-webkit-scrollbar-track": {
             width: "6px"
@@ -235,7 +236,7 @@ const SingleRestaurant = () => {
               alignContent="center"
             >
               <Box w="80%">
-                <Text fontSize={"20px"} fontWeight="500" color="#3e4152">
+                <Text fontSize={"20px"} fontWeight="500" color="var(--heading_color)">
                   {item.title}
                 </Text>
                 <Text>{`₹${item.price}`}</Text>
@@ -256,14 +257,14 @@ const SingleRestaurant = () => {
                   w="100px"
                   height="100px"
                   m="auto"
+                  objectFit="cover"
                 />
-              </Box>
-              <Button
+                <Button
                 position={"absolute"}
-                top="100px"
-                left={"82%"}
                 p="0px 20px 0px 20px"
                 bg={"green.500"}
+                left="35px"
+                bottom="-20px"
                 borderRadius={"5px"}
                 alignItems="center"
                 color={"white"}
@@ -282,6 +283,7 @@ const SingleRestaurant = () => {
               >
                 Add
               </Button>
+              </Box>
             </Box>
             <Box borderBottom={"2px solid #e0e5e9"} mt="30px"></Box>
           </Box>

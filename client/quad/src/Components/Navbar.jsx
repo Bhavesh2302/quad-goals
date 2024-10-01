@@ -100,6 +100,7 @@ const Navbar = () => {
         <Flex
           alignItems={"center"}
           gap={"10px"}
+          color="var(--heading_color)"
           _hover={{ color: "red", cursor: "pointer" }}
         >
           <MdLocalOffer fontSize="20px" />
@@ -108,6 +109,7 @@ const Navbar = () => {
         <Flex
           alignItems={"center"}
           gap={"10px"}
+          color="var(--heading_color)"
           _hover={{ color: "red", cursor: "pointer" }}
         >
           <MdHelp fontSize="20px" />
@@ -117,6 +119,7 @@ const Navbar = () => {
           <Flex
             alignItems={"center"}
             gap={"10px"}
+            color="var(--heading_color)"
             _hover={{ color: "red", cursor: "pointer" }}
           >
             <FaUserAlt fontSize="20px" />
@@ -128,6 +131,7 @@ const Navbar = () => {
         <Flex
           alignItems={"center"}
           gap={"10px"}
+          color="var(--heading_color)"
           _hover={{ color: "red", cursor: "pointer" }}
           onClick={() => navigate("/cart")}
         >
@@ -212,6 +216,7 @@ const Navbar = () => {
               <Flex
                 alignItems={"center"}
                 gap={"10px"}
+                color="var(--heading_color)"
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
                 onClick={() => {
@@ -224,6 +229,7 @@ const Navbar = () => {
               <Flex
                 alignItems={"center"}
                 gap={"10px"}
+                color="var(--heading_color)"
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
               >
@@ -233,6 +239,7 @@ const Navbar = () => {
               <Flex
                 alignItems={"center"}
                 gap={"10px"}
+                color="var(--heading_color)"
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
               >
@@ -242,6 +249,7 @@ const Navbar = () => {
               <Flex
                 alignItems={"center"}
                 gap={"10px"}
+                color="var(--heading_color)"
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
                 onClick={() => {
@@ -254,6 +262,7 @@ const Navbar = () => {
               <Flex
                 alignItems={"center"}
                 gap={"10px"}
+                color="var(--heading_color)"
                 _hover={{ color: "red", cursor: "pointer" }}
                 fontSize={{ base: "12px", sm: "12px", md: "15px" }}
               >
