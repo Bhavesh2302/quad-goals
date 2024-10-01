@@ -83,3 +83,8 @@
   width: 5px;
   visibility: visible;
 }
+
+:root {
+  --heading_color: #545454;
+  --paragraph: #646464;
+}
