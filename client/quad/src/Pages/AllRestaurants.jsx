@@ -28,10 +28,11 @@ const AllRestaurants = () => {
       <Navbar />
       <Box>
         {restaurants.length === 0 && !isLoading && (
-          <Heading>Sorry No Restaurants Found</Heading>
+          <Heading color="var(--heading_color)">
+            Sorry No Restaurants Found
+          </Heading>
         )}
       </Box>
-
       <Flex
         w={{ base: "95%", sm: "90%", md: "90%", lg: "88%" }}
         m="auto"
@@ -56,6 +57,7 @@ const AllRestaurants = () => {
             textAlign={"left"}
             fontWeight="600"
             fontSize="28px"
+            color="var(--heading_color)"
           >{` ${restaurants.length} restaurants`}</Text>
         </Box>
         <Flex
@@ -162,7 +164,9 @@ const AllRestaurants = () => {
         {isLoading &&
           new Array(8)
             .fill(0)
-            .map(() => <RestaurantSkeleton height="350px" mainPage={true} />)}
+            .map((_, i) => (
+              <RestaurantSkeleton height="350px" mainPage={true} key={i} />
+            ))}
         {restaurants.length > 0 &&
           restaurants.map((item) => (
             <Link key={item._id} to={`/allrestaurants/${city}/${item._id}`}>
@@ -245,6 +249,7 @@ const AllRestaurants = () => {
                 <Box></Box>
               </Box> */}
               <Box
+                key={item._id}
                 w={{ base: "100%", sm: "100%", md: "45%", lg: "300px" }}
                 h="auto"
                 borderRadius="5px"
@@ -288,10 +293,11 @@ const AllRestaurants = () => {
                       md: "14px",
                       lg: "15px"
                     }}
+                    color="var(--heading_color)"
                   >
-                    {item.rest_name}
+                    {item?.rest_name}
                   </Text>
-                  <Box height="45px" color="#686b78" textAlign="start">
+                  <Box height="45px" color="var(--paragraph)" textAlign="start">
                     {item.cuisines.join(", ")}
                   </Box>
                   <Box
