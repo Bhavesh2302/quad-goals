@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+.initial_loading_container {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes dish-spin {
   from {
     transform: rotate(0deg);
