@@ -79,7 +79,7 @@ const Login = () => {
         fontWeight={"650"}
         variant={"unstyled"}
         border={"0px"}
-        color={"black"}
+        color="var(--heading_color)"
         borderRadius={"0px"}
         fontSize={
           location?.pathname === "/"

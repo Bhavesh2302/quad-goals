@@ -77,7 +77,7 @@ const UserInfoDrawer = () => {
           >
             {userData?.name[0]}
           </Box>
-          <Box>{userData?.name?.trim().split(" ")[0]}</Box>
+          <Box color="var(--heading_color)">{userData?.name?.trim().split(" ")[0]}</Box>
         </Flex>
       </Button>
       <Drawer

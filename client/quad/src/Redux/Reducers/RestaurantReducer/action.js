@@ -24,6 +24,9 @@ import {
   GET_SINGLE_RESTAURANT_NAME_FAILURE,
   GET_SINGLE_RESTAURANT_NAME_REQUEST,
   GET_SINGLE_RESTAURANT_NAME_SUCCESS,
+  INITIAL_GET_RESTAURANTS_BY_CITY_FAILURE,
+  INITIAL_GET_RESTAURANTS_BY_CITY_REQUEST,
+  INITIAL_GET_RESTAURANTS_BY_CITY_SUCCESS,
   UPDATE_ITEM_CART_FAILURE,
   UPDATE_ITEM_CART_REQUEST,
   UPDATE_ITEM_CART_SUCCESS
@@ -210,4 +213,22 @@ export const updateQuantity = (token, cartId, payload) => (dispatch) => {
     });
 };
 
-// http://localhost:7082/cart/637df58a62d4aa32d7691d32/-1
+export const initialGetRestaurantsByCity = (city) => (dispatch) => {
+  // console.log(sortBy)
+  dispatch({ type: INITIAL_GET_RESTAURANTS_BY_CITY_REQUEST });
+  return axios
+    .get(
+      `${process.env.REACT_APP_BASE_URL}/allRestaurants/getCity?city=${city}`
+    )
+    .then((res) => {
+      // console.log("city",res);
+      return dispatch({
+        type: INITIAL_GET_RESTAURANTS_BY_CITY_SUCCESS,
+        payload: res.data.Restaurants
+      });
+    })
+    .catch((error) => {
+      dispatch({ type: INITIAL_GET_RESTAURANTS_BY_CITY_FAILURE });
+      console.log(error);
+    });
+};
