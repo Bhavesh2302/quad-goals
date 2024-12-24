@@ -7,8 +7,7 @@ const checkEmailController = Router();
 
 checkEmailController.post("/mail", async (req, res) => {
   const user = await UserModel.findOne(req.body);
-//   console.log(user);
-
+  //   console.log(user);
 
   // console.log(user.email)
   if (user) {
@@ -28,13 +27,12 @@ checkEmailController.post("/mail", async (req, res) => {
 checkEmailController.post("/otp", async (req, res) => {
   const { email, otp } = req.body;
 
-
-  const otpData = await OtpModel.findOne({ email,otp });
-  console.log("req",otp,otpData)
+  const otpData = await OtpModel.findOne({ email, otp });
+  console.log("req", otp, otpData);
 
   if (otpData) {
     if (otp === otpData.otp) {
-        await OtpModel.deleteOne({otp})
+      await OtpModel.deleteOne({ otp });
       res.send({ msg: "otp matched successfully" });
     } else {
       res.send({ msg: "Please enter the correct otp" });
@@ -43,21 +41,21 @@ checkEmailController.post("/otp", async (req, res) => {
 });
 
 const mailer = (email, otp) => {
-//   console.log(email, otp);
+  //   console.log(email, otp);
   var transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
     secure: false,
     auth: {
       user: process.env.EMAIL_ID,
-      pass: process.env.MAILER_PASSWORD,
-    },
+      pass: process.env.MAILER_PASSWORD
+    }
   });
   var mailOptions = {
     from: process.env.EMAIL_ID,
     to: email,
     subject: "rest your password one time password",
-    text: `one time password is ${otp}`,
+    text: `one time password is ${otp}`
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
@@ -69,5 +67,5 @@ const mailer = (email, otp) => {
 };
 
 module.exports = {
-  checkEmailController,
+  checkEmailController
 };

@@ -1,33 +1,24 @@
+const { Router } = require("express");
+const { RestaurantModel } = require("../models/restaurant.model");
 
+const costController = Router();
 
-const {Router}  = require("express")
-const { RestaurantModel } = require("../models/restaurant.model")
+costController.get("/htl", async (req, res) => {
+  const restaurants = await RestaurantModel.find().sort({ cost: -1 });
 
-const costController = Router()
+  console.log(restaurants);
 
-costController.get("/htl",async(req,res)=>{
+  res.send({ msg: restaurants });
+});
 
+costController.get("/lth", async (req, res) => {
+  const restaurants = await RestaurantModel.find().sort({ cost: 1 });
 
-    const restaurants = await RestaurantModel.find().sort({cost :-1})
+  console.log(restaurants);
 
-    console.log(restaurants)
+  res.send({ msg: restaurants });
+});
 
-
-    res.send({"msg":restaurants})
-})
-
-
-costController.get("/lth",async(req,res)=>{
-
-
-    const restaurants = await RestaurantModel.find().sort({cost :1})
-
-    console.log(restaurants)
-
-
-    res.send({"msg":restaurants})
-})
-
-module.exports={
-    costController
-}
+module.exports = {
+  costController
+};

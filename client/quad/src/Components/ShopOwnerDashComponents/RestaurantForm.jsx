@@ -40,6 +40,7 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
           address: "",
           menu: [],
           userId: shopOwner?.id,
+          active: false
         }
   );
 
@@ -167,6 +168,8 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
     );
   };
 
+  console.log("data", data, restaurant);
+
   return (
     <form
       action={
@@ -213,7 +216,18 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
         >
           Restaurant Details
         </Box>
-        <Box></Box>
+        <Flex alignItems="center" justifyContent="flex-start" gap="5px">
+          <Text fontSize="14px" fontWeight="600" color="#646464">
+            {restaurant.active ? "Active" : "Inactive"}
+          </Text>
+          <input
+            type="checkbox"
+            checked={restaurant?.active}
+            onChange={(e) => {
+              setRestaurant({ ...restaurant, active: e.target.checked });
+            }}
+          />
+        </Flex>
       </Flex>
       <Box w="95%" h="100%" pb="20px" pt="10px">
         <Box width="100%">

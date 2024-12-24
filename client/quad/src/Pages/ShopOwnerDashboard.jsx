@@ -64,7 +64,7 @@ const ShopOwnerDashboard = () => {
   return (
     <Box w="100%" m="auto" backgroundColor="#f3f3f3" pt="10px" h="1100px">
       <Box
-        w={{ base: "95%", sm: "95%", md: "95%", lg: "70%" }}
+        w={{ base: "95%", sm: "95%", md: "95%", lg: "80%" }}
         m="auto"
         backgroundColor="white"
         h="60px"
@@ -93,14 +93,14 @@ const ShopOwnerDashboard = () => {
         <UserInfoDrawer />
       </Box>
       <Flex
-        w={{ base: "95%", sm: "95%", md: "95%", lg: "70%" }}
+        w={{ base: "95%", sm: "95%", md: "95%", lg: "80%" }}
         m="auto"
         gap="10px"
         h={addNew ? "690px" : "400px"}
       >
         <Box
           display={{ base: "none", sm: "none", md: "none", lg: "block" }}
-          w="20%"
+          w="25%"
         >
           <ShopOwnerSidebar
             sideMenu={sideMenu}
@@ -113,7 +113,7 @@ const ShopOwnerDashboard = () => {
           />
         </Box>
         <Box
-          w={{ base: "100%", sm: "100%", md: "100%", lg: "80%" }}
+          w={{ base: "100%", sm: "100%", md: "100%", lg: "75%" }}
           h={addNew ? "700px" : "400px"}
           backgroundColor="#f3f3f3"
         >

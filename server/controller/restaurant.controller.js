@@ -44,7 +44,7 @@ restaurantController.get(
     console.log("shopownerId", shopownerId);
     const restaurants = await RestaurantModel.find({
       userId: shopownerId,
-      active: true,
+      // active: true,
     });
     console.log(restaurants);
     res.status(200).send({ restaurants: restaurants });
@@ -59,8 +59,8 @@ restaurantController.get(
     const { restId } = req.params;
 
     const restaurants = await RestaurantModel.find({
-      _id: restId,
-      active: true,
+      _id: restId
+      // active: true
     });
     console.log("restaurants-----", restaurants, restId);
     res.status(200).send({ restaurant: restaurants[0] });
@@ -130,12 +130,12 @@ restaurantController.put(
   async (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
-    const delete_restaurant = await RestaurantModel.findByIdAndUpdate(
+    const delete_restaurant = await RestaurantModel.findByIdAndDelete(
       {
         _id: id,
         userId,
       },
-      { active: false }
+      // { active: false }
     );
     console.log(delete_restaurant);
     res.status(201).send("Deleted restaurant");
