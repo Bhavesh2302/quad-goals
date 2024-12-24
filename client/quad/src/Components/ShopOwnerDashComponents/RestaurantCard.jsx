@@ -31,7 +31,7 @@ const RestaurantCard = ({
 
   return (
     <Box
-      w={{ base: "100%", sm: "100%", md: "45%", lg: "250px" }}
+      w={{ base: "100%", sm: "100%", md: "45%", lg: "31%" }}
       h="282px"
       borderRadius="5px"
       onMouseEnter={() => setIsHovering(true)}
