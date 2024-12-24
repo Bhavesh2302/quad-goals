@@ -1,4 +1,4 @@
-import { Button, Box, Flex, Tooltip } from "@chakra-ui/react";
+import { Button, Box, Flex, Tooltip, Switch, Text } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,7 +30,8 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
           city: "",
           address: "",
           menu: [],
-          userId: shopOwner?.id
+          userId: shopOwner?.id,
+          active: false
         }
   );
 
@@ -68,6 +69,8 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
     );
   };
 
+  console.log("data", data, restaurant);
+
   return (
     <Box
       display="flex"
@@ -104,7 +107,18 @@ export const RestaurantForm = ({ setAddNew, data, setIsEdit }) => {
         >
           Restaurant Details
         </Box>
-        <Box></Box>
+        <Flex alignItems="center" justifyContent="flex-start" gap="5px">
+          <Text fontSize="14px" fontWeight="600" color="#646464">
+            {restaurant.active ? "Active" : "Inactive"}
+          </Text>
+          <input
+            type="checkbox"
+            checked={restaurant?.active}
+            onChange={(e) => {
+              setRestaurant({ ...restaurant, active: e.target.checked });
+            }}
+          />
+        </Flex>
       </Flex>
       <Box w="95%" h="100%" pb="20px" pt="10px">
         <Box>

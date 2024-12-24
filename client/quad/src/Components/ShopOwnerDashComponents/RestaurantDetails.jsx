@@ -118,7 +118,7 @@ const RestaurantDetails = () => {
               fontWeight="650"
               fontSize={{ base: "18px", sm: "18px", md: "22px", lg: "22px" }}
             >
-              {restaurant.rest_name}
+              {restaurant?.rest_name}
             </Box>
             <Box
               display="flex"
@@ -142,7 +142,7 @@ const RestaurantDetails = () => {
                     lg: "15px"
                   }}
                 >
-                  {restaurant.address}
+                  {restaurant?.address}
                 </Box>
                 <Box
                   fontWeight="550"
@@ -185,7 +185,7 @@ const RestaurantDetails = () => {
                     lg: "15px"
                   }}
                 >
-                  ₹ {restaurant.cost} for two persons
+                  ₹ {restaurant?.cost} for two persons
                 </Box>
                 <Box
                   fontWeight="550"
@@ -196,7 +196,7 @@ const RestaurantDetails = () => {
                     lg: "15px"
                   }}
                 >
-                  Delivery in {restaurant.d_time} minutes
+                  Delivery in {restaurant?.d_time} minutes
                 </Box>
               </Box>
             </Box>

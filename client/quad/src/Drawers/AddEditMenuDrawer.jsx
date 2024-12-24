@@ -86,7 +86,7 @@ const AddEditMenuDrawer = ({
               mb="20px"
             >
               <BsShopWindow fontSize="22px" />
-              <Text>{restaurant.rest_name}</Text>
+              <Text>{restaurant?.rest_name}</Text>
             </Flex>
             <InputField
               title="Menu Name"

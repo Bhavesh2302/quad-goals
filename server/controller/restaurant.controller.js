@@ -20,8 +20,8 @@ restaurantController.get(
     const { shopownerId } = req.params;
     console.log("shopownerId", shopownerId);
     const restaurants = await RestaurantModel.find({
-      userId: shopownerId,
-      active: true
+      userId: shopownerId
+      // active: true
     });
     console.log(restaurants);
     res.status(200).send({ restaurants: restaurants });
@@ -36,8 +36,8 @@ restaurantController.get(
     const { restId } = req.params;
 
     const restaurants = await RestaurantModel.find({
-      _id: restId,
-      active: true
+      _id: restId
+      // active: true
     });
     console.log("restaurants-----", restaurants, restId);
     res.status(200).send({ restaurant: restaurants[0] });
