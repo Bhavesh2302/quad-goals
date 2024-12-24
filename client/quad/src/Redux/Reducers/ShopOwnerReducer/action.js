@@ -57,7 +57,7 @@ export const addRestaurantOfShopOwner = (payload, token) => (dispatch) => {
     url: `${process.env.REACT_APP_BASE_URL}/restaurant/create`,
     method: "post",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${token}`
     },
     data: payload
@@ -100,7 +100,7 @@ export const editRestaurantOfShopOwner = (payload, token, id) => (dispatch) => {
     url: `${process.env.REACT_APP_BASE_URL}/restaurant/update/${id}`,
     method: "patch",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       "Authorization": `Bearer ${token}`
     },
     data: payload
