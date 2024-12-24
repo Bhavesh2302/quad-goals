@@ -62,7 +62,7 @@ const ShopOwnerDashboard = () => {
   const btnRef = useRef();
 
   return (
-    <Box w="100%" m="auto" backgroundColor="#f3f3f3" pt="10px" h="780px">
+    <Box w="100%" m="auto" backgroundColor="#f3f3f3" pt="10px" h="1100px">
       <Box
         w={{ base: "95%", sm: "95%", md: "95%", lg: "70%" }}
         m="auto"

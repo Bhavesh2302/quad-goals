@@ -1,0 +1,358 @@
+{
+    "Mumbai": {
+        "restaurants": 
+        [
+            {
+                "image_rest": "image1.jpg",
+                "rest_name": "Mumbai Delight",
+                "cuisines": [
+                    "Indian",
+                    "Chinese"
+                ],
+                "rating": 4.5,
+                "d_time": "30 mins",
+                "cost": 500,
+                "offer": "60",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Andheri East, Mumbai",
+                "menu": [],
+                "userId": "mumbai1",
+                "active": true
+            },
+            {
+                "image_rest": "image2.jpg",
+                "rest_name": "Seafood Hub",
+                "cuisines": [
+                    "Seafood"
+                ],
+                "rating": 4.7,
+                "d_time": "40 mins",
+                "cost": 700,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Juhu Beach, Mumbai",
+                "menu": [],
+                "userId": "mumbai1",
+                "active": true
+            },
+            {
+                "image_rest": "image3.jpg",
+                "rest_name": "Spice Route",
+                "cuisines": [
+                    "South Indian"
+                ],
+                "rating": 4.3,
+                "d_time": "25 mins",
+                "cost": 400,
+                "offer": "60",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Bandra West, Mumbai",
+                "menu": [],
+                "userId": "mumbai1",
+                "active": true
+            },
+            {
+                "image_rest": "image4.jpg",
+                "rest_name": "Grill Junction",
+                "cuisines": [
+                    "Barbecue",
+                    "Grill"
+                ],
+                "rating": 4.2,
+                "d_time": "35 mins",
+                "cost": 600,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Powai, Mumbai",
+                "menu": [],
+                "userId": "mumbai1",
+                "active": true
+            },
+            {
+                "image_rest": "image5.jpg",
+                "rest_name": "Veggie Delights",
+                "cuisines": [
+                    "Vegetarian"
+                ],
+                "rating": 4,
+                "d_time": "20 mins",
+                "cost": 350,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Goregaon West, Mumbai",
+                "menu": [],
+                "userId": "mumbai1",
+                "active": true
+            },
+            {
+                "image_rest": "image6.jpg",
+                "rest_name": "The Italian Bowl",
+                "cuisines": [
+                    "Italian"
+                ],
+                "rating": 4.6,
+                "d_time": "40 mins",
+                "cost": 800,
+                "offer": "60",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Malad West, Mumbai",
+                "menu": [],
+                "userId": "mumbai2",
+                "active": true
+            },
+            {
+                "image_rest": "image7.jpg",
+                "rest_name": "Street Treats",
+                "cuisines": [
+                    "Street Food"
+                ],
+                "rating": 4.1,
+                "d_time": "15 mins",
+                "cost": 200,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Kurla West, Mumbai",
+                "menu": [],
+                "userId": "mumbai2",
+                "active": true
+            },
+            {
+                "image_rest": "image8.jpg",
+                "rest_name": "Tandoor Flames",
+                "cuisines": [
+                    "Indian",
+                    "Tandoori"
+                ],
+                "rating": 4.8,
+                "d_time": "45 mins",
+                "cost": 900,
+                "offer": "60",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Colaba, Mumbai",
+                "menu": [],
+                "userId": "mumbai2",
+                "active": true
+            },
+            {
+                "image_rest": "image9.jpg",
+                "rest_name": "Biryani King",
+                "cuisines": [
+                    "Indian",
+                    "Biryani"
+                ],
+                "rating": 4.4,
+                "d_time": "30 mins",
+                "cost": 550,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Sion, Mumbai",
+                "menu": [],
+                "userId": "mumbai2",
+                "active": true
+            },
+            {
+                "image_rest": "image10.jpg",
+                "rest_name": "Chaat House",
+                "cuisines": [
+                    "Chaat",
+                    "Snacks"
+                ],
+                "rating": 3.9,
+                "d_time": "10 mins",
+                "cost": 150,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Dadar West, Mumbai",
+                "menu": [],
+                "userId": "mumbai2",
+                "active": true
+            },
+            {
+                "image_rest": "image11.jpg",
+                "rest_name": "Thai Spice",
+                "cuisines": [
+                    "Thai"
+                ],
+                "rating": 4.5,
+                "d_time": "35 mins",
+                "cost": 650,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Lower Parel, Mumbai",
+                "menu": [],
+                "userId": "mumbai3",
+                "active": true
+            },
+            {
+                "image_rest": "image12.jpg",
+                "rest_name": "Burger Shack",
+                "cuisines": [
+                    "American",
+                    "Fast Food"
+                ],
+                "rating": 4,
+                "d_time": "20 mins",
+                "cost": 300,
+                "offer": "60",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Fort, Mumbai",
+                "menu": [],
+                "userId": "mumbai3",
+                "active": true
+            },
+            {
+                "image_rest": "image13.jpg",
+                "rest_name": "Kebab World",
+                "cuisines": [
+                    "Middle Eastern",
+                    "Kebabs"
+                ],
+                "rating": 4.7,
+                "d_time": "50 mins",
+                "cost": 1000,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Worli, Mumbai",
+                "menu": [],
+                "userId": "mumbai3",
+                "active": true
+            },
+            {
+                "image_rest": "image14.jpg",
+                "rest_name": "Sushi Time",
+                "cuisines": [
+                    "Japanese",
+                    "Sushi"
+                ],
+                "rating": 4.9,
+                "d_time": "45 mins",
+                "cost": 1200,
+                "offer": "60",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Marine Drive, Mumbai",
+                "menu": [],
+                "userId": "mumbai3",
+                "active": true
+            },
+            {
+                "image_rest": "image15.jpg",
+                "rest_name": "Fusion Feast",
+                "cuisines": [
+                    "Fusion"
+                ],
+                "rating": 4.2,
+                "d_time": "25 mins",
+                "cost": 500,
+                "offer": "none",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Santacruz West, Mumbai",
+                "menu": [],
+                "userId": "mumbai3",
+                "active": true
+            },
+            {
+                "image_rest": "image16.jpg",
+                "rest_name": "Cafe Bliss",
+                "cuisines": [
+                    "Cafe",
+                    "Desserts"
+                ],
+                "rating": 4.6,
+                "d_time": "30 mins",
+                "cost": 400,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Khar West, Mumbai",
+                "menu": [],
+                "userId": "mumbai4",
+                "active": true
+            },
+            {
+                "image_rest": "image17.jpg",
+                "rest_name": "Wrap It Up",
+                "cuisines": [
+                    "Wraps",
+                    "Fast Food"
+                ],
+                "rating": 4.1,
+                "d_time": "15 mins",
+                "cost": 250,
+                "offer": "60",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Chembur, Mumbai",
+                "menu": [],
+                "userId": "mumbai4",
+                "active": true
+            },
+            {
+                "image_rest": "image18.jpg",
+                "rest_name": "Mexican Fiesta",
+                "cuisines": [
+                    "Mexican"
+                ],
+                "rating": 4.3,
+                "d_time": "35 mins",
+                "cost": 700,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Vile Parle, Mumbai",
+                "menu": [],
+                "userId": "mumbai4",
+                "active": true
+            },
+            {
+                "image_rest": "image19.jpg",
+                "rest_name": "Chilli's Grill",
+                "cuisines": [
+                    "Tex-Mex",
+                    "Grill"
+                ],
+                "rating": 4.7,
+                "d_time": "40 mins",
+                "cost": 850,
+                "offer": "60",
+                "promoted": "none",
+                "city": "Mumbai",
+                "address": "Matunga West, Mumbai",
+                "menu": [],
+                "userId": "mumbai4",
+                "active": true
+            },
+            {
+                "image_rest": "image20.jpg",
+                "rest_name": "Saffron Bites",
+                "cuisines": [
+                    "Indian"
+                ],
+                "rating": 4.5,
+                "d_time": "30 mins",
+                "cost": 500,
+                "offer": "none",
+                "promoted": "promoted",
+                "city": "Mumbai",
+                "address": "Tardeo, Mumbai",
+                "menu": [],
+                "userId": "mumbai4",
+                "active": true
+            }
+        ]
+    }
+}
