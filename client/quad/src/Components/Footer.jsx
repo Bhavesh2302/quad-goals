@@ -100,13 +100,14 @@ const Footer = () => {
         >
           <Image
             src={
-              "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-AppStore_lg30tv"
+              "https://i.imgur.com/En8SMLt.png"
             }
+            
             alt={"appleStore"}
           />
           <Image
             src={
-              "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-GooglePlay_1_zixjxl"
+                "https://i.imgur.com/n1hczbX.png"
             }
             alt={"playStore"}
           />

@@ -9,10 +9,12 @@ import {
   DrawerContent,
   DrawerCloseButton
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 const LocationSearch = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const { city } = useParams();
 
   return (
     <>
@@ -23,7 +25,7 @@ const LocationSearch = () => {
         fontWeight={"500"}
         onClick={onOpen}
       >
-        Kota, Rajasthan, India
+         {city?.charAt(0).toUpperCase() + city?.slice(1).toLowerCase()}, India
       </Button>
       <Drawer
         isOpen={isOpen}
